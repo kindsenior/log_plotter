@@ -23,6 +23,7 @@ def my_time(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
+        print("start : " + func.func_name)
         result = func(*args, **kwargs)
         print('{0:>10} : {1:3.3f} [s]'.format(func.func_name,
                                               time.time() - start))
