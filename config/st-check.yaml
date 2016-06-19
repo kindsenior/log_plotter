@@ -1,0 +1,19 @@
+"right_foot_force":
+  "log": ['rmfo_off_rfsensor']
+  "field": [[0,1,2,3,4,5]]
+
+"left_foot_force":
+  "log": ['rmfo_off_lfsensor', 'st_allRefWrench']
+  "field": [[0,1,2,3,4,5]]
+
+"RefWrench":
+  "log": ['st_allRefWrench']
+  "field": [[6, 7, 8, 9, 10, 11]]
+
+"comp":
+  "log": ['st_allEEComp']
+  "field": [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]]
+
+"contactStates":
+  "log": ['abc_contactStates', 'abc_controlSwingSupportTime']
+  "field": [[0], [1]]

@@ -1,0 +1,29 @@
+"torque":
+  "log": ['RobotHardware0_tau']
+  # "field": [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]]
+  "field": [[4], [10]]
+"tracking":
+  "log": ['st_q', 'RobotHardware0_q', 'RobotHardware0_servoState']
+  # "field": [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]]
+  "field": [[4], [10]]
+"joint_angle":
+  "log": ['abc_q', 'st_q', 'el_q','RobotHardware0_q']
+  "field": [[4], [10]]
+"right_foot_force":
+  "log": ['rmfo_off_rfsensor']
+  "field": [[2]]
+"left_foot_force":
+  "log": ['rmfo_off_lfsensor']
+  "field": [[2]]
+"right_foot_force_My":
+  "log": ['rmfo_off_rfsensor']
+  "field": [[4]]
+"left_foot_force_My":
+  "log": ['rmfo_off_lfsensor']
+  "field": [[4]]
+"contactStates":
+  "log": ['abc_contactStates', 'abc_controlSwingSupportTime']
+  "field": [[0],[1]]
+"refWrench":
+  "log": ['st_allRefWrench']
+  "field": [[4], [10]]

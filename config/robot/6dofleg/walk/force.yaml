@@ -1,0 +1,6 @@
+"right_foot_force":
+  "log": ['sh_rfsensorOut', 'RobotHardware0_rfsensor', 'rmfo_off_rfsensor']
+  "field": [[0,1,2,3,4,5]]
+"left_foot_force":
+  "log": ['sh_lfsensorOut', 'RobotHardware0_lfsensor', 'rmfo_off_lfsensor']
+  "field": [[0,1,2,3,4,5]]

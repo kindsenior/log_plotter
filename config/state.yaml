@@ -1,0 +1,37 @@
+## test 1
+# "cog":
+#   "log": ['st_originActCog', 'st_originRefCog']
+#   "field": [[0], [1]]
+# "cogvel":
+#   "log": ['st_originActCogVel', 'st_originRefCogVel']
+#   "field": [[0], [1]]
+# "zmp":
+#   "log": ['st_originActZmp', 'st_originRefZmp', 'st_originNewZmp']
+#   "field": [[0], [1]]
+
+## test 2
+# "comp":
+#   "log": ['st_allEEComp']
+#   "field": [[2], [3], [8], [9]]
+# "contactStates":
+#   "log": ['abc_contactStates', 'abc_controlSwingSupportTime']
+#   "field": [[0], [1]]
+
+# # test 3
+# "no1_act_right_Fz_Mx_My_force":
+#   "log": ['rmfo_off_rfsensor']
+#   "field": [[2, 3, 4]]
+# "no2_ref_right_Fz_Mx_My_force":
+#   "log": ['st_allRefWrench']
+#   "field": [[8, 9, 10]]
+# "no3_act_left_Fz_Mx_My_force":
+#   "log": ['rmfo_off_lfsensor']
+#   "field": [[2, 3, 4]]
+# "no4_ref_left_Fz_Mx_My_force":
+#   "log": ['st_allRefWrench']
+#   "field": [[2, 3, 4]]
+
+# # test 4
+# "attitude":
+#   "log": ['st_actBaseRpy', 'st_currentBaseRpy', 'kf_rpy']
+#   "field": [[0,1,2]]

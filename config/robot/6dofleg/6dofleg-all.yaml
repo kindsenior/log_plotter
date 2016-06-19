@@ -1,0 +1,56 @@
+"joint_angle":
+  "log": ['sh_qOut', 'ic_q', 'abc_q', 'st_q', 'RobotHardware0_q']
+  "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"right_foot_force":
+  "log": ['sh_rfsensorOut', 'RobotHardware0_rfsensor', 'rmfo_off_rfsensor']
+  "field": [[0,1,2,3,4,5]]
+
+"left_foot_force":
+  "log": ['sh_lfsensorOut', 'RobotHardware0_lfsensor', 'rmfo_off_lfsensor']
+  "field": [[0,1,2,3,4,5]]
+
+"attitude":
+  "log": ['sh_baseRpyOut', 'st_actBaseRpy', 'st_currentBaseRpy', 'kf_rpy']
+  "field": [[0,1,2]]
+
+"imu":
+  "log": ['RobotHardware0_gsensor', 'RobotHardware0_gyrometer']
+  "field": [[0,1,2]]
+
+# "torque":
+#   "log": ['RobotHardware0_tau']
+#   "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"tracking":
+  "log": ['st_q', 'RobotHardware0_q', 'RobotHardware0_servoState']
+  "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+# "joint_velocity":
+#   "log": ['RobotHardware0_dq']
+#   "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+# "watt":
+#   "log": ['RobotHardware0_dq', 'RobotHardware0_tau']
+#   "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+
+# "12V":
+#   "log": ['RobotHardware0_servoState']
+#   "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"80V":
+  "log": ['RobotHardware0_servoState']
+  "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"current":
+  "log": ['RobotHardware0_servoState']
+  "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"temperature":
+  "log": ['RobotHardware0_servoState']
+  "field": [[0,1,2,3,4,5, 6, 7, 8, 9, 10, 11]]
+
+"comp":
+  "log": ['st_allEEComp']
+  "field": [[0,1,2, 3, 4, 5], [6, 7, 8, 9, 10, 11]]

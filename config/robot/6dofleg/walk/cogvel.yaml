@@ -1,0 +1,3 @@
+"cogvel":
+  "log": ['st_originActCogVel', 'st_originRefCogVel']
+  "field": [[0], [1]]
