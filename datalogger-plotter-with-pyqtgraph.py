@@ -164,8 +164,8 @@ class DataloggerLogParser:
                                           pen=pyqtgraph.mkPen('g', width=2), name='abs - enc')
                     elif title == "tracking":
                         if args[0] == "RobotHardware0_q":
-                            cur_item.plot(times, [math.degrees(x) for x in (self.dataListDict['st_q'][:, 1:][:, index] - data_dict[args[0]][:, index])],
-                                          pen=pyqtgraph.mkPen('r', width=2), name="st_q - rh_q")
+                            cur_item.plot(times, [math.degrees(x) for x in (data_dict[args[1]][:, index] - data_dict[args[0]][:, index])],
+                                          pen=pyqtgraph.mkPen('r', width=2), name=args[1]+" - rh_q")
                         else:
                             pass
                     elif title == "joint_angle" or title == "joint_velocity" or title == "attitude":

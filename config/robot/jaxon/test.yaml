@@ -3,7 +3,7 @@
   "index": [[0], [0], [0], [0]]
 
 "tracking":
-  "log": [['st_q'], ['RobotHardware0_q'], ['RobotHardware0_servoState', 'RobotHardware0_q']]
+  "log": [['RobotHardware0_q','st_q'], ['RobotHardware0_servoState']]
   "index": [[0], [0] , [0,1]]
 
 "right_foot_force":
