@@ -22,3 +22,6 @@
 
 - "group": "comp"
   "indices": [[0,1,2, 3, 4, 5]]
+
+- "group": "watt"
+  "indices": [[0,1,2,3,4,5]]

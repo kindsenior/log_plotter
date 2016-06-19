@@ -25,3 +25,7 @@
 "comp":
   "log": [['st_allEEComp']]
   "index": [[0]]
+
+"watt":
+  "log": [['RobotHardware0_dq','RobotHardware0_tau']]
+  "index": [[0],[0]]

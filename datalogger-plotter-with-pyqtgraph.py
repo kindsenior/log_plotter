@@ -173,7 +173,7 @@ class DataloggerLogParser:
                                       pen=pyqtgraph.mkPen(color_list[i], width=len(args_list)-i), name=args[0])
                     elif title == "watt":
                         if args[0] == "RobotHardware0_dq":
-                            cur_item.plot(times, [math.degrees(x) for x in self.dataListDict['RobotHardware0_tau'][:, (index+1):] * data_dict[args[0]][:, index]],
+                            cur_item.plot(times, [math.degrees(x) for x in data_dict[args[1]][:, index] * data_dict[args[0]][:, index]],
                                           pen=pyqtgraph.mkPen(color_list[i], width=len(args_list)-i), name=args[0], fillLevel=0, fillBrush=color_list[i])
                         else:
                             pass
