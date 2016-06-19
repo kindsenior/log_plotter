@@ -1,0 +1,27 @@
+"joint_angle":
+  "log": [['sh_qOut'], ['abc_q'], ['st_q'], ['RobotHardware0_q']]
+  "index": [[0], [0], [0], [0]]
+
+"tracking":
+  "log": [['st_q'], ['RobotHardware0_q'], ['RobotHardware0_servoState', 'RobotHardware0_q']]
+  "index": [[0], [0] , [0,1]]
+
+"right_foot_force":
+  "log": [['sh_rfsensorOut'], ['RobotHardware0_rfsensor'], ['rmfo_off_rfsensor']]
+  "index": [[0], [0], [0]]
+
+"current":
+  "log": [['RobotHardware0_servoState']]
+  "index": [[0],[0],[0]]
+
+"imu":
+  "log": [['RobotHardware0_gsensor'], ['RobotHardware0_gyrometer']]
+  "index": [[0],[0]]
+
+"temperature":
+  "log": [['RobotHardware0_servoState']]
+  "index": [[0]]
+
+"comp":
+  "log": [['st_allEEComp']]
+  "index": [[0]]
