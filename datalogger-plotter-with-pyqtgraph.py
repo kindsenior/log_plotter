@@ -120,11 +120,11 @@ class DataloggerLogParser:
             times = self.dataListDict[log_list[0]][:, 0]
 
             for cur_col, index in enumerate(indices_list[0]): # index : 0,1,2,3  (loop of plot areas)
+                cur_item = self.view.ci.rows[cur_row][cur_col]
+                cur_item.setTitle(title+" "+str(index))
+                cur_item.showGrid(x=True, y=True)
 
                 for i, args in enumerate(args_list): # cl : 'rh_q'  (loop of keys)
-                    cur_item = self.view.ci.rows[cur_row][cur_col]
-                    cur_item.setTitle(title+" "+str(index))
-                    cur_item.showGrid(x=True, y=True)
                     if i == 0: # we should call addLegend once a plot item
                         cur_item.addLegend(offset=(0, 0))
                     # plot
