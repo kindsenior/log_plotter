@@ -34,3 +34,11 @@
 "ServoState":
   "log": [['RobotHardware0_servoState']]
   "arg_index": [[0]]
+
+"12V":
+  "log": [['RobotHardware0_servoState']]
+  "arg_index": [[0]]
+
+"80V":
+  "log": [['RobotHardware0_servoState']]
+  "arg_index": [[0]]

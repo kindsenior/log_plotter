@@ -28,3 +28,9 @@
 
 - "group": "ServoState"
   "indices": [[0,1,2,3,4,5]]
+
+- "group": "12V"
+  "indices": [[0,1,2,3,4,5]]
+
+- "group": "80V"
+  "indices": [[0,1,2,3,4,5]]
