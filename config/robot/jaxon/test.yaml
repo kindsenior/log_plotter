@@ -1,35 +1,36 @@
 "joint_angle":
   "log": [['sh_qOut'], ['abc_q'], ['st_q'], ['RobotHardware0_q']]
-  "index": [[0], [0], [0], [0]]
+  "arg_index": [[0], [0], [0], [0]]
 
 "tracking":
   "log": [['RobotHardware0_q','st_q'], ['RobotHardware0_servoState']]
-  "index": [[0], [0] , [0,1]]
+  "arg_index": [[0,0], [0]]
 
 "right_foot_force":
   "log": [['sh_rfsensorOut'], ['RobotHardware0_rfsensor'], ['rmfo_off_rfsensor']]
-  "index": [[0], [0], [0]]
+  "arg_index": [[0], [0], [0]]
 
 "current":
   "log": [['RobotHardware0_servoState']]
-  "index": [[0],[0],[0]]
+  "arg_index": [[0]]
 
 "imu":
   "log": [['RobotHardware0_gsensor'], ['RobotHardware0_gyrometer']]
-  "index": [[0],[0]]
+  "arg_index": [[0],[0]]
 
 "temperature":
-  "log": [['RobotHardware0_servoState']]
-  "index": [[0]]
+  "log": [['RobotHardware0_servoState'],['RobotHardware0_servoState']]
+  "key": ['motor_temp', 'motor_outer_temp']
+  "arg_index": [[0],[0]]
 
 "comp":
   "log": [['st_allEEComp']]
-  "index": [[0]]
+  "arg_index": [[0]]
 
 "watt":
   "log": [['RobotHardware0_dq','RobotHardware0_tau']]
-  "index": [[0],[0]]
+  "arg_index": [[0],[0]]
 
 "ServoState":
   "log": [['RobotHardware0_servoState']]
-  "index": [[0]]
+  "arg_index": [[0]]

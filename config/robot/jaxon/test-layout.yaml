@@ -5,7 +5,7 @@
 # - "indices": [[25, 26, 27, 28, 29, 30, 31, 32]]
 
 - "group": "tracking"
-  "indices": [[0,1,2,3,4,5],[0,1,2,3,4,5]]
+  "indices": [[0,1,2,3,4,5]]
 # - "indices": [[6,7,8,9,10,11],[6,7,8,9,10,11]]
 
 - "group": "right_foot_force"
@@ -18,7 +18,7 @@
   "indices": [[0,1,2]]
 
 - "group": "temperature"
-  "indices": [[0,1,2,3,4,5,]]
+  "indices": [[0,1,2,3,4,5]]
 
 - "group": "comp"
   "indices": [[0,1,2, 3, 4, 5]]

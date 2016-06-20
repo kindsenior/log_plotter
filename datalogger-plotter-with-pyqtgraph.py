@@ -114,6 +114,11 @@ class DataloggerLogParser:
             assert plot != None
             indices_list = row_layout['indices']  # [[0,1,2,3],[4,5,6,7]]
             args_list = plot['log']      # [['sh_qOut'],['rh_q', 'st_q']]
+            if plot.has_key('key'): key_list = plot['key']
+            else: key_list = [args[0] for args in args_list]
+            if plot.has_key('func'): func_list = plot['func']
+            else: func_list = ['normal' for x in range(len(args_list))]
+            arg_index_list = plot['arg_index']
             log_list = list(set(reduce(lambda x,y: x + y, args_list)))
             data_dict = {}
             for log in log_list: data_dict[log] = self.dataListDict[log][:, 1:]
@@ -124,7 +129,7 @@ class DataloggerLogParser:
                 cur_item.setTitle(title+" "+str(index))
                 cur_item.showGrid(x=True, y=True)
 
-                for i, args in enumerate(args_list): # cl : 'rh_q'  (loop of keys)
+                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_index_list)): # args : ['sh_qOut'], ['rh_q', 'st_q']  (loop of keys)
                     if i == 0: # we should call addLegend once a plot item
                         cur_item.addLegend(offset=(0, 0))
                     # plot
