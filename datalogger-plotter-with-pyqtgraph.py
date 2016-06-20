@@ -10,6 +10,7 @@ import struct
 import sys
 import time
 import yaml
+import plot_method
 
 try:
     import pyqtgraph
@@ -136,41 +137,52 @@ class DataloggerLogParser:
                     if args[0] == 'RobotHardware0_servoState':
                         urata_len = 16
                         if title == "ServoState":
-                            def RePack(x):
-                                val = struct.unpack('i', struct.pack('f', float(x)))[0]
-                                #calib = (val & 0x01)
-                                #servo = (val & 0x02) >> 1
-                                #power = (val & 0x04) >> 2
-                                state = (val & 0x0007fff8) >> 3
-                                #temp  = (val & 0xff000000) >> 24
-                                return state
-                            vfr = numpy.vectorize(RePack)
-                            cur_item.plot(times, vfr(data_dict[args[0]][:, (urata_len+1) * index + (0+0)]),
-                                          pen=pyqtgraph.mkPen('r', width=2), name='ServoState')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # def RePack(x):
+                            #     val = struct.unpack('i', struct.pack('f', float(x)))[0]
+                            #     #calib = (val & 0x01)
+                            #     #servo = (val & 0x02) >> 1
+                            #     #power = (val & 0x04) >> 2
+                            #     state = (val & 0x0007fff8) >> 3
+                            #     #temp  = (val & 0xff000000) >> 24
+                            #     return state
+                            # vfr = numpy.vectorize(RePack)
+                            # cur_item.plot(times, vfr(data_dict[args[0]][:, (urata_len+1) * index + (0+0)]),
+                            #               pen=pyqtgraph.mkPen('r', width=2), name='ServoState')
                         if title == "CommNormal":
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (13+1)],
-                                          pen=pyqtgraph.mkPen('r', width=2), name='CommNormal')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (13+1)],
+                            #               pen=pyqtgraph.mkPen('r', width=2), name='CommNormal')
                         if title == "12V":
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (9+1)],
-                                          pen=pyqtgraph.mkPen('r', width=2), name='12V')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (9+1)],
+                            #               pen=pyqtgraph.mkPen('r', width=2), name='12V')
                         elif title == "80V":
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (2+1)],
-                                          pen=pyqtgraph.mkPen('g', width=2), name='80V')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (2+1)],
+                            #               pen=pyqtgraph.mkPen('g', width=2), name='80V')
                         elif title == "current":
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (1+1)],
-                                          pen=pyqtgraph.mkPen('b', width=2), name='current')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (1+1)],
+                            #               pen=pyqtgraph.mkPen('b', width=2), name='current')
                         elif title == "temperature":
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (0+1)],
-                                          pen=pyqtgraph.mkPen('r', width=2), name='motor_temp')
-                            cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * index + (7+1)],
-                                          pen=pyqtgraph.mkPen('g', width=1), name='motor_outer_temp')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)# fast
+                            # getattr(DataloggerLogParser.plot_method, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)# fast
+                        #     if key == "motor_temp":
+                        #         cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * indices_list[arg_indices[0]][cur_col] + (0+1)],
+                        #                       pen=pyqtgraph.mkPen(color_list[i], width=1), name=key)
+                        #     else:
+                        #         cur_item.plot(times, data_dict[args[0]][:, (urata_len+1) * indices_list[arg_indices[0]][cur_col] + (7+1)],
+                        #                       pen=pyqtgraph.mkPen(color_list[i], width=1), name=key)
                         elif title == "tracking":
-                            cur_item.plot(times, [math.degrees(x) for x in data_dict[args[0]][:, (urata_len+1) * index + (6+1)]],
-                                          pen=pyqtgraph.mkPen('g', width=2), name='abs - enc')
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, [math.degrees(x) for x in data_dict[args[0]][:, (urata_len+1) * index + (6+1)]],
+                            #               pen=pyqtgraph.mkPen('g', width=2), name='abs - enc')
                     elif title == "tracking":
                         if args[0] == "RobotHardware0_q":
-                            cur_item.plot(times, [math.degrees(x) for x in (data_dict[args[1]][:, index] - data_dict[args[0]][:, index])],
-                                          pen=pyqtgraph.mkPen('r', width=2), name=args[1]+" - rh_q")
+                            getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                            # cur_item.plot(times, [math.degrees(x) for x in (data_dict[args[1]][:, index] - data_dict[args[0]][:, index])],
+                            #               pen=pyqtgraph.mkPen('r', width=2), name=args[1]+" - rh_q")
                         else:
                             pass
                     elif title == "joint_angle" or title == "joint_velocity" or title == "attitude":

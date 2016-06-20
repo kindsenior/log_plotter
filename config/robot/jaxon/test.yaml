@@ -4,6 +4,7 @@
 
 "tracking":
   "log": [['RobotHardware0_q','st_q'], ['RobotHardware0_servoState']]
+  "func": ['plot_rh_q_st_q', 'plot_abs_enc']
   "arg_index": [[0,0], [0]]
 
 "right_foot_force":
@@ -12,6 +13,7 @@
 
 "current":
   "log": [['RobotHardware0_servoState']]
+  "func": ['plot_current']
   "arg_index": [[0]]
 
 "imu":
@@ -21,6 +23,7 @@
 "temperature":
   "log": [['RobotHardware0_servoState'],['RobotHardware0_servoState']]
   "key": ['motor_temp', 'motor_outer_temp']
+  "func": ['plot_motor_temp', 'plot_motor_outer_temp']
   "arg_index": [[0],[0]]
 
 "comp":
@@ -33,12 +36,15 @@
 
 "ServoState":
   "log": [['RobotHardware0_servoState']]
+  "func": ['plot_servostate']
   "arg_index": [[0]]
 
 "12V":
   "log": [['RobotHardware0_servoState']]
+  "func": ['plot_12V']
   "arg_index": [[0]]
 
 "80V":
   "log": [['RobotHardware0_servoState']]
+  "func": ['plot_80V']
   "arg_index": [[0]]
