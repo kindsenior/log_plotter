@@ -67,4 +67,4 @@ class PlotMethod(object):
                        pen=pyqtgraph.mkPen('r', width=2), name=args[1]+" - rh_q")
     @staticmethod
     def normal(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
-        plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2, name=args[0]))
+        plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2), name=key)
