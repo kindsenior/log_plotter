@@ -57,7 +57,7 @@ class DataloggerLogParser:
         # self.dateListDict is set by self.readData()
         self.dataListDict = {}# todo: to list of dictionary
         # back up for plot items
-        self.plotItemOrig = {}
+        self.plotItemOrig = []
 
     @my_time
     def readData(self):
@@ -95,9 +95,11 @@ class DataloggerLogParser:
         '''
         set layout of view according to self.plot_dict
         '''
-        for x in self.layout_list:
+        for rowIndex,x in enumerate(self.layout_list):
+            self.plotItemOrig.append([])
             for i in range(len(x["indices"][0])):
-                self.view.addPlot()
+                tmp_view=self.view.addPlot()
+                self.plotItemOrig[rowIndex].append(tmp_view)
             self.view.nextRow()
 
     @my_time
@@ -280,7 +282,6 @@ class DataloggerLogParser:
         '''
         customize right-click context menu
         '''
-        self.plotItemOrig = self.view.ci.items.copy()
         all_items = self.view.ci.items.keys()
         for pi in all_items:
             vb = pi.getViewBox()
@@ -313,9 +314,9 @@ class DataloggerLogParser:
                     self.view.ci.removeItem(i)
             def restoreCB():
                 self.view.ci.clear()
-                for key in self.plotItemOrig:
-                    r, c = self.plotItemOrig[key][0]
-                    self.view.ci.addItem(key, row=r, col=c)
+                for r in range(len(self.plotItemOrig)):
+                    for c in range(len(self.plotItemOrig[r])):
+                        self.view.ci.addItem(self.plotItemOrig[r][c], row=r, col=c)
             qa1.triggered.connect(functools.partial(hideCB, pi))
             qa2.triggered.connect(functools.partial(hideRowCB, pi))
             qa3.triggered.connect(functools.partial(hideColCB, pi))
