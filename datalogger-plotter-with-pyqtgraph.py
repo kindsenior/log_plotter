@@ -210,8 +210,8 @@ class DataloggerLogParser:
                         else: # rotation
                             cur_item.setYRange(math.radians(-10), math.radians(+10)) # compensation limit
                     else:
-                        cur_item.plot(times, data_dict[args[0]][:, index],
-                                      pen=pyqtgraph.mkPen(color_list[i], width=len(args_list)-i), name=args[0])
+                        getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+
             # increase current row
             cur_row = cur_row + 1
 
