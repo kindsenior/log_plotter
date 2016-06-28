@@ -33,6 +33,7 @@
 
 "watt":
   "log": [['RobotHardware0_dq','RobotHardware0_tau']]
+  "func": ['plot_watt']
   "arg_index": [[0,0]]
 
 "ServoState":

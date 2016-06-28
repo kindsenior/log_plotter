@@ -72,5 +72,12 @@ class PlotMethod(object):
         plot_item.plot(times, data_deg,pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=(len(args)-i+3)), name=args[0])
 
     @staticmethod
+    def plot_watt(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
+        joint_vel=data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]]
+        joint_tau=data_dict[args[1]][:, indices_list[arg_indices[0]][cur_col]]
+        watt=[math.degrees(x) for x in  joint_vel*joint_tau]
+        plot_item.plot(times, watt,pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=len(args)-i), name=args[0], fillLevel=0, fillBrush=PlotMethod.color_list[i])
+
+    @staticmethod
     def normal(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
         plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2), name=key)
