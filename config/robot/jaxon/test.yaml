@@ -1,5 +1,6 @@
 "joint_angle":
   "log": [['sh_qOut'], ['abc_q'], ['st_q'], ['RobotHardware0_q']]
+  "func": ['plot_rad2deg','plot_rad2deg','plot_rad2deg','plot_rad2deg']
   "arg_index": [[0], [0], [0], [0]]
 
 "tracking":
