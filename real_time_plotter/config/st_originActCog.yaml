@@ -1,0 +1,9 @@
+"topicName": 'st_originActCog'
+"portName": '/localhost:15005/st.rtc:originActCog'
+"msgType": ["hrpsys_ros_bridge", "RTC_Point3D"]
+
+# msg
+"rule": [ "msg.x=data.data.x",
+          "msg.y=data.data.y",
+          "msg.z=data.data.z"  ]
+
