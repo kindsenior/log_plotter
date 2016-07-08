@@ -240,12 +240,10 @@ class DataloggerLogParser:
                 del_list = self.view.ci.items.keys()
                 r, _c = self.view.ci.items[item][0]
                 not_del_list=[self.view.ci.rows[r][c] for c in self.view.ci.rows[r].keys()]
-                for i in self.view.ci.items.keys():
-                    tmp_r, tmp_c = self.view.ci.items[i][0]
+                for i in del_list:
                     if i in not_del_list:
                         del_list.remove(i)
                 for i in del_list:
-                    tmp_r, tmp_c = self.view.ci.items[i][0]
                     self.view.ci.removeItem(i)
             def hideExcColumnCB(item):
                 del_list = self.view.ci.items.keys()
