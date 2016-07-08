@@ -197,13 +197,14 @@ class DataloggerLogParser:
                         # else:
                         #     pass
                     elif title == "imu":
-                        mod3 = index % 3
-                        if args[0] == 'RobotHardware0_gsensor':
-                            self.view.ci.rows[cur_row][0].plot(times, data_dict[args[0]][:, index],
-                                                               pen=pyqtgraph.mkPen(color_list[mod3], width=3-mod3), name=['x', 'y', 'z'][mod3])
-                        elif args[0] == 'RobotHardware0_gyrometer':
-                            self.view.ci.rows[cur_row][1].plot(times, data_dict[args[0]][:, index],
-                                                               pen=pyqtgraph.mkPen(color_list[mod3], width=3-mod3), name=['x', 'y', 'z'][mod3])
+                        getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                        # mod3 = index % 3
+                        # if args[0] == 'RobotHardware0_gsensor':
+                        #     self.view.ci.rows[cur_row][0].plot(times, data_dict[args[0]][:, index],
+                        #                                        pen=pyqtgraph.mkPen(color_list[mod3], width=3-mod3), name=['x', 'y', 'z'][mod3])
+                        # elif args[0] == 'RobotHardware0_gyrometer':
+                        #     self.view.ci.rows[cur_row][1].plot(times, data_dict[args[0]][:, index],
+                        #                                        pen=pyqtgraph.mkPen(color_list[mod3], width=3-mod3), name=['x', 'y', 'z'][mod3])
                     elif title == "comp":
                         cur_item.plot(times, data_dict[args[0]][:, index],
                                       pen=pyqtgraph.mkPen(color_list[i], width=len(args_list)-i), name=args[0])
