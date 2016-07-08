@@ -88,5 +88,14 @@ class PlotMethod(object):
                            pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=3-i), name=key)
 
     @staticmethod
+    def plot_comp(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
+        plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]],
+                      pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=1+len(args)-i), name=args[0])
+        if indices_list[arg_indices[0]][cur_col] % 6 < 3: # position
+            plot_item.setYRange(-0.025, +0.025) # compensation limit
+        else: # rotation
+            plot_item.setYRange(math.radians(-10), math.radians(+10)) # compensation limit
+
+    @staticmethod
     def normal(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
         plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2), name=key)
