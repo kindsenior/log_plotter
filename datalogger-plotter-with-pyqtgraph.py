@@ -214,6 +214,7 @@ class DataloggerLogParser:
             qa4 = vb.menu.addAction('restore plots')
             qa5 = hm.addAction('hide except this plot')
             qa6 = hm.addAction('hide except this row')
+            qa7 = hm.addAction('hide except this colmn')
             def hideCB(item):
                 self.view.ci.removeItem(item)
             def hideRowCB(item):
@@ -246,6 +247,15 @@ class DataloggerLogParser:
                 for i in del_list:
                     tmp_r, tmp_c = self.view.ci.items[i][0]
                     self.view.ci.removeItem(i)
+            def hideExcColumnCB(item):
+                del_list = self.view.ci.items.keys()
+                _r, c = self.view.ci.items[item][0]
+                not_del_list=[self.view.ci.rows[r][c] for r in range(len(a.view.ci.rows))]
+                for i in del_list:
+                    if i in not_del_list:
+                        del_list.remove(i)
+                for i in del_list:
+                    self.view.ci.removeItem(i)
             def restoreCB():
                 self.view.ci.clear()
                 for key in self.plotItemOrig:
@@ -257,6 +267,7 @@ class DataloggerLogParser:
             qa4.triggered.connect(restoreCB)
             qa5.triggered.connect(functools.partial(hideExcCB, pi))
             qa6.triggered.connect(functools.partial(hideExcRowCB, pi))
+            qa7.triggered.connect(functools.partial(hideExcColumnCB, pi))
 
     def main(self):
         '''
