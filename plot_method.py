@@ -79,5 +79,23 @@ class PlotMethod(object):
         plot_item.plot(times, watt,pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=len(args)-i), name=args[0], fillLevel=0, fillBrush=PlotMethod.color_list[i])
 
     @staticmethod
+    def plot_imu(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
+        if cur_col==0:
+            plot_item.plot(times, data_dict[args[0]][:, i],
+                           pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=3-i), name=key)
+        if cur_col==1:
+            plot_item.plot(times, data_dict[args[1]][:, i],
+                           pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=3-i), name=key)
+
+    @staticmethod
+    def plot_comp(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
+        plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]],
+                      pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=1+len(args)-i), name=args[0])
+        if indices_list[arg_indices[0]][cur_col] % 6 < 3: # position
+            plot_item.setYRange(-0.025, +0.025) # compensation limit
+        else: # rotation
+            plot_item.setYRange(math.radians(-10), math.radians(+10)) # compensation limit
+
+    @staticmethod
     def normal(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
         plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2), name=key)
