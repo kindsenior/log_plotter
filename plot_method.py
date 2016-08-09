@@ -2,6 +2,7 @@
 import numpy
 import struct
 import math
+import sys
 
 try:
     import pyqtgraph
