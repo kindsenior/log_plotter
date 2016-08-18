@@ -53,3 +53,7 @@
   "log": [['RobotHardware0_servoState']]
   "func": ['plot_80V']
   "arg_index": [[0]]
+
+"ZMP":
+  "log": [['st_zmp']]
+  "arg_index": [[0]]
