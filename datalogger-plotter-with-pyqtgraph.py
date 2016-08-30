@@ -11,6 +11,7 @@ import sys
 import time
 import yaml
 import plot_method
+import re
 
 try:
     import pyqtgraph
@@ -42,7 +43,6 @@ def readOneTopic(fname):
             tmp.append([float(x) for x in dl])
     return numpy.array(tmp)
 
-
 class DataloggerLogParser:
     def __init__(self, fname, plot_conf_name, layout_conf_name, title):
         self.fname = fname
@@ -68,9 +68,7 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
-        logs_list_list = [plot_conf[1]["log"] for plot_conf in self.plot_dict.items()]
-        duplicated_list = [log for logs_list in logs_list_list for logs in logs_list for log in logs ]
-        topic_list = list(set(duplicated_list))
+        topic_list = list(set(reduce(lambda x,y: x+y, [plot_conf[1]["log"] for plot_conf in self.plot_dict.items()])))
         # store data in parallel
         fname_list = [self.fname+'.'+ext for ext in topic_list]
         pl = multiprocessing.Pool()
@@ -89,6 +87,31 @@ class DataloggerLogParser:
             vf = numpy.vectorize(servoStatesConverter)
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = vf(ss_tmp)
+        # parse plot_dict
+        for topic in self.plot_dict.keys():
+            for index_i,index  in enumerate(self.plot_dict[topic]['index']):
+                if type(index)==str:
+                    parsed_index=re.match("([0-9]+):([0-9]+)", index)
+                    if parsed_index:
+                        self.plot_dict[topic]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index=re.match("([0-9]+):", index)
+                    if parsed_index:
+                        self.plot_dict[topic]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
+                        continue
+        # parse layout_list
+        for row_layout_i,row_layout in enumerate(self.layout_list):
+            for index_i,index  in enumerate(row_layout['index']):
+                if type(index[0])==str:
+                    parsed_index=re.match("([0-9]+):([0-9]+)", index[0])
+                    if parsed_index:
+                        self.layout_list[row_layout_i]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index=re.match("([0-9]+):", index[0])
+                    if parsed_index:
+                        self.layout_list[row_layout_i]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
+                        continue
+
 
     @my_time
     def setLayout(self):
@@ -96,7 +119,7 @@ class DataloggerLogParser:
         set layout of view according to self.plot_dict
         '''
         for x in self.layout_list:
-            for i in range(len(x["indices"][0])):
+            for i in range(len(x["index"][0])):
                 self.view.addPlot()
             self.view.nextRow()
 
@@ -107,35 +130,43 @@ class DataloggerLogParser:
         '''
         color_list = pyqtgraph.functions.Colors.keys()
         cur_row = 0
-        plot = None
+        # for each row
         for row_layout in self.layout_list: # plot : ('joint_velocity', {'field':[[0,1],[2,3]], 'log':['rh_q', 'st_q']}) (loop of rows)
             if row_layout.has_key("group"):
-                title = row_layout["group"]
-                plot = self.plot_dict[title]
-            assert plot != None
-            indices_list = row_layout['indices']  # [[0,1,2,3],[4,5,6,7]]
-            args_list = plot['log']      # [['sh_qOut'],['rh_q', 'st_q']]
-            if plot.has_key('key'): key_list = plot['key']
-            else: key_list = [args[0] for args in args_list]
-            if plot.has_key('func'): func_list = plot['func']
-            else: func_list = ['normal' for x in range(len(args_list))]
-            arg_index_list = plot['arg_index']
-            log_list = list(set(reduce(lambda x,y: x + y, args_list)))
+                title = row_layout["group"] # title of graph
+                key_list = row_layout["key"] #title of legend
+
+            layout_index_list = row_layout['index']  # [[0,1,2,3],[4,5,6,7]]
+            indices_list_tmp=[[map(lambda plot_index_i: plot_index[plot_index_i], [plot_index_i for plot_index_i in layout_index_list][key_i]) \
+                               for plot_index in self.plot_dict[key]['index']] \
+                              for key_i,key in enumerate(key_list)]
+            indices_list=reduce(lambda x,y: x+y,indices_list_tmp)
+
+            # make arg_indices_list
+            arg_indices_list=[]; arg_indices_list_counter=0;
+            for indices_tmp in indices_list_tmp:
+                arg_indices_list.append(range(arg_indices_list_counter,arg_indices_list_counter+len(indices_tmp)))
+                arg_indices_list_counter+=1
+
+            args_list = [self.plot_dict[key]["log"] for key in key_list] # [['sh_qOut'],['rh_q', 'st_q']]
+            func_list = [self.plot_dict[x]['func'] if self.plot_dict[x].has_key('func') else "normal" for x in key_list]
+            log_list = list(set(reduce(lambda x,y: x + y, [self.plot_dict[x]['log'] for x in key_list])))
             data_dict = {}
             for log in log_list: data_dict[log] = self.dataListDict[log][:, 1:]
             times = self.dataListDict[log_list[0]][:, 0]
 
-            for cur_col, index in enumerate(indices_list[0]): # index : 0,1,2,3  (loop of plot areas)
+            # in each column
+            for cur_col in range(len(layout_index_list[0])):
+            # for cur_col, index in enumerate(layout_index_list): # index : 0,1,2,3  (index for plot) # column
                 cur_item = self.view.ci.rows[cur_row][cur_col]
-                cur_item.setTitle(title+" "+str(index))
+                cur_item.setTitle(title+" "+str(layout_index_list[0][cur_col]))
                 cur_item.showGrid(x=True, y=True)
 
-                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_index_list)): # args : ['sh_qOut'], ['rh_q', 'st_q']  (loop of keys)
+                # plot legends in one graph
+                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_indices_list)):
                     if i == 0: # we should call addLegend once a plot item
                         cur_item.addLegend(offset=(0, 0))
-                    # plot
                     getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
-            # increase current row
             cur_row = cur_row + 1
 
     @my_time
@@ -299,3 +330,4 @@ if __name__ == '__main__':
     a = DataloggerLogParser(args.f, args.plot, args.layout, args.t)
     a.main()
     pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+
