@@ -98,5 +98,15 @@ class PlotMethod(object):
             plot_item.setYRange(math.radians(-10), math.radians(+10)) # compensation limit
 
     @staticmethod
+    def plot_COP(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
+        offset = indices_list[arg_indices[0]][cur_col]*6
+        arg = args[min(len(args)-1,cur_col)]
+        f_z = data_dict[arg][:, offset+2]
+        tau_x = data_dict[arg][:, offset+3]
+        tau_y = data_dict[arg][:, offset+4]
+        plot_item.plot(times, -tau_y/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i], width=2), name=key+"x")
+        plot_item.plot(times,  tau_x/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i+1], width=2), name=key+"y")
+
+    @staticmethod
     def normal(plot_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i):
         plot_item.plot(times, data_dict[args[0]][:, indices_list[arg_indices[0]][cur_col]], pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=2), name=key)
