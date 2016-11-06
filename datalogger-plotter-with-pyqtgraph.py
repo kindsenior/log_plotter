@@ -12,6 +12,7 @@ import time
 import yaml
 import plot_method
 import re
+import copy
 
 try:
     import pyqtgraph
@@ -68,7 +69,8 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
-        topic_list = list(set(reduce(lambda x,y: x+y, [plot_conf[1]["log"] for plot_conf in self.plot_dict.items()])))
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
         # store data in parallel
         fname_list = [self.fname+'.'+ext for ext in topic_list]
         pl = multiprocessing.Pool()
@@ -88,16 +90,18 @@ class DataloggerLogParser:
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = vf(ss_tmp)
         # parse plot_dict
-        for topic in self.plot_dict.keys():
-            for index_i,index  in enumerate(self.plot_dict[topic]['index']):
+        for key in self.plot_dict.keys():
+            if not key in used_keys:
+                continue
+            for index_i,index  in enumerate(self.plot_dict[key]['index']):
                 if type(index)==str:
                     parsed_index=re.match("([0-9]+):([0-9]+)", index)
                     if parsed_index:
-                        self.plot_dict[topic]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        self.plot_dict[key]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
                         continue
                     parsed_index=re.match("([0-9]+):", index)
                     if parsed_index:
-                        self.plot_dict[topic]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
+                        self.plot_dict[key]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[key]['log'][index_i]][0]))
                         continue
         # parse layout_list
         for row_layout_i,row_layout in enumerate(self.layout_list):
@@ -111,7 +115,8 @@ class DataloggerLogParser:
                     if parsed_index:
                         self.layout_list[row_layout_i]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
                         continue
-
+            if not row_layout.has_key('name'):
+                row_layout['name'] = copy.copy(row_layout['key'])
 
     @my_time
     def setLayout(self):
@@ -134,7 +139,8 @@ class DataloggerLogParser:
         for row_layout in self.layout_list: # plot : ('joint_velocity', {'field':[[0,1],[2,3]], 'log':['rh_q', 'st_q']}) (loop of rows)
             if row_layout.has_key("group"):
                 title = row_layout["group"] # title of graph
-                key_list = row_layout["key"] #title of legend
+                key_list = row_layout["key"] # id of legend
+                name_list = row_layout["name"] # name of legend
 
             layout_index_list = row_layout['index']  # [[0,1,2,3],[4,5,6,7]]
             indices_list_tmp=[[map(lambda plot_index_i: plot_index[plot_index_i], [plot_index_i for plot_index_i in layout_index_list][key_i]) \
@@ -163,10 +169,10 @@ class DataloggerLogParser:
                 cur_item.showGrid(x=True, y=True)
 
                 # plot legends in one graph
-                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_indices_list)):
+                for i, (args, key, func, arg_indices, name) in enumerate(zip(args_list, key_list, func_list, arg_indices_list, name_list)):
                     if i == 0: # we should call addLegend once a plot item
                         cur_item.addLegend(offset=(0, 0))
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
+                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, name, i)
             cur_row = cur_row + 1
 
     @my_time
