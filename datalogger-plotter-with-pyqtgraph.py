@@ -94,26 +94,26 @@ class DataloggerLogParser:
             if not key in used_keys:
                 continue
             for index_i,index  in enumerate(self.plot_dict[key]['index']):
-                if type(index)==str:
-                    parsed_index=re.match("([0-9]+):([0-9]+)", index)
+                if type(index) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index)
                     if parsed_index:
-                        self.plot_dict[key]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        self.plot_dict[key]['index'][index_i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
                         continue
-                    parsed_index=re.match("([0-9]+):", index)
+                    parsed_index = re.match("([0-9]+):", index)
                     if parsed_index:
-                        self.plot_dict[key]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[key]['log'][index_i]][0]))
+                        self.plot_dict[key]['index'][index_i] = range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[key]['log'][index_i]][0]))
                         continue
         # parse layout_list
         for row_layout_i,row_layout in enumerate(self.layout_list):
             for index_i,index  in enumerate(row_layout['index']):
-                if type(index[0])==str:
-                    parsed_index=re.match("([0-9]+):([0-9]+)", index[0])
+                if type(index[0]) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index[0])
                     if parsed_index:
-                        self.layout_list[row_layout_i]['index'][index_i]=range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        self.layout_list[row_layout_i]['index'][index_i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
                         continue
-                    parsed_index=re.match("([0-9]+):", index[0])
+                    parsed_index = re.match("([0-9]+):", index[0])
                     if parsed_index:
-                        self.layout_list[row_layout_i]['index'][index_i]=range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
+                        self.layout_list[row_layout_i]['index'][index_i] = range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
                         continue
             if not row_layout.has_key('name'):
                 row_layout['name'] = copy.copy(row_layout['key'])
@@ -146,10 +146,10 @@ class DataloggerLogParser:
             indices_list_tmp=[[map(lambda plot_index_i: plot_index[plot_index_i], [plot_index_i for plot_index_i in layout_index_list][key_i]) \
                                for plot_index in self.plot_dict[key]['index']] \
                               for key_i,key in enumerate(key_list)]
-            indices_list=reduce(lambda x,y: x+y,indices_list_tmp)
+            indices_list = reduce(lambda x,y: x+y,indices_list_tmp)
 
             # make arg_indices_list
-            arg_indices_list=[]; arg_indices_list_counter=0;
+            arg_indices_list = []; arg_indices_list_counter = 0;
             for indices_tmp in indices_list_tmp:
                 arg_indices_list.append(range(arg_indices_list_counter,arg_indices_list_counter+len(indices_tmp)))
                 arg_indices_list_counter+=1
