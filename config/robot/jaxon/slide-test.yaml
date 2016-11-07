@@ -1,23 +1,142 @@
-"joint_angle":
-  "log": [['sh_qOut'], ['abc_q'], ['st_q']]
-  "func": ['plot_rad2deg','plot_rad2deg','plot_rad2deg']
-  "arg_index": [[0], [0], [0]]
+'sh_qOut':
+  'func': 'plot_rad2deg'
+  'log': ['sh_qOut']
+  'index': ['0:']
 
-"ZMP":
-  "log": [['st_zmp']]
-  "arg_index": [[0]]
+'abc_q':
+  'func': 'plot_rad2deg'
+  'log': ['abc_q']
+  'index': ['10:']
 
-"COP":
-  "log": [['st_allRefWrench'],['abc_rfsensor','abc_lfsensor','abc_rfsensor','abc_lfsensor'],['rmfo_off_rfsensor','rmfo_off_lfsensor','rmfo_off_rhsensor','rmfo_off_lhsensor']]
-  "func": ['plot_COP','plot_COP','plot_COP']
-  "key": ['ST ref COP','ABC ref COP','act COP']
-  "arg_index": [[0],[1],[1]]
+'st_q':
+  'func': 'plot_rad2deg'
+  'log': ['st_q']
+  'index': ['0:']
 
-"Fz":
-  "log": [['rmfo_off_rfsensor'],['rmfo_off_lfsensor'],['rmfo_off_rhsensor'],['rmfo_off_lhsensor']]
-  "key": ['RLEG','LLEG','RARM','LARM']
-  "arg_index": [[0],[0],[0],[0]]
+'RobotHardware0_q':
+  'func': 'plot_rad2deg'
+  'log': ['RobotHardware0_q']
+  'index': ['0:']
 
-"zmp":
-  "log": [['abc_zmpOut'],['st_originRefZmp'],['st_originNewZmp'],['st_originActZmp']]
-  "arg_index": [[0],[0],[0],[0]]
+'rh_st_diff':
+  'func': 'plot_rh_q_st_q'
+  'log': ['RobotHardware0_q','st_q']
+  'index': ['0:','0:']
+
+'abs_enc_diff':
+  'func': 'plot_abs_enc'
+  'log': ['RobotHardware0_servoState','RobotHardware0_servoState']
+  'index': ['0:','0:']
+
+'sh_rfsensorOut':
+  'log': ['sh_rfsensorOut']
+  'index': ['0:6']
+
+'RobotHardware0_rfsensor':
+  'log': ['RobotHardware0_rfsensor']
+  'index': ['0:6']
+
+'rmfo_off_rfsensor':
+  'log': ['rmfo_off_rfsensor']
+  'index': ['0:6']
+
+'rmfo_off_lfsensor':
+  'log': ['rmfo_off_lfsensor']
+  'index': ['0:6']
+
+'rmfo_off_rhsensor':
+  'log': ['rmfo_off_rhsensor']
+  'index': ['0:6']
+
+'rmfo_off_lhsensor':
+  'log': ['rmfo_off_lhsensor']
+  'index': ['0:6']
+
+"current":
+  'log': ['RobotHardware0_servoState']
+  'func': 'plot_current'
+  'index': [[0,1,2,3,4,5]]
+
+# todo
+# imu is not check x,y,z
+"imu_x":
+  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
+  "func": 'plot_imu'
+  "index": [[0,1],[0,1]]
+
+"imu_y":
+  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
+  "func": 'plot_imu'
+  "index": [[0,1],[0,1]]
+
+"imu_z":
+  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
+  "func": 'plot_imu'
+  "index": [[0,1],[0,1]]
+
+"motor_temp":
+  "log": ['RobotHardware0_servoState']
+  "func": 'plot_motor_temp'
+  "index": [[0,1,2,3,4,5]]
+
+'motor_outer_temp':
+  "log": ['RobotHardware0_servoState']
+  "func": 'plot_motor_outer_temp'
+  "index": [[0,1,2,3,4,5]]
+
+"comp":
+  "log": ['st_allEEComp']
+  "func": 'plot_comp'
+  "index": [[0,1,2, 3, 4, 5]]
+
+"watt":
+  "log": ['RobotHardware0_dq','RobotHardware0_tau']
+  "func": 'plot_watt'
+  "index": [[0,1,2,3,4,5],[0,1,2,3,4,5]]
+
+"ServoState":
+  "log": ['RobotHardware0_servoState']
+  "func": 'plot_servostate'
+  "index": [[0,1,2,3,4,5]]
+
+"12V":
+  "log": ['RobotHardware0_servoState']
+  "func": 'plot_12V'
+  "index": [[0,1,2,3,4,5]]
+
+"80V":
+  "log": ['RobotHardware0_servoState']
+  "func": 'plot_80V'
+  "index": [[0,1,2,3,4,5]]
+
+"st_ref_cop":
+  "log": ['st_allRefWrench']
+  "func": 'plot_COP'
+  "index": [[0,1]] # legs
+
+"abc_ref_cop":
+  "log": ['abc_rfsensor', 'abc_lfsensor','abc_rfsensor','abc_lfsensor']
+  "func": 'plot_COP'
+  "index": [[0], [0], [0], [0]] # draw both leg automatically
+
+"act_cop":
+  "log": ['rmfo_off_rfsensor','rmfo_off_lfsensor','rmfo_off_rhsensor','rmfo_off_lhsensor']
+  "func": 'plog_COP'
+  "index": [[0], [0], [0], [0]] # draw both leg automatically
+
+"abc_zmp":
+  "log": ['abc_zmpOut']
+  "index": [[0,1,2]]
+
+"st_originRefZmp":
+  "log": ['st_originRefZmp']
+  "index": [[0,1,2]]
+
+"st_originNewZmp":
+  "log": ['st_originNewZmp']
+  "index": [[0,1,2]]
+
+"st_originActZmp":
+  "log": ['st_originActZmp']
+  "index": [[0,1,2]]
+
