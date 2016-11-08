@@ -60,6 +60,38 @@ class DataloggerLogParser:
         # back up for plot items
         self.plotItemOrig = {}
 
+    def _arange_yaml (self):
+        '''
+        fix yaml format
+        from
+        ```yaml
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        - 'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+
+        ```
+        to
+        ```yaml
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+        ```
+        '''
+        # complete 'group' and 'key' in layout_list
+        assert (self.layout_list[0].has_key('group'))
+        assert (self.layout_list[0].has_key('key'))
+        for i, row_layout in enumerate(self.layout_list):
+            if not row_layout.has_key('group'):
+                row_layout['group'] = self.layout_list[i-1]['group']
+            if not row_layout.has_key('key'):
+                row_layout['key'] = self.layout_list[i-1]['key']
+            if not row_layout.has_key('name'):
+                row_layout['name'] = copy.copy(row_layout['key'])
+
     @my_time
     def readData(self):
         '''
@@ -69,6 +101,7 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
+        self._arange_yaml()
         used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
         topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
         # store data in parallel
