@@ -87,6 +87,46 @@ class PlotDictInterface(object):
     def __init__(self):
         self.plot_dict = self.parent.plot_dict
 
+class RowColInterface(object):
+    _row = None
+    _col = None
+    _children =[]
+    max_row = 0
+    max_col = 0
+    def __init__(self):
+        self.__row = None
+        self.__col = None
+    def row(self):
+        return self.__row
+    def col(self):
+        return self.__col
+    def loc(self):
+        return self.__row, self.__col
+    def put(self):
+        try:
+            assert(RowColInterface._col != None)
+        except:
+            raise Exception('please call resetManager() before you first call put()!')
+        try:
+            assert(self not in RowColInterface._children)
+        except:
+            raise Exception('do not call put() twice or more!')
+        RowColInterface._col += 1
+        self.__col = RowColInterface._col
+        self.__row = RowColInterface._row
+        RowColInterface._children.append(self)
+        if self.__row > RowColInterface.max_row: RowColInterface.max_row += self.__row
+        if self.__col > RowColInterface.max_col: RowColInterface.max_col += self.__col
+        return self.__row, self.__col
+    @staticmethod
+    def newline():
+        RowColInterface._row += 1
+        RowColInterface._col = -1
+    @staticmethod
+    def resetManager():
+        RowColInterface._row = 0
+        RowColInterface._col = -1
+
 class GraphGroupTree(MultiArray):
     '''
     all the graph
@@ -100,8 +140,14 @@ class GraphGroupTree(MultiArray):
         self.layout_list = layout_list
         self.plot_dict = plot_dict
         self.name = name
-        member = [GraphGroup(self, row) for row,_ in enumerate(self.layout_list)]
+        member = [GraphGroup(self, i) for i,_ in enumerate(self.layout_list)]
         MultiArray.__init__(self, member)
+        RowColInterface.resetManager()
+        for gg in self:
+            for g in gg:
+                g.put()
+            if not (gg.layout.has_key('newline') and gg.layout['newline'] == False ):
+                RowColInterface.newline()
 
     def complement_layout_list():
         pass
@@ -113,46 +159,47 @@ class GraphGroup(MultiArray, PlotDictInterface):
     '''
     graphs in line
     '''
-    def __init__(self, parent, row):
+    def __init__(self, parent, idx):
         '''
         parent_tree: parent tree
         layout: one member from layout.yaml
         this class is list of graphs belonging to the same graph group
         '''
         self.parent = parent
-        self.row = row
-        self.layout = self.parent.layout_list[row]
+        self._id = idx
+        self.layout = self.parent.layout_list[self._id]
         self.name = self.layout['group']
         PlotDictInterface.__init__(self)
         col_max_len = max([len(item) for item in self.layout['index']])
-        members = [GraphInfo(self, index) for index in range(col_max_len)]
+        members = [GraphInfo(self, i) for i in range(col_max_len)]
         MultiArray.__init__(self, members)
 
-class GraphInfo(MultiArray, PlotDictInterface):
+class GraphInfo(MultiArray, PlotDictInterface, RowColInterface):
     '''
     each graph
     '''
-    def __init__(self, parent, col):
+    def __init__(self, parent, idx):
         self.parent = parent
-        self.col = col
+        self._id = idx
         self.layout = self.parent.layout.copy()
-        self.layout['index'] = [item[self.col] for item in self.parent.layout['index']]
+        self.layout['index'] = [item[self._id] for item in self.parent.layout['index']]
         self.name = str('{}[{}]'.format(self.parent.name, self.layout['index'][0]))
         PlotDictInterface.__init__(self)
-        members = [LegendInfo(self, legend_idx) for legend_idx, _ in enumerate(self.layout['index'])]
+        RowColInterface.__init__(self)
+        members = [LegendInfo(self, legend_id) for legend_id, _ in enumerate(self.layout['index'])]
         MultiArray.__init__(self, members)
 
 class LegendInfo(PlotDictInterface):
     '''
     each legend in graph
     '''
-    def __init__(self, parent, index):
+    def __init__(self, parent, idx):
         self.parent = parent
-        self.index = index
+        self._id = idx
         self.layout = self.parent.layout.copy()
-        self.layout['name'] = self.parent.layout['name'][self.index]
-        self.layout['key'] = self.parent.layout['key'][self.index]
-        self.layout['index'] = self.parent.layout['index'][self.index]
+        self.layout['name'] = self.parent.layout['name'][self._id]
+        self.layout['key'] = self.parent.layout['key'][self._id]
+        self.layout['index'] = self.parent.layout['index'][self._id]
         self.name = self.layout['name']
         PlotDictInterface.__init__(self)
         self.how_to_plot = self.lookup_plot_dict(self.plot_dict)
