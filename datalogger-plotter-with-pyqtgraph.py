@@ -13,6 +13,7 @@ import yaml
 import plot_method
 import re
 import copy
+from graph_tree import *
 
 try:
     import pyqtgraph
@@ -51,6 +52,7 @@ class DataloggerLogParser:
             self.plot_dict = yaml.load(f)
         with open(layout_conf_name, "r") as f:
             self.layout_list = yaml.load(f)
+        self._arange_yaml()
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
         self.view.setBackground('w')
@@ -84,6 +86,7 @@ class DataloggerLogParser:
         # complete 'group' and 'key' in layout_list
         assert (self.layout_list[0].has_key('group'))
         assert (self.layout_list[0].has_key('key'))
+        # layout yaml
         for i, row_layout in enumerate(self.layout_list):
             if not row_layout.has_key('group'):
                 row_layout['group'] = self.layout_list[i-1]['group']
@@ -91,6 +94,10 @@ class DataloggerLogParser:
                 row_layout['key'] = self.layout_list[i-1]['key']
             if not row_layout.has_key('name'):
                 row_layout['name'] = copy.copy(row_layout['key'])
+        # plot.yaml
+        for rule_tupple in self.plot_dict.items():
+            if not rule_tupple[1].has_key('func'):
+                rule_tupple[1]['func'] = 'normal'
 
     @my_time
     def readData(self):
@@ -101,7 +108,6 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
-        self._arange_yaml()
         used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
         topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
         # store data in parallel
@@ -160,53 +166,38 @@ class DataloggerLogParser:
             for i in range(len(x["index"][0])):
                 self.view.addPlot()
             self.view.nextRow()
+        # set grid
+        for plot_item in a.view.ci.items.keys():
+            plot_item.showGrid(x=True, y=True)
+            # we should call addLegend once a plot item
+            plot_item.addLegend(offset=(0, 0))
 
     @my_time
     def plotData(self):
         '''
         plot
         '''
-        color_list = pyqtgraph.functions.Colors.keys()
-        cur_row = 0
-        # for each row
-        for row_layout in self.layout_list: # plot : ('joint_velocity', {'field':[[0,1],[2,3]], 'log':['rh_q', 'st_q']}) (loop of rows)
-            if row_layout.has_key("group"):
-                title = row_layout["group"] # title of graph
-                key_list = row_layout["key"] # id of legend
-                name_list = row_layout["name"] # name of legend
+        times = self.dataListDict.items()[0][1][:,0]
+        self.graph_tree = GraphGroupTree(self.layout_list, self.plot_dict)
+        # geneerate data_dict
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
+        data_dict = {}
+        for log in topic_list:
+            data_dict[log] = self.dataListDict[log][:, 1:]
 
-            layout_index_list = row_layout['index']  # [[0,1,2,3],[4,5,6,7]]
-            indices_list_tmp=[[map(lambda plot_index_i: plot_index[plot_index_i], [plot_index_i for plot_index_i in layout_index_list][key_i]) \
-                               for plot_index in self.plot_dict[key]['index']] \
-                              for key_i,key in enumerate(key_list)]
-            indices_list = reduce(lambda x,y: x+y,indices_list_tmp)
-
-            # make arg_indices_list
-            arg_indices_list = []; arg_indices_list_counter = 0;
-            for indices_tmp in indices_list_tmp:
-                arg_indices_list.append(range(arg_indices_list_counter,arg_indices_list_counter+len(indices_tmp)))
-                arg_indices_list_counter+=1
-
-            args_list = [self.plot_dict[key]["log"] for key in key_list] # [['sh_qOut'],['rh_q', 'st_q']]
-            func_list = [self.plot_dict[x]['func'] if self.plot_dict[x].has_key('func') else "normal" for x in key_list]
-            log_list = list(set(reduce(lambda x,y: x + y, [self.plot_dict[x]['log'] for x in key_list])))
-            data_dict = {}
-            for log in log_list: data_dict[log] = self.dataListDict[log][:, 1:]
-            times = self.dataListDict[log_list[0]][:, 0]
-
-            # in each column
-            for cur_col in range(len(layout_index_list[0])):
-            # for cur_col, index in enumerate(layout_index_list): # index : 0,1,2,3  (index for plot) # column
-                cur_item = self.view.ci.rows[cur_row][cur_col]
-                cur_item.setTitle(title+" "+str(layout_index_list[0][cur_col]))
-                cur_item.showGrid(x=True, y=True)
-
-                # plot legends in one graph
-                for i, (args, key, func, arg_indices, name) in enumerate(zip(args_list, key_list, func_list, arg_indices_list, name_list)):
-                    if i == 0: # we should call addLegend once a plot item
-                        cur_item.addLegend(offset=(0, 0))
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, name, i)
-            cur_row = cur_row + 1
+        for graph_group in self.graph_tree:
+            for graph in graph_group:
+                for legend in graph:
+                    row = graph.row()
+                    col = graph.col()
+                    plot_item = a.view.ci.rows[row][col] # canvas to draw
+                    func = legend.how_to_plot['func']    # function in plot_method (ex. 'plot_watt')
+                    logs = legend.how_to_plot['log']     # list of log (ex. ['RobotHardware0_dq', 'RobotHardware0_tau'])
+                    log_cols = legend.how_to_plot['index']   # columns in log (ex. [0, 0])
+                    i = legend.index                     # if there are three legend in one graph, i = 0 or 1 or 2.
+                    key = legend.layout['name']
+                    getattr(plot_method.PlotMethod, func) (plot_item, times, data_dict, logs, log_cols, col, key, i)
 
     @my_time
     def setLabel(self):
@@ -369,4 +360,3 @@ if __name__ == '__main__':
     a = DataloggerLogParser(args.f, args.plot, args.layout, args.t)
     a.main()
     pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
-
