@@ -88,8 +88,7 @@ class RowColInterface(object):
     _row = None
     _col = None
     _children =[]
-    max_row = 0
-    max_col = 0
+    layout = []
     def __init__(self):
         self.__row = None
         self.__col = None
@@ -112,17 +111,21 @@ class RowColInterface(object):
         self.__col = RowColInterface._col
         self.__row = RowColInterface._row
         RowColInterface._children.append(self)
-        if self.__row > RowColInterface.max_row: RowColInterface.max_row += self.__row
-        if self.__col > RowColInterface.max_col: RowColInterface.max_col += self.__col
         return self.__row, self.__col
     @staticmethod
     def newline():
+        RowColInterface.layout.append(RowColInterface._col+1)
         RowColInterface._row += 1
         RowColInterface._col = -1
+    @staticmethod
+    def end_of_put():
+        if RowColInterface._col == -1:
+            RowColInterface.newline()
     @staticmethod
     def resetManager():
         RowColInterface._row = 0
         RowColInterface._col = -1
+
 
 class GraphGroupTree(MultiArray):
     '''
@@ -145,6 +148,7 @@ class GraphGroupTree(MultiArray):
                 g.put()
             if not (gg.layout.has_key('newline') and gg.layout['newline'] == False ):
                 RowColInterface.newline()
+        RowColInterface.end_of_put() # confirm the newline at last
 
     def complement_layout_list():
         pass

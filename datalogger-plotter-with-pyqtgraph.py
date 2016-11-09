@@ -162,8 +162,10 @@ class DataloggerLogParser:
         '''
         set layout of view according to self.plot_dict
         '''
-        for x in self.layout_list:
-            for i in range(len(x["index"][0])):
+        self.graph_tree = GraphGroupTree(self.layout_list, self.plot_dict)
+        # set graphItem
+        for col_num in RowColInterface.layout:
+            for j in range(col_num):
                 self.view.addPlot()
             self.view.nextRow()
         # set grid
@@ -178,7 +180,6 @@ class DataloggerLogParser:
         plot
         '''
         times = self.dataListDict.items()[0][1][:,0]
-        self.graph_tree = GraphGroupTree(self.layout_list, self.plot_dict)
         # geneerate data_dict
         used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
         topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
