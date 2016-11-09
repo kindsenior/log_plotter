@@ -33,6 +33,7 @@ representing one legend. how_to_plot is a dictionary describing the data to plot
             -LegendInfo
 
 '''
+import warnings
 
 class MultiArray(list):
     def __init___(self, array):
@@ -183,7 +184,12 @@ class GraphInfo(MultiArray, PlotDictInterface, RowColInterface):
         self.parent = parent
         self._id = idx
         self.layout = self.parent.layout.copy()
-        self.layout['index'] = [item[self._id] for item in self.parent.layout['index']]
+        try:
+            self.layout['index'] = [item[self._id] for item in self.parent.layout['index']]
+        except:
+            warnings.warn('\033[93m mismatch index sizein {}!\033[0m'.format(self.parent.name))
+            self.layout['index'] = [item[self._id] if self._id < len(item) else None for item in self.parent.layout['index']]
+            self.layout['index'].remove(None)
         self.name = str('{}[{}]'.format(self.parent.name, self.layout['index'][0]))
         PlotDictInterface.__init__(self)
         RowColInterface.__init__(self)

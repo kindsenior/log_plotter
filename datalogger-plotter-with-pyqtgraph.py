@@ -52,7 +52,6 @@ class DataloggerLogParser:
             self.plot_dict = yaml.load(f)
         with open(layout_conf_name, "r") as f:
             self.layout_list = yaml.load(f)
-        self._arange_yaml()
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
         self.view.setBackground('w')
@@ -62,7 +61,7 @@ class DataloggerLogParser:
         # back up for plot items
         self.plotItemOrig = {}
 
-    def _arange_yaml (self):
+    def _arange_yaml_before_readData (self):
         '''
         fix yaml format
         from
@@ -99,6 +98,46 @@ class DataloggerLogParser:
             if not rule_tupple[1].has_key('func'):
                 rule_tupple[1]['func'] = 'normal'
 
+    def _arange_yaml_after_readData (self):
+        '''
+        from:
+            'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        to:
+            'index': [[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]]
+        '''
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        for key in self.plot_dict.keys():
+            if not key in used_keys:
+                continue
+            index_field = self.plot_dict[key]['index'] # ex. [['0:6'], ['0:6']]
+            for i,_ in enumerate(index_field):
+                if type(index_field[i][0]) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index_field[i][0])
+                    if parsed_index:
+                        index_field[i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index = re.match("([0-9]+):", index_field[i][0])
+                    if parsed_index:
+                        log_name = self.plot_dict[key]['log'][i]
+                        data_row_length = len(self.dataListDict[log_name][0]) -1
+                        index_field[i] = range(int(parsed_index.group(1)), data_row_length)
+                        continue
+        # parse layout_list
+        for row_layout in self.layout_list:
+            index_field = row_layout['index'] # ex. [['0:6'], ['0:6'], ['0:6'], ['0:6']]
+            key = row_layout['key']
+            for i,_ in enumerate(index_field):
+                if type(index_field[i][0]) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index_field[i][0])
+                    if parsed_index:
+                        index_field[i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index = re.match("([0-9]+):", index_field[i][0])
+                    if parsed_index:
+                        max_len = len(self.plot_dict[key[i]]['index'][0])
+                        index_field[i] = range(int(parsed_index.group(1)), max_len)
+                        continue
+
     @my_time
     def readData(self):
         '''
@@ -108,6 +147,8 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
+        # fix yaml
+        self._arange_yaml_before_readData()
         used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
         topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
         # store data in parallel
@@ -128,34 +169,8 @@ class DataloggerLogParser:
             vf = numpy.vectorize(servoStatesConverter)
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = vf(ss_tmp)
-        # parse plot_dict
-        for key in self.plot_dict.keys():
-            if not key in used_keys:
-                continue
-            for index_i,index  in enumerate(self.plot_dict[key]['index']):
-                if type(index) == str:
-                    parsed_index = re.match("([0-9]+):([0-9]+)", index)
-                    if parsed_index:
-                        self.plot_dict[key]['index'][index_i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
-                        continue
-                    parsed_index = re.match("([0-9]+):", index)
-                    if parsed_index:
-                        self.plot_dict[key]['index'][index_i] = range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[key]['log'][index_i]][0]))
-                        continue
-        # parse layout_list
-        for row_layout_i,row_layout in enumerate(self.layout_list):
-            for index_i,index  in enumerate(row_layout['index']):
-                if type(index[0]) == str:
-                    parsed_index = re.match("([0-9]+):([0-9]+)", index[0])
-                    if parsed_index:
-                        self.layout_list[row_layout_i]['index'][index_i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
-                        continue
-                    parsed_index = re.match("([0-9]+):", index[0])
-                    if parsed_index:
-                        self.layout_list[row_layout_i]['index'][index_i] = range(int(parsed_index.group(1)), len(self.dataListDict[self.plot_dict[topic]['log'][index_i]][0]))
-                        continue
-            if not row_layout.has_key('name'):
-                row_layout['name'] = copy.copy(row_layout['key'])
+        # fix yaml
+        self._arange_yaml_after_readData()
 
     @my_time
     def setLayout(self):

@@ -1,19 +1,19 @@
 - 'group': "joint_angle"
   'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
-  'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
-- 'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+  'index': [['0:6'],['0:6'],['0:6'],['0:6']]
+- 'index': [['6:12'],['6:12'],['6:12'],['6:12']]
 
 - 'group': 'tracking'
   'key': ['rh_st_diff','abs_enc_diff']
-  'index': [[0,1,2,3,4,5],[0,1,2,3,4,5]]
+  'index': [['0:5'],['0:5']]
 
 - 'group': "right_foot_force"
   'key': ['sh_rfsensorOut','RobotHardware0_rfsensor','rmfo_off_rfsensor']
-  'index': [[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]]
+  'index': [['0:5'],['0:5'],['0:5']]
 
 - "group": "current"
   'key': ['current']
-  "index": [[0,1,2,3,4,5]]
+  "index": [['0:5']]
 
 - "group": "imu_gsensor"
   "key": ["imu_gsensor", "imu_gsensor", "imu_gsensor"]
@@ -29,19 +29,19 @@
 
 - "group": "temperature"
   "key": ["motor_temp","motor_outer_temp"]
-  "index": [[0,1,2,3,4,5],[0,1,2,3,4,5]]
+  "index": [['0:5'],['0:5']]
 
 - "group": "comp"
   "key": ["comp"]
-  "index": [[0,1,2, 3, 4, 5]]
+  "index": [['0:5']]
 
 - "group": "watt"
   "key": ["watt"]
-  "index": [[0,1,2,3,4,5]]
+  "index": [['0:5']]
 
 - "group": "ServoState"
   "key": ["ServoState"]
-  "index": [[0,1,2,3,4,5]]
+  "index": [['0:5']]
 
 - "group": "12V"
   "key": ["12V"]
