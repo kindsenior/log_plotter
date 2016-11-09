@@ -50,10 +50,7 @@ class MultiArray(list):
                 tmp_list = MultiArray([])
                 for row in self[args[0]]:
                     tmp = row[args[1]]
-                    if not issubclass(type(tmp), list):
-                        tmp_list.append([tmp])
-                    else:
-                        tmp_list.append(tmp)
+                    tmp_list.append(tmp)
                 return tmp_list
         else:
             tmp = list.__getitem__(self, args)
@@ -195,11 +192,11 @@ class LegendInfo(PlotDictInterface):
     '''
     def __init__(self, parent, idx):
         self.parent = parent
-        self._id = idx
+        self.index = idx
         self.layout = self.parent.layout.copy()
-        self.layout['name'] = self.parent.layout['name'][self._id]
-        self.layout['key'] = self.parent.layout['key'][self._id]
-        self.layout['index'] = self.parent.layout['index'][self._id]
+        self.layout['name'] = self.parent.layout['name'][self.index]
+        self.layout['key'] = self.parent.layout['key'][self.index]
+        self.layout['index'] = self.parent.layout['index'][self.index]
         self.name = self.layout['name']
         PlotDictInterface.__init__(self)
         self.how_to_plot = self.lookup_plot_dict(self.plot_dict)
