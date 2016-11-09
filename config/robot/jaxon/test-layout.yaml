@@ -2,19 +2,30 @@
   'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
   'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
 - 'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+
 - 'group': 'tracking'
   'key': ['rh_st_diff','abs_enc_diff']
   'index': [[0,1,2,3,4,5],[0,1,2,3,4,5]]
+
 - 'group': "right_foot_force"
   'key': ['sh_rfsensorOut','RobotHardware0_rfsensor','rmfo_off_rfsensor']
   'index': [[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]]
+
 - "group": "current"
   'key': ['current']
   "index": [[0,1,2,3,4,5]]
 
-- "group": "imu"
-  "key": ['imu_x','imu_y','imu_z']
-  "index": [[0,1],[0,1],[0,1]]
+- "group": "imu_gsensor"
+  "key": ["imu_gsensor", "imu_gsensor", "imu_gsensor"]
+  "name": ["x", "y", "z"]
+  "index": [[0],[1],[2]]
+  "newline": False
+
+- "group": "imu_gyrometer"
+  "key": ["imu_gyrometer", "imu_gyrometer", "imu_gyrometer"]
+  "name": ["x", "y", "z"]
+  "index": [[0],[1],[2]]
+
 
 - "group": "temperature"
   "key": ["motor_temp","motor_outer_temp"]

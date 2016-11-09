@@ -80,15 +80,6 @@ class PlotMethod(object):
         plot_item.plot(times, watt,pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=len(logs)-i), name=logs[0], fillLevel=0, fillBrush=PlotMethod.color_list[i])
 
     @staticmethod
-    def plot_imu(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
-        if cur_col==0:
-            plot_item.plot(times, data_dict[logs[0]][:, i],
-                           pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=3-i), name=key)
-        if cur_col==1:
-            plot_item.plot(times, data_dict[logs[1]][:, i],
-                           pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=3-i), name=key)
-
-    @staticmethod
     def plot_comp(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         plot_item.plot(times, data_dict[logs[0]][:, log_cols[0]],
                       pen=pyqtgraph.mkPen(PlotMethod.color_list[i], width=1+len(logs)-i), name=logs[0])

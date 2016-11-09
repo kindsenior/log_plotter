@@ -57,22 +57,13 @@
   'func': 'plot_current'
   'index': [[0,1,2,3,4,5]]
 
-# todo
-# imu is not check x,y,z
-"imu_x":
-  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
-  "func": 'plot_imu'
-  "index": [[0,1],[0,1]]
+"imu_gsensor":
+  "log": ['RobotHardware0_gsensor']
+  "index": [[0,1,2]]
 
-"imu_y":
-  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
-  "func": 'plot_imu'
-  "index": [[0,1],[0,1]]
-
-"imu_z":
-  "log": ['RobotHardware0_gsensor','RobotHardware0_gyrometer']
-  "func": 'plot_imu'
-  "index": [[0,1],[0,1]]
+"imu_gyrometer":
+  "log": ['RobotHardware0_gyrometer']
+  "index": [[0,1,2]]
 
 "motor_temp":
   "log": ['RobotHardware0_servoState']
