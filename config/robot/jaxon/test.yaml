@@ -6,7 +6,7 @@
 'abc_q':
   'func': 'plot_rad2deg'
   'log': ['abc_q']
-  'index': ['10:']
+  'index': ['0:']
 
 'st_q':
   'func': 'plot_rad2deg'
@@ -87,7 +87,7 @@
 "comp":
   "log": ['st_allEEComp']
   "func": 'plot_comp'
-  "index": [[0,1,2, 3, 4, 5]]
+  "index": [[0, 1, 2, 3, 4, 5]]
 
 "watt":
   "log": ['RobotHardware0_dq','RobotHardware0_tau']
