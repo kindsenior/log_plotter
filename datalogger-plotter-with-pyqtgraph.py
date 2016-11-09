@@ -173,6 +173,14 @@ class DataloggerLogParser:
             plot_item.showGrid(x=True, y=True)
             # we should call addLegend once a plot item
             plot_item.addLegend(offset=(0, 0))
+        # set tile
+        for graph_group in self.graph_tree:
+            for graph in graph_group:
+                row = graph.row()
+                col = graph.col()
+                title = graph.name
+                plot_item = a.view.ci.rows[row][col]
+                plot_item.setTitle(title)
 
     @my_time
     def plotData(self):
