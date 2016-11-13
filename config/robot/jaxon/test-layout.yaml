@@ -1,39 +1,53 @@
-- "group": "joint_angle"
-  "indices": [[0,1,2,3,4,5]]
-- "indices": [[6,7,8,9,10,11]]
-# - "indices": [[17, 18, 19, 20, 21, 22, 23, 24]]
-# - "indices": [[25, 26, 27, 28, 29, 30, 31, 32]]
+- 'group': "joint_angle"
+  'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+  'index': [['0:6'],['0:6'],['0:6'],['0:6']]
+- 'index': [['6:12'],['6:12'],['6:12'],['6:12']]
 
-- "group": "tracking"
-  "indices": [[0,1,2,3,4,5]]
-# - "indices": [[6,7,8,9,10,11],[6,7,8,9,10,11]]
+- 'group': 'tracking'
+  'key': ['rh_st_diff','abs_enc_diff']
+  'index': [['0:5'],['0:5']]
 
-- "group": "right_foot_force"
-  "indices": [[0,1,2,3,4,5]]
+- 'group': "right_foot_force"
+  'key': ['sh_rfsensorOut','RobotHardware0_rfsensor','rmfo_off_rfsensor']
+  'index': [['0:5'],['0:5'],['0:5']]
 
 - "group": "current"
-  "indices": [[0,1,2,3,4,5]]
+  'key': ['current']
+  "index": [['0:5']]
 
-- "group": "imu"
-  "indices": [[0,1]]
+- "group": "imu_gsensor"
+  "key": ["imu_gsensor", "imu_gsensor", "imu_gsensor"]
+  "name": ["x", "y", "z"]
+  "index": [[0],[1],[2]]
+  "newline": False
+
+- "group": "imu_gyrometer"
+  "key": ["imu_gyrometer", "imu_gyrometer", "imu_gyrometer"]
+  "name": ["x", "y", "z"]
+  "index": [[0],[1],[2]]
+
 
 - "group": "temperature"
-  "indices": [[0,1,2,3,4,5]]
+  "key": ["motor_temp","motor_outer_temp"]
+  "index": [['0:5'],['0:5']]
 
 - "group": "comp"
-  "indices": [[0,1,2, 3, 4, 5]]
+  "key": ["comp"]
+  "index": [['0:5']]
 
 - "group": "watt"
-  "indices": [[0,1,2,3,4,5]]
+  "key": ["watt"]
+  "index": [['0:5']]
 
 - "group": "ServoState"
-  "indices": [[0,1,2,3,4,5]]
+  "key": ["ServoState"]
+  "index": [['0:5']]
 
 - "group": "12V"
-  "indices": [[0,1,2,3,4,5]]
+  "key": ["12V"]
+  "index": [[0,1,2,3,4,5]]
 
 - "group": "80V"
-  "indices": [[0,1,2,3,4,5]]
+  "key": ["80V"]
+  "index": [[0,1,2,3,4,5]]
 
-- "group": "ZMP"
-  "indices": [[0,1]]

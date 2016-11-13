@@ -11,6 +11,9 @@ import sys
 import time
 import yaml
 import plot_method
+import re
+import copy
+from graph_tree import *
 
 try:
     import pyqtgraph
@@ -42,7 +45,6 @@ def readOneTopic(fname):
             tmp.append([float(x) for x in dl])
     return numpy.array(tmp)
 
-
 class DataloggerLogParser:
     def __init__(self, fname, plot_conf_name, layout_conf_name, title):
         self.fname = fname
@@ -59,6 +61,83 @@ class DataloggerLogParser:
         # back up for plot items
         self.plotItemOrig = {}
 
+    def _arange_yaml_before_readData (self):
+        '''
+        fix yaml format
+        from
+        ```yaml
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        - 'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+
+        ```
+        to
+        ```yaml
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        - 'group': "joint_angle"
+          'key': ['sh_qOut', 'abc_q', 'st_q', 'RobotHardware0_q']
+          'index': [["6:12"],["6:12"],["6:12"],["6:12"]]
+        ```
+        '''
+        # complete 'group' and 'key' in layout_list
+        assert (self.layout_list[0].has_key('group'))
+        assert (self.layout_list[0].has_key('key'))
+        # layout yaml
+        for i, row_layout in enumerate(self.layout_list):
+            if not row_layout.has_key('group'):
+                row_layout['group'] = self.layout_list[i-1]['group']
+            if not row_layout.has_key('key'):
+                row_layout['key'] = self.layout_list[i-1]['key']
+            if not row_layout.has_key('name'):
+                row_layout['name'] = copy.copy(row_layout['key'])
+        # plot.yaml
+        for rule_tupple in self.plot_dict.items():
+            if not rule_tupple[1].has_key('func'):
+                rule_tupple[1]['func'] = 'normal'
+
+    def _arange_yaml_after_readData (self):
+        '''
+        from:
+            'index': [["0:6"],["0:6"],["0:6"],["0:6"]]
+        to:
+            'index': [[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5]]
+        '''
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        for key in self.plot_dict.keys():
+            if not key in used_keys:
+                continue
+            index_field = self.plot_dict[key]['index'] # ex. [['0:6'], ['0:6']]
+            for i,_ in enumerate(index_field):
+                if type(index_field[i][0]) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index_field[i][0])
+                    if parsed_index:
+                        index_field[i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index = re.match("([0-9]+):", index_field[i][0])
+                    if parsed_index:
+                        log_name = self.plot_dict[key]['log'][i]
+                        data_row_length = len(self.dataListDict[log_name][0]) -1
+                        index_field[i] = range(int(parsed_index.group(1)), data_row_length)
+                        continue
+        # parse layout_list
+        for row_layout in self.layout_list:
+            index_field = row_layout['index'] # ex. [['0:6'], ['0:6'], ['0:6'], ['0:6']]
+            key = row_layout['key']
+            for i,_ in enumerate(index_field):
+                if type(index_field[i][0]) == str:
+                    parsed_index = re.match("([0-9]+):([0-9]+)", index_field[i][0])
+                    if parsed_index:
+                        index_field[i] = range(int(parsed_index.group(1)),int(parsed_index.group(2)))
+                        continue
+                    parsed_index = re.match("([0-9]+):", index_field[i][0])
+                    if parsed_index:
+                        max_len = len(self.plot_dict[key[i]]['index'][0])
+                        index_field[i] = range(int(parsed_index.group(1)), max_len)
+                        continue
+
     @my_time
     def readData(self):
         '''
@@ -68,9 +147,10 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
-        logs_list_list = [plot_conf[1]["log"] for plot_conf in self.plot_dict.items()]
-        duplicated_list = [log for logs_list in logs_list_list for logs in logs_list for log in logs ]
-        topic_list = list(set(duplicated_list))
+        # fix yaml
+        self._arange_yaml_before_readData()
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
         # store data in parallel
         fname_list = [self.fname+'.'+ext for ext in topic_list]
         pl = multiprocessing.Pool()
@@ -89,54 +169,59 @@ class DataloggerLogParser:
             vf = numpy.vectorize(servoStatesConverter)
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = vf(ss_tmp)
+        # fix yaml
+        self._arange_yaml_after_readData()
 
     @my_time
     def setLayout(self):
         '''
         set layout of view according to self.plot_dict
         '''
-        for x in self.layout_list:
-            for i in range(len(x["indices"][0])):
+        self.graph_tree = GraphGroupTree(self.layout_list, self.plot_dict)
+        # set graphItem
+        for col_num in RowColInterface.layout:
+            for j in range(col_num):
                 self.view.addPlot()
             self.view.nextRow()
+        # set grid
+        for plot_item in a.view.ci.items.keys():
+            plot_item.showGrid(x=True, y=True)
+            # we should call addLegend once a plot item
+            plot_item.addLegend(offset=(0, 0))
+        # set tile
+        for graph_group in self.graph_tree:
+            for graph in graph_group:
+                row = graph.row()
+                col = graph.col()
+                title = graph.name
+                plot_item = a.view.ci.rows[row][col]
+                plot_item.setTitle(title)
 
     @my_time
     def plotData(self):
         '''
         plot
         '''
-        color_list = pyqtgraph.functions.Colors.keys()
-        cur_row = 0
-        plot = None
-        for row_layout in self.layout_list: # plot : ('joint_velocity', {'field':[[0,1],[2,3]], 'log':['rh_q', 'st_q']}) (loop of rows)
-            if row_layout.has_key("group"):
-                title = row_layout["group"]
-                plot = self.plot_dict[title]
-            assert plot != None
-            indices_list = row_layout['indices']  # [[0,1,2,3],[4,5,6,7]]
-            args_list = plot['log']      # [['sh_qOut'],['rh_q', 'st_q']]
-            if plot.has_key('key'): key_list = plot['key']
-            else: key_list = [args[0] for args in args_list]
-            if plot.has_key('func'): func_list = plot['func']
-            else: func_list = ['normal' for x in range(len(args_list))]
-            arg_index_list = plot['arg_index']
-            log_list = list(set(reduce(lambda x,y: x + y, args_list)))
-            data_dict = {}
-            for log in log_list: data_dict[log] = self.dataListDict[log][:, 1:]
-            times = self.dataListDict[log_list[0]][:, 0]
+        times = self.dataListDict.items()[0][1][:,0]
+        # geneerate data_dict
+        used_keys = list(set(reduce(lambda x,y: x+y, [group["key"] for group in self.layout_list])))
+        topic_list = list(set(reduce(lambda x,y: x+y, [self.plot_dict[used_key]["log"] for used_key in used_keys] )))
+        data_dict = {}
+        for log in topic_list:
+            data_dict[log] = self.dataListDict[log][:, 1:]
 
-            for cur_col, index in enumerate(indices_list[0]): # index : 0,1,2,3  (loop of plot areas)
-                cur_item = self.view.ci.rows[cur_row][cur_col]
-                cur_item.setTitle(title+" "+str(index))
-                cur_item.showGrid(x=True, y=True)
-
-                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_index_list)): # args : ['sh_qOut'], ['rh_q', 'st_q']  (loop of keys)
-                    if i == 0: # we should call addLegend once a plot item
-                        cur_item.addLegend(offset=(0, 0))
-                    # plot
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
-            # increase current row
-            cur_row = cur_row + 1
+        for graph_group in self.graph_tree:
+            for graph in graph_group:
+                for legend in graph:
+                    row = graph.row()
+                    col = graph.col()
+                    plot_item = a.view.ci.rows[row][col] # canvas to draw
+                    func = legend.how_to_plot['func']    # function in plot_method (ex. 'plot_watt')
+                    logs = legend.how_to_plot['log']     # list of log (ex. ['RobotHardware0_dq', 'RobotHardware0_tau'])
+                    log_cols = legend.how_to_plot['index']   # columns in log (ex. [0, 0])
+                    i = legend.index                     # if there are three legend in one graph, i = 0 or 1 or 2.
+                    key = legend.layout['name']
+                    getattr(plot_method.PlotMethod, func) (plot_item, times, data_dict, logs, log_cols, col, key, i)
 
     @my_time
     def setLabel(self):
