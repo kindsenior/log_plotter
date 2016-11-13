@@ -292,10 +292,23 @@ if __name__ == '__main__':
     parser.add_argument('--plot', type=str, help='plot configure file', metavar='file', required=True)
     parser.add_argument('--layout', type=str, help='layout configure file', metavar='file', required=True)
     parser.add_argument('-t', type=str, help='title', default=None)
+    parser.add_argument("-i", action='store_true', help='interactive (start IPython)')
     parser.set_defaults(feature=False)
     args = parser.parse_args()
     # main
     app = pyqtgraph.Qt.QtGui.QApplication([])
     a = DataloggerLogParser(args.f, args.plot, args.layout, args.t)
     a.main()
-    pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+
+    if args.i:
+        [app.processEvents() for i in range(2)]
+        # start ipython
+        print '====='
+        print "please use \033[33mapp.processEvents()\033[m to update graph."
+        print "you can use \033[33ma\033[m as DataloggerLogParser instance."
+        print '====='
+        from IPython import embed
+        embed()
+    else:
+        pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+
