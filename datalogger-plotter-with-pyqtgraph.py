@@ -11,6 +11,7 @@ import sys
 import time
 import yaml
 import plot_method
+from graph_legend import GraphLegendInfo, expand_str_to_list
 
 try:
     import pyqtgraph
@@ -50,6 +51,17 @@ class DataloggerLogParser:
             self.plot_dict = yaml.load(f)
         with open(layout_conf_name, "r") as f:
             self.layout_list = yaml.load(f)
+        # expand [0-33] => [0,1,2,...,33]
+        for leg_info in self.plot_dict.values():
+            for log_info in leg_info['data']:
+                if type(log_info['column'][0]) == str:
+                    log_info['column'] = expand_str_to_list(log_info['column'][0])
+        for group in self.layout_list:
+            for leg in group['legends']:
+                if type(leg['id'][0]) == str:
+                    leg['id'] = expand_str_to_list(leg['id'][0])
+            group.setdefault('newline', True)
+
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
         self.view.setBackground('w')
@@ -68,9 +80,14 @@ class DataloggerLogParser:
         #                                         ...,
         #                                         [t_n, x_n, y_n, ...]])
         '''
-        logs_list_list = [plot_conf[1]["log"] for plot_conf in self.plot_dict.items()]
-        duplicated_list = [log for logs_list in logs_list_list for logs in logs_list for log in logs ]
-        topic_list = list(set(duplicated_list))
+        # get list fo used topic
+        all_legends = reduce(lambda x,y: x+y, [group['legends'] for group in self.layout_list])
+        used_keys = list(set([legend['key'] for legend in all_legends]))
+        log_col_pairs = reduce(lambda x,y: x+y, [self.plot_dict[key]['data'] for key in used_keys])
+        topic_list = list(set([log_col_pair['log'] for log_col_pair in log_col_pairs]))
+        self._used_keys = used_keys
+        self._topic_list = topic_list
+
         # store data in parallel
         fname_list = [self.fname+'.'+ext for ext in topic_list]
         pl = multiprocessing.Pool()
@@ -95,48 +112,55 @@ class DataloggerLogParser:
         '''
         set layout of view according to self.plot_dict
         '''
-        for x in self.layout_list:
-            for i in range(len(x["indices"][0])):
-                self.view.addPlot()
-            self.view.nextRow()
+        # set view and get legend info
+        self.legend_list = [[]]
+        graph_row = 0
+        graph_col = 0
+        for i, group in enumerate(self.layout_list):
+            group_len = max(len(leg['id']) for leg in group['legends'])
+            for j in range(group_len):
+                # add graph
+                plot_item = self.view.addPlot()
+                self.legend_list[graph_row].append([])
+                plot_item.setTitle(group['title']+" "+str(j))
+                plot_item.showGrid(x=True, y=True)
+
+                # add legend info to this graph
+                for k in range(len(group['legends'])):
+                    legend_info = GraphLegendInfo(self.layout_list, self.plot_dict, i, j, k)
+                    self.legend_list[graph_row][graph_col].append(legend_info)
+                graph_col += 1
+            if group['newline']:
+                # add newline
+                self.view.nextRow()
+                graph_row +=1
+                graph_col = 0
+                self.legend_list.append([])
 
     @my_time
     def plotData(self):
         '''
         plot
         '''
+
         color_list = pyqtgraph.functions.Colors.keys()
-        cur_row = 0
-        plot = None
-        for row_layout in self.layout_list: # plot : ('joint_velocity', {'field':[[0,1],[2,3]], 'log':['rh_q', 'st_q']}) (loop of rows)
-            if row_layout.has_key("group"):
-                title = row_layout["group"]
-                plot = self.plot_dict[title]
-            assert plot != None
-            indices_list = row_layout['indices']  # [[0,1,2,3],[4,5,6,7]]
-            args_list = plot['log']      # [['sh_qOut'],['rh_q', 'st_q']]
-            if plot.has_key('key'): key_list = plot['key']
-            else: key_list = [args[0] for args in args_list]
-            if plot.has_key('func'): func_list = plot['func']
-            else: func_list = ['normal' for x in range(len(args_list))]
-            arg_index_list = plot['arg_index']
-            log_list = list(set(reduce(lambda x,y: x + y, args_list)))
-            data_dict = {}
-            for log in log_list: data_dict[log] = self.dataListDict[log][:, 1:]
-            times = self.dataListDict[log_list[0]][:, 0]
-
-            for cur_col, index in enumerate(indices_list[0]): # index : 0,1,2,3  (loop of plot areas)
-                cur_item = self.view.ci.rows[cur_row][cur_col]
-                cur_item.setTitle(title+" "+str(index))
-                cur_item.showGrid(x=True, y=True)
-
-                for i, (args, key, func, arg_indices) in enumerate(zip(args_list, key_list, func_list, arg_index_list)): # args : ['sh_qOut'], ['rh_q', 'st_q']  (loop of keys)
-                    if i == 0: # we should call addLegend once a plot item
-                        cur_item.addLegend(offset=(0, 0))
-                    # plot
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, args, indices_list, arg_indices, cur_col, key, i)
-            # increase current row
-            cur_row = cur_row + 1
+        times = self.dataListDict[self._topic_list[0]][:, 0]
+        data_dict = {}
+        for log in self._topic_list: data_dict[log] = self.dataListDict[log][:, 1:]
+        # self.legend_list = [[[leg1, leg2,...],[],...]
+        #                     [[],              [],...]
+        #                     [[],              [],...]]
+        for i, group_legends in enumerate(self.legend_list):
+            for j, graph_legends in enumerate(group_legends):
+                cur_item = self.view.ci.rows[i][j]
+                cur_item.addLegend(offset=(0, 0))
+                for k, legend in enumerate(graph_legends):
+                    func = legend.info['func']
+                    logs = [d['log'] for d in legend.info['data']]
+                    log_cols = [d['column'] for d in legend.info['data']]
+                    cur_col = j
+                    key = legend.info['label']
+                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, logs, log_cols, cur_col, key, k)
 
     @my_time
     def setLabel(self):

@@ -1,39 +1,71 @@
-- "group": "joint_angle"
-  "indices": [[0,1,2,3,4,5]]
-- "indices": [[6,7,8,9,10,11]]
-# - "indices": [[17, 18, 19, 20, 21, 22, 23, 24]]
-# - "indices": [[25, 26, 27, 28, 29, 30, 31, 32]]
+- title: joint_angle
+  legends:
+    - { key: sh_qOut, id: [0-5] }
+    - { key: abc_q, id: [0-5] }
+    - { key: st_q, id: [0-5] }
+    - { key: RobotHardware0_q, id: [0-5] }
 
-- "group": "tracking"
-  "indices": [[0,1,2,3,4,5]]
-# - "indices": [[6,7,8,9,10,11],[6,7,8,9,10,11]]
+- title: joint_angle
+  legends:
+    - { key: sh_qOut, id: [6-11] }
+    - { key: abc_q, id: [6-11] }
+    - { key: st_q, id: [6-11] }
+    - { key: RobotHardware0_q, id: [6-11] }
 
-- "group": "right_foot_force"
-  "indices": [[0,1,2,3,4,5]]
+- title: tracking
+  legends:
+    - {key: rh_st_diff, id: [0-5] }
+    - {key: abs_enc_diff, id: [0-5] }
 
-- "group": "current"
-  "indices": [[0,1,2,3,4,5]]
+- title: right_foot_force
+  legends:
+    - { key: sh_rfsensorOut, id: [0-5] }
+    - { key: RobotHardware0_rfsensor, id: [0-5] }
+    - { key: rmfo_off_rfsensor, id: [0-5] }
 
-- "group": "imu"
-  "indices": [[0,1]]
+- title: current
+  legends:
+    - { key: current, id: [0-5] }
 
-- "group": "temperature"
-  "indices": [[0,1,2,3,4,5]]
+- title: imu_gsensor
+  legends:
+    - { key: imu_gsensor, id: [0], label: x }
+    - { key: imu_gsensor, id: [1], label: y }
+    - { key: imu_gsensor, id: [2], label: z }
+  newline: False
 
-- "group": "comp"
-  "indices": [[0,1,2, 3, 4, 5]]
+- title: imu_gyrometer
+  legends:
+    - { key: imu_gyrometer, id: [0], label: x }
+    - { key: imu_gyrometer, id: [1], label: y }
+    - { key: imu_gyrometer, id: [2], label: z }
 
-- "group": "watt"
-  "indices": [[0,1,2,3,4,5]]
+- title: temperature
+  legends:
+    - { key: motor_temp, id: [0-5] }
+    - { key: motor_outer_temp, id: [0-5] }
 
-- "group": "ServoState"
-  "indices": [[0,1,2,3,4,5]]
+- title: comp
+  legends:
+    - { key: comp, id: [0-5] }
 
-- "group": "12V"
-  "indices": [[0,1,2,3,4,5]]
+- title: watt
+  legends:
+    - { key: watt, id: [0-5] }
 
-- "group": "80V"
-  "indices": [[0,1,2,3,4,5]]
+- title: ServoState
+  legends:
+    - { key: ServoState, id: [0-5] }
 
-- "group": "ZMP"
-  "indices": [[0,1]]
+- title: 12V
+  legends:
+    - { key: 12V, id: [0,1,2,3,4,5] }
+
+- title: 80V
+  legends:
+    - { key: 80V, id: [0,1,2,3,4,5] }
+
+- title: ZMP
+  legends:
+    - { key: st_zmp, id: [0,1] }
+
