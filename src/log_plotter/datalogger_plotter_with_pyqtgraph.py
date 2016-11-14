@@ -16,6 +16,7 @@ import signal
 import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 import log_plotter.yaml_selector as yaml_selector
+import log_plotter.pyqtgraph_LegendItem_patch
 
 try:
     import pyqtgraph
