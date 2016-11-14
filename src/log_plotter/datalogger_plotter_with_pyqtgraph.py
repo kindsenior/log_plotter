@@ -151,7 +151,7 @@ class DataloggerLogParser:
             group_len = max(len(leg['id']) for leg in group['legends'])
             for j in range(group_len):
                 # add graph
-                plot_item = self.view.addPlot()
+                plot_item = self.view.addPlot(viewBox = pyqtgraph.ViewBox(border = pyqtgraph.mkPen(color='k', width=2)))
                 self.legend_list[graph_row].append([])
                 plot_item.setTitle(group['title']+" "+str(j))
                 plot_item.showGrid(x=True, y=True)
