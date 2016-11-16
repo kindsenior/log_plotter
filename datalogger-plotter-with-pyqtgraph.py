@@ -128,6 +128,10 @@ class DataloggerLogParser:
                 self.legend_list[graph_row].append([])
                 plot_item.setTitle(group['title']+" "+str(j))
                 plot_item.showGrid(x=True, y=True)
+                if group.has_key('downsampling'):
+                    plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
+                                              auto=group['downsampling'].get('auto', False),
+                                              mode=group['downsampling'].get('mode', 'peak'))
 
                 # add legend info to this graph
                 for k in range(len(group['legends'])):
