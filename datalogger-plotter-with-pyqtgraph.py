@@ -36,11 +36,15 @@ def my_time(func):
 # seems that we should declare global function for multiprocess
 def readOneTopic(fname):
     tmp = []
-    with open(fname, 'r') as f:
-        reader = csv.reader(f, delimiter=' ')
-        for row in reader:
-            dl = filter(lambda x: x != '', row)
-            tmp.append([float(x) for x in dl])
+    try:
+        with open(fname, 'r') as f:
+            reader = csv.reader(f, delimiter=' ')
+            for row in reader:
+                dl = filter(lambda x: x != '', row)
+                tmp.append([float(x) for x in dl])
+    except Exception as e:
+        print '[readOneToopic] error occured while reading {}'.format(fname)
+        raise e
     return numpy.array(tmp)
 
 
