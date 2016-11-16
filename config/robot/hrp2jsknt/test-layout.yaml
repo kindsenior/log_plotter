@@ -50,12 +50,14 @@
     - { key: imu_gsensor, id: [1], label: y }
     - { key: imu_gsensor, id: [2], label: z }
   newline: False
+  downsampling: {ds: 100, auto: False, mode: peak}
 
 - title: imu_gyrometer
   legends:
     - { key: imu_gyrometer, id: [0], label: x }
     - { key: imu_gyrometer, id: [1], label: y }
     - { key: imu_gyrometer, id: [2], label: z }
+  downsampling: {ds: 100, auto: False, mode: peak}
 
 - title: comp
   legends:
