@@ -10,8 +10,8 @@ import struct
 import sys
 import time
 import yaml
-import plot_method
-from graph_legend import GraphLegendInfo, expand_str_to_list
+import log_plotter.plot_method as plot_method
+from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 
 try:
     import pyqtgraph
@@ -317,7 +317,7 @@ class DataloggerLogParser:
         self.customMenu()
         self.view.showMaximized()
 
-if __name__ == '__main__':
+def main():
     # args
     parser = argparse.ArgumentParser(description='plot data from hrpsys log')
     parser.add_argument('-f', type=str, help='input file', metavar='file', required=True)
@@ -343,4 +343,7 @@ if __name__ == '__main__':
         embed()
     else:
         pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+
+if __name__ == '__main__':
+    main()
 
