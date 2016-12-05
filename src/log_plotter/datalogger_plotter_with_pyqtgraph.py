@@ -6,7 +6,6 @@ import functools
 import math
 import multiprocessing
 import numpy
-import struct
 import sys
 import time
 import yaml
@@ -133,11 +132,8 @@ class DataloggerLogParser:
             self.dataListDict[topic][:, 0] = [x - min_time for x in raw_time]
         # fix servoState
         if 'RobotHardware0_servoState' in topic_list:
-            def servoStatesConverter(x):
-                return struct.unpack('f', struct.pack('i', int(x)))[0]
-            vf = numpy.vectorize(servoStatesConverter)
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
-            self.dataListDict['RobotHardware0_servoState'][:, 1:] = vf(ss_tmp)
+            self.dataListDict['RobotHardware0_servoState'][:, 1:] = numpy.fromstring(ss_tmp.astype('i').tostring(), dtype='f').reshape(ss_tmp.shape)
 
     @my_time
     def setLayout(self):
