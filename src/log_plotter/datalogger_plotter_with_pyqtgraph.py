@@ -10,6 +10,9 @@ import struct
 import sys
 import time
 import yaml
+import os
+import fnmatch
+import re
 import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 
@@ -47,6 +50,31 @@ def readOneTopic(fname):
         raise e
     return numpy.array(tmp)
 
+# return file list matching specific substring
+def findFile(pattern, path):
+    result = []
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            if fnmatch.fnmatch(name, pattern):
+                result.append(os.path.join(root, name))
+    return result
+
+# replace RobotHardware0 to each simulation one
+def replaceRH(fname_list):
+    log_dir = os.path.dirname(fname_list[0])
+    base_name = os.path.splitext(os.path.basename(fname_list[0]))[0]
+    # choreonoid
+    if findFile(base_name + '.RobotHardware_choreonoid0_*', log_dir):
+        fname_list = [fname.replace('.RobotHardware0_', '.RobotHardware_choreonoid0_') for fname in fname_list]
+        return fname_list
+    # hrpsys simulator
+    elif findFile(base_name + '.*(Robot)0_*', log_dir):
+        # pick up robot name (.<ROBOT_NAME>(Robot)0_)
+        rep = re.sub(findFile(base_name + '.*(Robot)0_*', log_dir)[0].split('(Robot)0_')[1], '',
+                     os.path.splitext(findFile(base_name + '.*(Robot)0_*', log_dir)[0])[1])
+        fname_list = [fname.replace('.RobotHardware0_', rep) for fname in fname_list]
+        return fname_list
+    else: return fname_list
 
 class DataloggerLogParser:
     def __init__(self, fname, plot_conf_name, layout_conf_name, title):
@@ -93,7 +121,7 @@ class DataloggerLogParser:
         self._topic_list = topic_list
 
         # store data in parallel
-        fname_list = [self.fname+'.'+ext for ext in topic_list]
+        fname_list = replaceRH([self.fname+'.'+ext for ext in topic_list])
         pl = multiprocessing.Pool()
         data_list = pl.map(readOneTopic, fname_list)
         for topic, data in zip(topic_list, data_list):
