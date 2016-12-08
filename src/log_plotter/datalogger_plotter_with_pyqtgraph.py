@@ -12,6 +12,7 @@ import yaml
 import os
 import fnmatch
 import re
+import signal
 import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 
@@ -366,6 +367,7 @@ def main():
         from IPython import embed
         embed()
     else:
+        signal.signal(signal.SIGINT, signal.SIG_DFL)
         pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
 
 if __name__ == '__main__':
