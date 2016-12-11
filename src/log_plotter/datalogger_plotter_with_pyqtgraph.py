@@ -15,7 +15,6 @@ import re
 import signal
 import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
-import log_plotter.yaml_selector as yaml_selector
 
 try:
     import pyqtgraph
@@ -347,17 +346,14 @@ def main():
     # args
     parser = argparse.ArgumentParser(description='plot data from hrpsys log')
     parser.add_argument('-f', type=str, help='input file', metavar='file', required=True)
-    parser.add_argument('--plot', type=str, help='plot configure file', metavar='file')
-    parser.add_argument('--layout', type=str, help='layout configure file', metavar='file')
+    parser.add_argument('--plot', type=str, help='plot configure file', metavar='file', required=True)
+    parser.add_argument('--layout', type=str, help='layout configure file', metavar='file', required=True)
     parser.add_argument('-t', type=str, help='title', default=None)
     parser.add_argument("-i", action='store_true', help='interactive (start IPython)')
     parser.set_defaults(feature=False)
     args = parser.parse_args()
     # main
     app = pyqtgraph.Qt.QtGui.QApplication([])
-    if args.plot is None or args.layout is None: # check args
-        get_yamls_path = yaml_selector.MainDialog()
-        args.plot, args.layout = get_yamls_path()
     a = DataloggerLogParser(args.f, args.plot, args.layout, args.t)
     a.main()
 
