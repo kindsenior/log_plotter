@@ -29,6 +29,7 @@ class PathSelector (QtGui.QGroupBox):
       self.label = QtGui.QLabel(self.path)
       self.button = QtGui.QPushButton()
       self.button.setText(button_name)
+      self.button.setAutoDefault(True)
       # set parents
       hbox.addWidget(self.button)
       hbox.addWidget(self.label)
@@ -83,6 +84,7 @@ class MainDialog(object):
       self.layout_yaml_selector = PathSelector('layout.yaml', 'select', self.layout_yaml_path)
       button = QtGui.QPushButton(self.window)
       button.setText('OK')
+      button.setAutoDefault(True);
       ## set layout
       vbox.addWidget(self.plot_yaml_selector)
       vbox.addWidget(self.layout_yaml_selector)
