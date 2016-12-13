@@ -272,7 +272,7 @@ class DataloggerLogParser:
             qa4 = vb.menu.addAction('restore plots')
             qa5 = hm.addAction('hide except this plot')
             qa6 = hm.addAction('hide except this row')
-            qa7 = hm.addAction('hide except this colmn')
+            qa7 = hm.addAction('hide except this column')
             def hideCB(item):
                 self.view.ci.removeItem(item)
             def hideRowCB(item):
