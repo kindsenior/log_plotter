@@ -296,14 +296,12 @@ class DataloggerLogParser:
                     self.view.ci.removeItem(i)
             def hideExcRowCB(item):
                 r, _c = self.view.ci.items[item][0]
-                not_del_list=[self.view.ci.rows[r][c] for c in self.view.ci.rows[r].keys()]
-                del_list = [x for x in self.view.ci.items.keys() if x not in not_del_list]
+                del_list = [x for x in self.view.ci.items.keys() if self.view.ci.items[x][0][0] != r]
                 for i in del_list:
                     self.view.ci.removeItem(i)
             def hideExcColumnCB(item):
                 _r, c = self.view.ci.items[item][0]
-                not_del_list=[self.view.ci.rows[r][c] for r in range(len(self.view.ci.rows))]
-                del_list = [x for x in self.view.ci.items.keys() if x not in not_del_list]
+                del_list = [x for x in self.view.ci.items.keys() if self.view.ci.items[x][0][1] != c]
                 for i in del_list:
                     self.view.ci.removeItem(i)
             def restoreCB():
