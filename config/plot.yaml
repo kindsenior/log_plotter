@@ -1,0 +1,39 @@
+# ST
+## cog
+st_originActCog:
+  data:
+    - { log: st_originActCog, column: [0-2] }
+st_originRefCog:
+  data:
+    - { log: st_originRefCog, column: [0-2] }
+## zmp
+st_originActZmp:
+  data:
+    - { log: st_originActZmp, column: [0-2] }
+st_originRefZmp:
+  data:
+    - { log: st_originRefZmp, column: [0-2] }
+st_originNewZmp:
+  data:
+    - { log: st_originNewZmp, column: [0-2] }
+## force
+rmfo_off_rfsensor:
+  data:
+    - { log: rmfo_off_rfsensor, column: [0-5] }
+
+rmfo_off_lfsensor:
+  data:
+    - { log: rmfo_off_lfsensor, column: [0-5] }
+st_ref_rfsensor:
+  data:
+    - { log: st_allRefWrench, column: [0-5] }
+st_ref_lfsensor:
+  data:
+    - { log: st_allRefWrench, column: [6-11] }
+st_ref_rhsensor:
+  data:
+    - { log: st_allRefWrench, column: [12-17] }
+st_ref_lhsensor:
+  data:
+    - { log: st_allRefWrench, column: [18-23] }
+
