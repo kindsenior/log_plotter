@@ -62,7 +62,7 @@ def findFile(pattern, path):
 
 # replace RobotHardware0 to each simulation one
 def replaceRH(fname_list):
-    log_dir = os.path.dirname(fname_list[0])
+    log_dir = os.path.dirname(os.path.abspath(fname_list[0]))
     base_name = os.path.splitext(os.path.basename(fname_list[0]))[0]
     # choreonoid
     if findFile(base_name + '.RobotHardware_choreonoid0_*', log_dir):
