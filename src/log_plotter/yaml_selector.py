@@ -11,7 +11,7 @@ class PathSelector (QtGui.QGroupBox):
    '''
    :members: path (path/to/yaml)
    '''
-   def __init__(self, group_name, button_name, default_path=None, stdout=False):
+   def __init__(self, group_name, button_name, default_path=None, stdout=False, filter="yaml (*.yaml)"):
       '''
       ex:
       PathSelector('plot.yaml', 'select', '/path/to/default/plot.yaml')
@@ -35,14 +35,14 @@ class PathSelector (QtGui.QGroupBox):
       hbox.addWidget(self.label)
       vbox.addLayout(hbox)
       self.setLayout(vbox)
-      self.button.clicked.connect(self.select_path)
+      self.button.clicked.connect(functools.partial(self.select_path, filter))
 
-   def select_path(self):
+   def select_path(self, filter):
       '''
       callback function when 'select' button was pressed.
       '''
       d = QtGui.QFileDialog()
-      pathname = d.getOpenFileName(directory=os.path.dirname(self.path))
+      pathname = d.getOpenFileName(directory=os.path.dirname(self.path), filter=filter)
       if not pathname == "":
          self.set_path(pathname)
 
@@ -80,8 +80,8 @@ class MainDialog(object):
       ## widgets
       self.window = QtGui.QWidget()
       vbox = QtGui.QVBoxLayout()
-      self.plot_yaml_selector = PathSelector('plot.yaml', 'select', self.plot_yaml_path)
-      self.layout_yaml_selector = PathSelector('layout.yaml', 'select', self.layout_yaml_path)
+      self.plot_yaml_selector = PathSelector('plot.yaml', 'select', self.plot_yaml_path, filter="_plot.yaml (*_plot.yaml)")
+      self.layout_yaml_selector = PathSelector('layout.yaml', 'select', self.layout_yaml_path, filter="_layout.yaml (*_layout.yaml)")
       button = QtGui.QPushButton(self.window)
       button.setText('OK')
       button.setAutoDefault(True);
