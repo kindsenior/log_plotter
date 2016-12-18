@@ -33,6 +33,12 @@
     - { key: st_q, id: [26-33] }
     - { key: RobotHardware0_q, id: [26-33] }
 
+- title: cog
+  legends:
+    - { key: abc_cogOut, id: [0-2]}
+    - { key: st_originActCog, id: [0-2]}
+    - { key: st_originRefCog, id: [0-2]}
+
 - title: tracking
   legends:
     - {key: rh_st_diff, id: [0-5] }

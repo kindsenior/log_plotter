@@ -18,6 +18,18 @@ RobotHardware0_q:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
 
+abc_cogOut:
+  data:
+    - { log: abc_cogOut, column: [0-2] }
+
+st_originActCog:
+  data:
+    - { log: st_originActCog, column: [0-2] }
+
+st_originRefCog:
+  data:
+    - { log: st_originRefCog, column: [0-2] }
+
 rh_st_diff:
   func: plot_rh_q_st_q
   data:
