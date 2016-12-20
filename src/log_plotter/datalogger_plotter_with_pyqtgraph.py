@@ -16,6 +16,7 @@ import signal
 import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 import log_plotter.yaml_selector as yaml_selector
+import log_plotter.pyqtgraph_LegendItem_patch
 
 try:
     import pyqtgraph
@@ -150,15 +151,14 @@ class DataloggerLogParser:
             group_len = max(len(leg['id']) for leg in group['legends'])
             for j in range(group_len):
                 # add graph
-                plot_item = self.view.addPlot()
+                plot_item = self.view.addPlot(viewBox = pyqtgraph.ViewBox(border = pyqtgraph.mkPen(color='k', width=2)))
                 self.legend_list[graph_row].append([])
-                plot_item.setTitle(group['title']+" "+str(j))
-                plot_item.showGrid(x=True, y=True)
+                plot_item.setTitle(group['title']+" "+str(j), color ='000000')
+                plot_item.showGrid(x=True, y=True, alpha=1)
                 if group.has_key('downsampling'):
                     plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
                                               auto=group['downsampling'].get('auto', False),
                                               mode=group['downsampling'].get('mode', 'peak'))
-
                 # add legend info to this graph
                 for k in range(len(group['legends'])):
                     legend_info = GraphLegendInfo(self.layout_list, self.plot_dict, i, j, k)
@@ -255,6 +255,13 @@ class DataloggerLogParser:
                 for i, p in enumerate(all_items):
                     if i != 0:
                         p.setYLink(target_item)
+
+        # design
+        for i, p in enumerate(self.view.ci.items.keys()):
+            ax = p.getAxis('bottom')
+            ax.setPen(pyqtgraph.mkPen('k', width=1, style=pyqtgraph.QtCore.Qt.DashLine))
+            ax = p.getAxis('left')
+            ax.setPen(pyqtgraph.mkPen('k', width=1, style=pyqtgraph.QtCore.Qt.DashLine))
 
     @my_time
     def customMenu(self):

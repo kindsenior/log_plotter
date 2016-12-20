@@ -1,0 +1,85 @@
+import pyqtgraph.graphicsItems
+from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.graphicsItems.GraphicsWidget import GraphicsWidget
+from pyqtgraph import functions as fn
+from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem, drawSymbol
+
+# set legend forefround white
+def white_foreground_legend_item_paint(legend_item, p, *args):
+    p.setPen(fn.mkPen(0,0,0,255, width = 1)) # r,g,b,alpha
+    p.setBrush(fn.mkBrush(255,255,255,255))
+    p.drawRect(legend_item.boundingRect())
+
+# set legend, ItemSample horizontal
+class HorizenLegend(GraphicsWidget):
+    """ Class responsible for drawing a single item in a LegendItem (sans label).
+
+    This may be subclassed to draw custom graphics in a Legend.
+    """
+    ## Todo: make this more generic; let each item decide how it should be represented.
+    def __init__(self, item):
+        GraphicsWidget.__init__(self)
+        self.item = item
+
+    def boundingRect(self):
+        return QtCore.QRectF(0, 0, 20, 20)
+
+    def paint(self, p, *args):
+        #p.setRenderHint(p.Antialiasing)  # only if the data is antialiased.
+        opts = self.item.opts
+
+        if opts.get('fillLevel',None) is not None and opts.get('fillBrush',None) is not None:
+            p.setBrush(fn.mkBrush(opts['fillBrush']))
+            p.setPen(fn.mkPen(None))
+            p.drawPolygon(QtGui.QPolygonF([QtCore.QPointF(2,18), QtCore.QPointF(18,2), QtCore.QPointF(18,18)]))
+
+        if not isinstance(self.item, ScatterPlotItem):
+            p.setPen(fn.mkPen(opts['pen']))
+            p.drawLine(2, 10, 18, 10)
+
+        symbol = opts.get('symbol', None)
+        if symbol is not None:
+            if isinstance(self.item, PlotDataItem):
+                opts = self.item.scatter.opts
+
+            pen = fn.mkPen(opts['pen'])
+            brush = fn.mkBrush(opts['brush'])
+            size = opts['size']
+
+            p.translate(10,10)
+            path = drawSymbol(p, symbol, size, pen, brush)
+
+# avoid LegendItem cover ItemSample
+def LegendItem_updateSize(self):
+    if self.size is not None:
+        return
+    height = 0
+    width = 0
+    #print("-------")
+    for sample, label in self.items:
+        height += max(sample.height(), label.height()) + 3
+        width = max(width, sample.width()+label.width())
+        #print(width, height)
+    #print width, height
+    # self.setGeometry(0, 0, width+25, height)
+    self.setGeometry(0, 0, width+35, height)
+
+# justify left for legend label
+from pyqtgraph.graphicsItems.LabelItem import LabelItem
+def LegendItem_addItem(self, item, name):
+    label = LabelItem(name, justify='left', color='000000')
+    if isinstance(item, pyqtgraph.graphicsItems.LegendItem.ItemSample):
+        sample = item
+    else:
+        sample = pyqtgraph.graphicsItems.LegendItem.ItemSample(item)
+    row = self.layout.rowCount()
+    self.items.append((sample, label))
+    self.layout.addItem(sample, row, 0)
+    self.layout.addItem(label, row, 1)
+    self.updateSize()
+
+
+pyqtgraph.graphicsItems.LegendItem.LegendItem.paint = white_foreground_legend_item_paint
+pyqtgraph.graphicsItems.LegendItem.LegendItem.updateSize = LegendItem_updateSize
+pyqtgraph.graphicsItems.LegendItem.LegendItem.addItem = LegendItem_addItem
+pyqtgraph.graphicsItems.LegendItem.ItemSample = HorizenLegend
