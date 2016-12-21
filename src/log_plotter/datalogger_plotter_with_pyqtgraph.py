@@ -17,6 +17,7 @@ import log_plotter.plot_method as plot_method
 from log_plotter.graph_legend import GraphLegendInfo, expand_str_to_list
 import log_plotter.yaml_selector as yaml_selector
 import log_plotter.pyqtgraph_LegendItem_patch
+import log_plotter.graph_tools as graph_tools
 
 try:
     import pyqtgraph
@@ -324,6 +325,21 @@ class DataloggerLogParser:
             qa6.triggered.connect(functools.partial(hideExcRowCB, pi))
             qa7.triggered.connect(functools.partial(hideExcColumnCB, pi))
 
+    @my_time
+    def customMenu2(self):
+        '''
+        customize right-click context menu
+        '''
+        for pi in self.view.ci.items.keys():
+            vb = pi.getViewBox()
+            tool_menu = vb.menu.addMenu('Tool')
+            # graph size tool
+            size_menu = tool_menu.addMenu('graph size')
+            size_widget = graph_tools.GraphSize(pi, self.view)
+            size_action = pyqtgraph.QtGui.QWidgetAction(size_menu)
+            size_action.setDefaultWidget(size_widget)
+            size_menu.addAction(size_action)
+
     def main(self):
         '''
         1. read log files
@@ -340,6 +356,7 @@ class DataloggerLogParser:
         self.setLabel()
         self.linkAxes()
         self.customMenu()
+        self.customMenu2()
         self.view.showMaximized()
 
 def main():
