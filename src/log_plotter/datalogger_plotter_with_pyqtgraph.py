@@ -232,6 +232,35 @@ class DataloggerLogParser:
             cur_item.setLabel("bottom", text="time", units="s")
 
     @my_time
+    def setItemSize(self):
+        # set graph size
+        qdw = pyqtgraph.QtGui.QDesktopWidget()
+        for i, group in enumerate(self.layout_list):
+            for j in range(len(self.legend_list[i])):
+                cur_item = self.view.ci.rows[i][j]
+                vb = cur_item.getViewBox()
+                bottom_ax = cur_item.getAxis('bottom')
+                left_ax = cur_item.getAxis('left')
+                right_ax = cur_item.getAxis('right')
+                w = group.get('width', False)
+                if w:
+                    if 'mm' in str(w):
+                        w = int(w.replace('mm', '')) # todo: support px, pt,...
+                        w = qdw.physicalDpiX() / 25.4 * w
+                    vb.setFixedWidth(w)
+                    bottom_ax.setFixedWidth(w)
+                    cur_item.setFixedWidth(cur_item.minimumWidth())
+                h = group.get('height', False)
+                if h:
+                    if 'mm' in str(h):
+                        h = int(h.replace('mm', '')) # todo: support px, pt,...
+                        h = qdw.physicalDpiY() / 25.4 * h
+                    vb.setFixedHeight(h)
+                    left_ax.setFixedHeight(h)
+                    right_ax.setFixedHeight(h)
+                    cur_item.setFixedHeight(cur_item.minimumHeight())
+
+    @my_time
     def linkAxes(self):
         '''
         link all X axes and some Y axes
@@ -354,6 +383,7 @@ class DataloggerLogParser:
         self.setLayout()
         self.plotData()
         self.setLabel()
+        self.setItemSize()
         self.linkAxes()
         self.customMenu()
         self.customMenu2()
