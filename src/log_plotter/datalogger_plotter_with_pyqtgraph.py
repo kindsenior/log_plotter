@@ -314,6 +314,11 @@ class DataloggerLogParser:
             text = p.titleLabel.text
             full = "<span style='%s'>%s</span>" % ('; '.join(font_style_list), text)
             p.titleLabel.item.setHtml(full)
+            for data in p.legend.items:
+                label = data[1]
+                text = label.text
+                full = "<span style='%s'>%s</span>" % ('; '.join(font_style_list), text)
+                label.item.setHtml(full)
             for side in sidelist:
                 ax = p.getAxis(side)
                 ax.tickFont = font
