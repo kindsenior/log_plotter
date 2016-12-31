@@ -106,6 +106,11 @@ class DataloggerLogParser:
         # back up for plot items
         self.plotItemOrig = {}
 
+        # default font style
+        self.font_type = 'Times New Roman'
+        self.font_size = 12
+        self.font_color = 'black'
+
     @my_time
     def readData(self):
         '''
@@ -154,7 +159,7 @@ class DataloggerLogParser:
                 # add graph
                 plot_item = self.view.addPlot(viewBox = pyqtgraph.ViewBox(border = pyqtgraph.mkPen(color='k', width=2)))
                 self.legend_list[graph_row].append([])
-                plot_item.setTitle(group['title']+" "+str(j), color ='000000')
+                plot_item.setTitle(group['title']+" "+str(j))
                 plot_item.showGrid(x=True, y=True, alpha=1)
                 if group.has_key('downsampling'):
                     plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
@@ -294,6 +299,27 @@ class DataloggerLogParser:
             ax.setPen(pyqtgraph.mkPen('k', width=0.5, style=pyqtgraph.QtCore.Qt.DashLine))
 
     @my_time
+    def setFont(self):
+        '''
+        set font style ( title, axis, label )
+        '''
+        font = pyqtgraph.Qt.QtGui.QFont(self.font_type, self.font_size)
+        font_style = {'font-family': self.font_type, 'font-size': str(self.font_size) + 'pt', 'color': self.font_color}
+        font_style_list = []
+        font_style_list.append('font-family: ' + self.font_type)
+        font_style_list.append('font-size: ' + str(self.font_size) + 'pt')
+        font_style_list.append('color: ' + self.font_color)
+        sidelist = [ 'bottom', 'left' ]
+        for p in self.view.ci.items.keys():
+            text = p.titleLabel.text
+            full = "<span style='%s'>%s</span>" % ('; '.join(font_style_list), text)
+            p.titleLabel.item.setHtml(full)
+            for side in sidelist:
+                ax = p.getAxis(side)
+                ax.tickFont = font
+                ax.setLabel(**font_style)
+
+    @my_time
     def customMenu(self):
         '''
         customize right-click context menu
@@ -385,6 +411,7 @@ class DataloggerLogParser:
         self.setLabel()
         self.setItemSize()
         self.linkAxes()
+        self.setFont()
         self.customMenu()
         self.customMenu2()
         self.view.showMaximized()
