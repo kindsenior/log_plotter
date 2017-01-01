@@ -218,7 +218,9 @@ class DataloggerLogParser:
                 tmp_units = "deg/s"
             elif ("watt" in title):
                 tmp_units = "W"
-            cur_item.setLabel("left", text="", units=tmp_units)
+            # cur_item.setLabel("left", text="", units=tmp_units)
+            if tmp_units:
+                cur_item.setLabel("left", text="["+tmp_units+"]")
             # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
             for ax in cur_item.axes.values():
                 ax['item'].enableAutoSIPrefix(enable=False)
