@@ -2,7 +2,7 @@
 ## 使用方法
 ### 1. コマンドラインで
 ```
-python datalogger-plotter-with-pyqtgraph.py -f file-name --plot plot.yaml --layout layout.yaml
+python datalogger_plotter_with_pyqtgraph.py -f file-name --plot plot.yaml --layout layout.yaml
 ```
 
 ### 2. nautilusから右クリックで
