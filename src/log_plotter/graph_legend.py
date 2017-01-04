@@ -11,7 +11,8 @@ class GraphLegendInfo(object):
         :param int  j: jth column in layout_yaml
         :param int  k: kth legend in graph
         '''
-        self.group_info = layout_yaml[i]
+        # self.group_info = layout_yaml[i]
+        self.group_info = layout_yaml.values()[i]
         self.plot_dict = plot_yaml
         self.group_index = i
         self.graph_index = j
@@ -19,9 +20,9 @@ class GraphLegendInfo(object):
 
         # colect info from plot.yaml
         my_info = {}
-        my_key = layout_yaml[i]['legends'][k]['key']
+        my_key = self.group_info['legends'][k]['key']
         my_info.update(plot_yaml[my_key])
-        my_info.update(layout_yaml[i]['legends'][k])
+        my_info.update(self.group_info['legends'][k])
         # colect info from layout.yaml
         my_info.setdefault('func', 'normal')
         my_info.setdefault('label', my_key)
