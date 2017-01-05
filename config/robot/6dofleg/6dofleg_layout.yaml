@@ -2,14 +2,14 @@ extend:
   ../../st_layout.yaml
 
 main:
-  joint_angle:
+  rleg_joint_angle:
     legends:
       - { key: sh_qOut, id: [0-5] }
       - { key: abc_q, id: [0-5] }
       - { key: st_q, id: [0-5] }
       - { key: RobotHardware0_q, id: [0-5] }
 
-  joint_angle:
+  lleg_joint_angle:
     legends:
       - { key: sh_qOut, id: [6-11] }
       - { key: abc_q, id: [6-11] }
