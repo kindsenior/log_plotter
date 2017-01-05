@@ -1,3 +1,6 @@
+extend:
+  - ../../common_plot.yaml
+
 sh_qOut:
   func: plot_rad2deg
   data:
@@ -18,107 +21,14 @@ RobotHardware0_q:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
 
-abc_cogOut:
-  data:
-    - { log: abc_cogOut, column: [0-2] }
-
-st_originActCog:
-  data:
-    - { log: st_originActCog, column: [0-2] }
-
-st_originRefCog:
-  data:
-    - { log: st_originRefCog, column: [0-2] }
-
 rh_st_diff:
   func: plot_rh_q_st_q
   data:
     - { log: RobotHardware0_q, column: [0-33] }
     - { log: st_q, column: [0-33] }
 
-sh_rfsensorOut:
-  data:
-    - { log: sh_rfsensorOut, column: [0-5] }
-
-RobotHardware0_rfsensor:
-  data:
-    - { log: RobotHardware0_rfsensor, column: [0-5] }
-
-rmfo_off_rfsensor:
-  data:
-    - { log: rmfo_off_rfsensor, column: [0-5] }
-
-rmfo_off_lfsensor:
-  data:
-    - { log: rmfo_off_lfsensor, column: [0-5] }
-
-rmfo_off_rhsensor:
-  data:
-    - { log: rmfo_off_rhsensor, column: [0-5] }
-
-rmfo_off_lhsensor:
-  data:
-    - { log: rmfo_off_lhsensor, column: [0-5] }
-
-rfu_ref_rhsensorOut:
-  data:
-    - { log: rfu_ref_rhsensorOut, column: [0-5] }
-
-rfu_ref_lhsensorOut:
-  data:
-    - { log: rfu_ref_lhsensorOut, column: [0-5] }
-
-imu_gsensor:
-  data:
-    - { log: RobotHardware0_gsensor, column: [0,1,2] }
-
-imu_gyrometer:
-  data:
-    - { log: RobotHardware0_gyrometer, column: [0,1,2] }
-
-comp:
-  func: plot_comp
-  data:
-    -  { log: st_allEEComp, column: [0, 1, 2, 3, 4, 5] }
-
 watt:
   func: plot_watt
   data:
-    - { log: RobotHardware0_dq, column: [0,1,2,3,4,5]  }
-    - { log: RobotHardware0_tau, column: [0,1,2,3,4,5] }
-
-
-st_zmp:
-  data:
-    - { log: st_zmp, column: [0,1] }
-
-# ServoState:
-#   func: plot_servostate
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-# current:
-#   func: plot_current
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-# motor_temp:
-#   func: plot_motor_temp
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-# motor_outer_temp:
-#   func: plot_motor_outer_temp
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-# 12V:
-#   func: plot_12V
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-# 80V:
-#   func: plot_80V
-#   data:
-#     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
+    - { log: RobotHardware0_dq, column: [0-33]  }
+    - { log: RobotHardware0_tau, column: [0-33] }
