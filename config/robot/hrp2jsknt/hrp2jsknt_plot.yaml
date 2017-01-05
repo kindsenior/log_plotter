@@ -1,3 +1,6 @@
+extend:
+  ../../common_plot.yaml
+
 sh_qOut:
   func: plot_rad2deg
   data:
