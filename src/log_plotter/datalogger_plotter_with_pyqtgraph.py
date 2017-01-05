@@ -95,6 +95,7 @@ class DataloggerLogParser:
                 if type(leg['id'][0]) == str:
                     leg['id'] = expand_str_to_list(leg['id'][0])
             self.layout_dict[title].setdefault('newline', True)
+            self.layout_dict[title].setdefault('label', False)
 
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
@@ -212,20 +213,21 @@ class DataloggerLogParser:
         for i in range(row_num):
             cur_item = self.view.ci.rows[i][0]
             title = cur_item.titleLabel.text
-            tmp_units = None
-            if ("12V" in title) or ("80V" in title):
-                tmp_units = "V"
+            tmp_label = None
+            if self.legend_list[i][0][0].group_info['label']: tmp_label = self.legend_list[i][0][0].group_info['label']
+            elif ("12V" in title) or ("80V" in title):
+                tmp_label = "[V]"
             elif "current" in title:
-                tmp_units = "A"
+                tmp_label = "[A]"
             elif ("temperature" in title) or ("joint_angle" in title) or ("attitude" in title) or ("tracking" in title):
-                tmp_units = "deg"
+                tmp_label = "[deg]"
             elif ("joint_velocity" in title):
-                tmp_units = "deg/s"
+                tmp_label = "[deg/s]"
             elif ("watt" in title):
-                tmp_units = "W"
-            # cur_item.setLabel("left", text="", units=tmp_units)
-            if tmp_units:
-                cur_item.setLabel("left", text="["+tmp_units+"]")
+                tmp_label = "[W]"
+            # cur_item.setLabel("left", text="", units=tmp_label)
+            if tmp_label:
+                cur_item.setLabel("left", text=tmp_label)
             # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
             for ax in cur_item.axes.values():
                 ax['item'].enableAutoSIPrefix(enable=False)
