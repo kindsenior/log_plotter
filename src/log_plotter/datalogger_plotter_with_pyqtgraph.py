@@ -9,6 +9,7 @@ import numpy
 import sys
 import time
 import yaml
+import metayaml
 import os
 import fnmatch
 import re
@@ -82,20 +83,18 @@ def replaceRH(fname_list):
 class DataloggerLogParser:
     def __init__(self, fname, plot_conf_name, layout_conf_name, title):
         self.fname = fname
-        with open(plot_conf_name, "r") as f:
-            self.plot_dict = yaml.load(f)
-        with open(layout_conf_name, "r") as f:
-            self.layout_list = yaml.load(f)
+        self.plot_dict = metayaml.read(plot_conf_name)
+        self.layout_dict = metayaml.read(layout_conf_name)["main"]
         # expand [0-33] => [0,1,2,...,33]
         for leg_info in self.plot_dict.values():
             for log_info in leg_info['data']:
                 if type(log_info['column'][0]) == str:
                     log_info['column'] = expand_str_to_list(log_info['column'][0])
-        for group in self.layout_list:
-            for leg in group['legends']:
+        for title in self.layout_dict:
+            for leg in self.layout_dict[title]['legends']:
                 if type(leg['id'][0]) == str:
                     leg['id'] = expand_str_to_list(leg['id'][0])
-            group.setdefault('newline', True)
+            self.layout_dict[title].setdefault('newline', True)
 
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
@@ -121,7 +120,7 @@ class DataloggerLogParser:
         #                                         [t_n, x_n, y_n, ...]])
         '''
         # get list fo used topic
-        all_legends = reduce(lambda x,y: x+y, [group['legends'] for group in self.layout_list])
+        all_legends = reduce(lambda x,y: x+y, [self.layout_dict[title]['legends'] for title in self.layout_dict])
         used_keys = list(set([legend['key'] for legend in all_legends]))
         log_col_pairs = reduce(lambda x,y: x+y, [self.plot_dict[key]['data'] for key in used_keys])
         topic_list = list(set([log_col_pair['log'] for log_col_pair in log_col_pairs]))
@@ -153,13 +152,14 @@ class DataloggerLogParser:
         self.legend_list = [[]]
         graph_row = 0
         graph_col = 0
-        for i, group in enumerate(self.layout_list):
+        for i, title in enumerate(self.layout_dict):
+            group = self.layout_dict[title]
             group_len = max(len(leg['id']) for leg in group['legends'])
             for j in range(group_len):
                 # add graph
                 plot_item = self.view.addPlot(viewBox = pyqtgraph.ViewBox(border = pyqtgraph.mkPen(color='k', width=2)))
                 self.legend_list[graph_row].append([])
-                plot_item.setTitle(group['title']+" "+str(j))
+                plot_item.setTitle(title+" "+str(j))
                 plot_item.showGrid(x=True, y=True, alpha=1)
                 if group.has_key('downsampling'):
                     plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
@@ -167,7 +167,7 @@ class DataloggerLogParser:
                                               mode=group['downsampling'].get('mode', 'peak'))
                 # add legend info to this graph
                 for k in range(len(group['legends'])):
-                    legend_info = GraphLegendInfo(self.layout_list, self.plot_dict, i, j, k)
+                    legend_info = GraphLegendInfo(self.layout_dict, self.plot_dict, i, j, k)
                     self.legend_list[graph_row][graph_col].append(legend_info)
                 graph_col += 1
             if group['newline']:
@@ -242,7 +242,8 @@ class DataloggerLogParser:
     def setItemSize(self):
         # set graph size
         qdw = pyqtgraph.QtGui.QDesktopWidget()
-        for i, group in enumerate(self.layout_list):
+        for i, title in enumerate(self.layout_dict):
+            group = self.layout_dict[title]
             for j in range(len(self.legend_list[i])):
                 cur_item = self.view.ci.rows[i][j]
                 vb = cur_item.getViewBox()
