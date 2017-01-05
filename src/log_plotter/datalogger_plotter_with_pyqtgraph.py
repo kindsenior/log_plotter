@@ -236,7 +236,7 @@ class DataloggerLogParser:
         col_num = len(self.view.ci.rows[row_num-1])
         for i in range(col_num):
             cur_item = self.view.ci.rows[row_num-1][i]
-            cur_item.setLabel("bottom", text="time", units="s")
+            cur_item.setLabel("bottom", text="time [s]")
 
     @my_time
     def setItemSize(self):
