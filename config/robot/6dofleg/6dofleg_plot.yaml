@@ -1,5 +1,5 @@
 extend:
-  ../../common_plot.yaml
+  - ../../common_plot.yaml
 
 sh_qOut:
   func: plot_rad2deg
@@ -37,43 +37,10 @@ abs_enc_diff:
   data:
     - { log: RobotHardware0_servoState, column: [0-11] }
     - { log: RobotHardware0_servoState, column: [0-11] }
-
-sh_rfsensorOut:
-  data:
-    - { log: sh_rfsensorOut, column: [0-5] }
-
-RobotHardware0_rfsensor:
-  data:
-    - { log: RobotHardware0_rfsensor, column: [0-5] }
-
-rmfo_off_rfsensor:
-  data:
-    - { log: rmfo_off_rfsensor, column: [0-5] }
-
-sh_lfsensorOut:
-  data:
-    - { log: sh_lfsensorOut, column: [0-5] }
-
-RobotHardware0_lfsensor:
-  data:
-    - { log: RobotHardware0_lfsensor, column: [0-5] }
-
-rmfo_off_lfsensor:
-  data:
-    - { log: rmfo_off_lfsensor, column: [0-5] }
-
 current:
   func: plot_current
   data:
     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
-
-imu_gsensor:
-  data:
-    - { log: RobotHardware0_gsensor, column: [0,1,2] }
-
-imu_gyrometer:
-  data:
-    - { log: RobotHardware0_gyrometer, column: [0,1,2] }
 
 motor_temp:
   func: plot_motor_temp
@@ -119,7 +86,3 @@ dgain:
   func: plot_dgain
   data:
     - { log: RobotHardware0_servoState, column: [0-11] }
-
-st_zmp:
-  data:
-    - { log: st_zmp, column: [0,1] }

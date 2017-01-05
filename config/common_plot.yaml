@@ -1,12 +1,27 @@
-# ST
 ## cog
+abc_cogOut:
+  data:
+    - { log: abc_cogOut, column: [0-2] }
 st_originActCog:
   data:
     - { log: st_originActCog, column: [0-2] }
 st_originRefCog:
   data:
     - { log: st_originRefCog, column: [0-2] }
+## cog velocity
+st_originActCogVel:
+  data:
+    - { log: st_originActCogVel, column: [0-2] }
+st_originRefCogVel:
+  data:
+    - { log: st_originRefCogVel, column: [0-2] }
 ## zmp
+abc_zmpOut:
+  data:
+    - { log: abc_zmpOut, column: [0-2] }
+abc_refZmp:
+  data:
+    - { log: abc_refZmp, column: [0-2] }
 st_originActZmp:
   data:
     - { log: st_originActZmp, column: [0-2] }
@@ -16,11 +31,26 @@ st_originRefZmp:
 st_originNewZmp:
   data:
     - { log: st_originNewZmp, column: [0-2] }
+# root-link relative zmp
+st_zmp:
+  data:
+    - { log: st_zmp, column: [0-2] }
 ## force
+sh_rfsensorOut:
+  data:
+    - { log: sh_rfsensorOut, column: [0-5] }
+sh_lfsensorOut:
+  data:
+    - { log: sh_lfsensorOut, column: [0-5] }
+RobotHardware0_rfsensor:
+  data:
+    - { log: RobotHardware0_rfsensor, column: [0-5] }
+RobotHardware0_lfsensor:
+  data:
+    - { log: RobotHardware0_lfsensor, column: [0-5] }
 rmfo_off_rfsensor:
   data:
     - { log: rmfo_off_rfsensor, column: [0-5] }
-
 rmfo_off_lfsensor:
   data:
     - { log: rmfo_off_lfsensor, column: [0-5] }
@@ -36,4 +66,31 @@ st_ref_rhsensor:
 st_ref_lhsensor:
   data:
     - { log: st_allRefWrench, column: [18-23] }
-
+# imu
+imu_gsensor:
+  data:
+    - { log: RobotHardware0_gsensor, column: [0-2] }
+imu_gyrometer:
+  func: plot_rad2deg
+  data:
+    - { log: RobotHardware0_gyrometer, column: [0-2] }
+# rpy
+st_actBaseRpy:
+  func: plot_rad2deg
+  data:
+    - { log: st_actBaseRpy, column: [0-2] }
+st_currentBaseRpy:
+  func: plot_rad2deg
+  data:
+    - { log: st_currentBaseRpy, column: [0-2] }
+kf_rpy:
+  func: plot_rad2deg
+  data:
+    - { log: kf_rpy, column: [0-2] }
+# pos
+abc_basePos:
+  data:
+    - { log: abc_baseTformOut, column: [0-2] }
+st_currentBasePos:
+  data:
+    - { log: st_currentBasePos, column: [0-2] }
