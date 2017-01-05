@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import log_plotter
+VERSION=log_plotter.__version__
 
 try: # install in catkin work space
     from distutils.core import setup
@@ -8,6 +10,7 @@ try: # install in catkin work space
         packages=['log_plotter'],
         package_dir={'': 'src'},
         scripts=['src/log_plotter/datalogger_plotter_with_pyqtgraph.py'],
+        version=VERSION
     )
     setup(**d)
 except: # install in /usr/local/
@@ -15,7 +18,7 @@ except: # install in /usr/local/
     from setuptools import setup, find_packages
     from os.path import join
     setup(name='log_plotter',
-          version='0.0.0',
+          version=VERSION,
           description='log plotter for hrpsys',
           packages=[join('src', package) for package in find_packages(where='./src/')],
           entry_points="""

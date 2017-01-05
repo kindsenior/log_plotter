@@ -54,6 +54,18 @@ rmfo_off_rfsensor:
 rmfo_off_lfsensor:
   data:
     - { log: rmfo_off_lfsensor, column: [0-5] }
+rmfo_off_rhsensor:
+  data:
+    - { log: rmfo_off_rhsensor, column: [0-5] }
+rmfo_off_lhsensor:
+  data:
+    - { log: rmfo_off_lhsensor, column: [0-5] }
+rfu_ref_rhsensorOut:
+  data:
+    - { log: rfu_ref_rhsensorOut, column: [0-5] }
+rfu_ref_lhsensorOut:
+  data:
+    - { log: rfu_ref_lhsensorOut, column: [0-5] }
 st_ref_rfsensor:
   data:
     - { log: st_allRefWrench, column: [0-5] }
@@ -66,7 +78,7 @@ st_ref_rhsensor:
 st_ref_lhsensor:
   data:
     - { log: st_allRefWrench, column: [18-23] }
-# imu
+## imu
 imu_gsensor:
   data:
     - { log: RobotHardware0_gsensor, column: [0-2] }
@@ -74,7 +86,7 @@ imu_gyrometer:
   func: plot_rad2deg
   data:
     - { log: RobotHardware0_gyrometer, column: [0-2] }
-# rpy
+## rpy
 st_actBaseRpy:
   func: plot_rad2deg
   data:
@@ -87,10 +99,27 @@ kf_rpy:
   func: plot_rad2deg
   data:
     - { log: kf_rpy, column: [0-2] }
-# pos
+## pos
 abc_basePos:
   data:
     - { log: abc_baseTformOut, column: [0-2] }
 st_currentBasePos:
   data:
     - { log: st_currentBasePos, column: [0-2] }
+## end effector compensation
+comp_rleg:
+  func: plot_comp
+  data:
+    -  { log: st_allEEComp, column: [0-5] }
+comp_lleg:
+  func: plot_comp
+  data:
+    -  { log: st_allEEComp, column: [6-11] }
+comp_rarm:
+  func: plot_comp
+  data:
+    -  { log: st_allEEComp, column: [12-17] }
+comp_larm:
+  func: plot_comp
+  data:
+    -  { log: st_allEEComp, column: [18-23] }
