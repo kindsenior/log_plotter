@@ -1,71 +1,75 @@
-- title: joint_angle
-  legends:
-    - { key: sh_qOut, id: [0-5] }
-    - { key: abc_q, id: [0-5] }
-    - { key: st_q, id: [0-5] }
-    - { key: RobotHardware0_q, id: [0-5] }
+extend:
+    ../../st_layout.yaml
 
-- title: joint_angle
-  legends:
-    - { key: sh_qOut, id: [6-11] }
-    - { key: abc_q, id: [6-11] }
-    - { key: st_q, id: [6-11] }
-    - { key: RobotHardware0_q, id: [6-11] }
+main:
+  rleg_joint_angle:
+    legends:
+      - { key: sh_qOut, id: [0-5] }
+      - { key: abc_q, id: [0-5] }
+      - { key: st_q, id: [0-5] }
+      - { key: RobotHardware0_q, id: [0-5] }
 
-- title: tracking
-  legends:
-    - {key: rh_st_diff, id: [0-5] }
-    - {key: abs_enc_diff, id: [0-5] }
+  lleg_joint_angle:
+    legends:
+      - { key: sh_qOut, id: [6-11] }
+      - { key: abc_q, id: [6-11] }
+      - { key: st_q, id: [6-11] }
+      - { key: RobotHardware0_q, id: [6-11] }
 
-- title: right_foot_force
-  legends:
-    - { key: sh_rfsensorOut, id: [0-5] }
-    - { key: RobotHardware0_rfsensor, id: [0-5] }
-    - { key: rmfo_off_rfsensor, id: [0-5] }
+  tracking:
+    legends:
+      - {key: rh_st_diff, id: [0-5] }
+      - {key: abs_enc_diff, id: [0-5] }
 
-- title: current
-  legends:
-    - { key: current, id: [0-5] }
+  right_foot_force:
+    legends:
+      - { key: sh_rfsensorOut, id: [0-5] }
+      - { key: RobotHardware0_rfsensor, id: [0-5] }
+      - { key: rmfo_off_rfsensor, id: [0-5] }
 
-- title: imu_gsensor
-  legends:
-    - { key: imu_gsensor, id: [0], label: x }
-    - { key: imu_gsensor, id: [1], label: y }
-    - { key: imu_gsensor, id: [2], label: z }
-  newline: False
+  current:
+    legends:
+      - { key: current, id: [0-5] }
 
-- title: imu_gyrometer
-  legends:
-    - { key: imu_gyrometer, id: [0], label: x }
-    - { key: imu_gyrometer, id: [1], label: y }
-    - { key: imu_gyrometer, id: [2], label: z }
+  imu_gsensor:
+    legends:
+      - { key: imu_gsensor, id: [0], label: x }
+      - { key: imu_gsensor, id: [1], label: y }
+      - { key: imu_gsensor, id: [2], label: z }
+    newline: False
 
-- title: temperature
-  legends:
-    - { key: motor_temp, id: [0-5] }
-    - { key: motor_outer_temp, id: [0-5] }
+  imu_gyrometer:
+    legends:
+      - { key: imu_gyrometer, id: [0], label: x }
+      - { key: imu_gyrometer, id: [1], label: y }
+      - { key: imu_gyrometer, id: [2], label: z }
 
-- title: comp
-  legends:
-    - { key: comp, id: [0-5] }
+  temperature:
+    legends:
+      - { key: motor_temp, id: [0-5] }
+      - { key: motor_outer_temp, id: [0-5] }
 
-- title: watt
-  legends:
-    - { key: watt, id: [0-5] }
+  comp:
+    legends:
+      - { key: comp, id: [0-5] }
 
-- title: ServoState
-  legends:
-    - { key: ServoState, id: [0-5] }
+  watt:
+    legends:
+      - { key: watt, id: [0-5] }
 
-- title: 12V
-  legends:
-    - { key: 12V, id: [0,1,2,3,4,5] }
+  ServoState:
+    legends:
+      - { key: ServoState, id: [0-5] }
 
-- title: 80V
-  legends:
-    - { key: 80V, id: [0,1,2,3,4,5] }
+  12V:
+    legends:
+      - { key: 12V, id: [0,1,2,3,4,5] }
 
-- title: ZMP
-  legends:
-    - { key: st_zmp, id: [0,1] }
+  80V:
+    legends:
+      - { key: 80V, id: [0,1,2,3,4,5] }
+
+  ZMP:
+    legends:
+      - { key: st_zmp, id: [0,1] }
 
