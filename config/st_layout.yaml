@@ -1,5 +1,5 @@
 main:
-  cog:
+  act/ref cog zmp:
     legends:
       - { key: st_originActCog, id: [0-2]}
       - { key: st_originRefCog, id: [0-2]}
@@ -7,14 +7,14 @@ main:
       - { key: st_originRefZmp, id: [0-2]}
       - { key: st_originNewZmp, id: [0-2]}
 
-  force:
+  act/ref force:
     legends:
       - { key: rmfo_off_rfsensor, id: [0-2] }
       - { key: rmfo_off_lfsensor, id: [0-2] }
       - { key: st_ref_rfsensor, id: [0-2] }
       - { key: st_ref_lfsensor, id: [0-2] }
 
-  moment:
+  act/ref moment:
     legends:
       - { key: rmfo_off_rfsensor, id: [3-5] }
       - { key: rmfo_off_lfsensor, id: [3-5] }
