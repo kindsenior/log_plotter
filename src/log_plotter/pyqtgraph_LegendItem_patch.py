@@ -3,6 +3,7 @@ from pyqtgraph.Qt import QtGui, QtCore
 from pyqtgraph.graphicsItems.GraphicsWidget import GraphicsWidget
 from pyqtgraph import functions as fn
 from pyqtgraph.graphicsItems.ScatterPlotItem import ScatterPlotItem, drawSymbol
+from pyqtgraph.graphicsItems.PlotDataItem import PlotDataItem
 
 # set legend forefround white
 def white_foreground_legend_item_paint(legend_item, p, *args):
