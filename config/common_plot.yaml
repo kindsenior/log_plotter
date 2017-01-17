@@ -94,3 +94,10 @@ abc_basePos:
 st_currentBasePos:
   data:
     - { log: st_currentBasePos, column: [0-2] }
+# optional data
+abc_contactStates:
+  data:
+    - { log: abc_contactStates, column: [0-3] }
+abc_controlSwingSupportTime:
+  data:
+    - { log: abc_controlSwingSupportTime, column: [0-3] }
