@@ -7,6 +7,16 @@ main:
       - { key: st_originRefZmp, id: [0-2]}
       - { key: st_originNewZmp, id: [0-2]}
 
+  act/ref cog velocity:
+    legends:
+      - { key: st_originActCogVel, id: [0-2]}
+      - { key: st_originRefCogVel, id: [0-2]}
+
+  act/ref root-link relative zmp:
+    legends:
+      - { key: st_zmp, id: [0-1] }
+      - { key: abc_zmpOut, id: [0-1] }
+
   act/ref force:
     legends:
       - { key: rmfo_off_rfsensor, id: [0-2] }
@@ -21,3 +31,7 @@ main:
       - { key: st_ref_rfsensor, id: [3-5] }
       - { key: st_ref_lfsensor, id: [3-5] }
 
+  # optional_data:
+  #   legends:
+  #     - { key: abc_contactStates, id: [0-3] }
+  #     - { key: abc_controlSwingSupportTime, id: [0-3] }
