@@ -95,7 +95,8 @@ class DataloggerLogParser:
                 if type(leg['id'][0]) == str:
                     leg['id'] = expand_str_to_list(leg['id'][0])
             self.layout_dict[title].setdefault('newline', True)
-            self.layout_dict[title].setdefault('label', False)
+            self.layout_dict[title].setdefault('left_label', False)
+            self.layout_dict[title].setdefault('bottom_label', "time [s]")
 
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
@@ -209,36 +210,35 @@ class DataloggerLogParser:
         set label: time for bottom plots, unit for left plots
         '''
         row_num = len(self.view.ci.rows)
-        # left plot items
         for i in range(row_num):
-            cur_item = self.view.ci.rows[i][0]
-            title = cur_item.titleLabel.text
-            tmp_label = None
-            if self.legend_list[i][0][0].group_info['label']: tmp_label = self.legend_list[i][0][0].group_info['label']
-            elif ("12V" in title) or ("80V" in title):
-                tmp_label = "[V]"
-            elif "current" in title:
-                tmp_label = "[A]"
-            elif ("temperature" in title) or ("joint_angle" in title) or ("attitude" in title) or ("tracking" in title):
-                tmp_label = "[deg]"
-            elif ("joint_velocity" in title):
-                tmp_label = "[deg/s]"
-            elif ("watt" in title):
-                tmp_label = "[W]"
-            # cur_item.setLabel("left", text="", units=tmp_label)
-            if tmp_label:
-                cur_item.setLabel("left", text=tmp_label)
-            # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
-            for ax in cur_item.axes.values():
-                ax['item'].enableAutoSIPrefix(enable=False)
-                ax['item'].autoSIPrefixScale = 1.0
-                ax['item'].labelUnitPrefix = ''
-                ax['item'].setLabel()
-        # bottom plot items
-        col_num = len(self.view.ci.rows[row_num-1])
-        for i in range(col_num):
-            cur_item = self.view.ci.rows[row_num-1][i]
-            cur_item.setLabel("bottom", text="time [s]")
+            col_num = len(self.view.ci.rows[i])
+            for j in range(col_num):
+                cur_item = self.view.ci.rows[i][j]
+                # set left label
+                title = cur_item.titleLabel.text
+                tmp_left_label = None
+                if self.legend_list[i][j][0].group_info['left_label']: tmp_left_label = self.legend_list[i][j][0].group_info['left_label']
+                elif ("12V" in title) or ("80V" in title):
+                    tmp_left_label = "[V]"
+                elif "current" in title:
+                    tmp_left_label = "[A]"
+                elif ("temperature" in title) or ("joint_angle" in title) or ("attitude" in title) or ("tracking" in title):
+                    tmp_left_label = "[deg]"
+                elif ("joint_velocity" in title):
+                    tmp_left_label = "[deg/s]"
+                elif ("watt" in title):
+                    tmp_left_label = "[W]"
+                # cur_item.setLabel("left", text="", units=tmp_left_label)
+                if tmp_left_label:
+                    cur_item.setLabel("left", text=tmp_left_label)
+                # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
+                for ax in cur_item.axes.values():
+                    ax['item'].enableAutoSIPrefix(enable=False)
+                    ax['item'].autoSIPrefixScale = 1.0
+                    ax['item'].labelUnitPrefix = ''
+                    ax['item'].setLabel()
+                # set bottom label
+                cur_item.setLabel("bottom", text=self.legend_list[i][j][0].group_info['bottom_label'])
 
     @my_time
     def setItemSize(self):
@@ -459,4 +459,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
