@@ -42,18 +42,36 @@ sh_rfsensorOut:
 sh_lfsensorOut:
   data:
     - { log: sh_lfsensorOut, column: [0-5] }
+sh_rhsensorOut:
+  data:
+    - { log: sh_rhsensorOut, column: [0-5] }
+sh_lhsensorOut:
+  data:
+    - { log: sh_lhsensorOut, column: [0-5] }
 RobotHardware0_rfsensor:
   data:
     - { log: RobotHardware0_rfsensor, column: [0-5] }
 RobotHardware0_lfsensor:
   data:
     - { log: RobotHardware0_lfsensor, column: [0-5] }
+RobotHardware0_rhsensor:
+  data:
+    - { log: RobotHardware0_rhsensor, column: [0-5] }
+RobotHardware0_lhsensor:
+  data:
+    - { log: RobotHardware0_lhsensor, column: [0-5] }
 rmfo_off_rfsensor:
   data:
     - { log: rmfo_off_rfsensor, column: [0-5] }
 rmfo_off_lfsensor:
   data:
     - { log: rmfo_off_lfsensor, column: [0-5] }
+rmfo_off_rhsensor:
+  data:
+    - { log: rmfo_off_rhsensor, column: [0-5] }
+rmfo_off_lhsensor:
+  data:
+    - { log: rmfo_off_lhsensor, column: [0-5] }
 st_ref_rfsensor:
   data:
     - { log: st_allRefWrench, column: [0-5] }

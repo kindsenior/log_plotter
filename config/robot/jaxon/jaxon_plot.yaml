@@ -33,14 +33,6 @@ abs_enc_diff:
     - { log: RobotHardware0_servoState, column: [0-33] }
     - { log: RobotHardware0_servoState, column: [0-33] }
 
-sh_rfsensorOut:
-  data:
-    - { log: sh_rfsensorOut, column: [0-5] }
-
-RobotHardware0_rfsensor:
-  data:
-    - { log: RobotHardware0_rfsensor, column: [0-5] }
-
 rmfo_off_rfsensor:
   data:
     - { log: rmfo_off_rfsensor, column: [0-5] }
