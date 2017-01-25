@@ -295,6 +295,17 @@ class DataloggerLogParser:
                 for i, p in enumerate(all_items):
                     if i != 0:
                         p.setYLink(target_item)
+        # check axis range
+        for i, title in enumerate(self.layout_dict):
+            group = self.layout_dict[title]
+            for j in range(len(self.legend_list[i])):
+                plot_item = self.view.ci.rows[i][j]
+                x_range = self.legend_list[i][j][0].group_info.get("xRange")
+                if x_range is not None:
+                    plot_item.setXRange(x_range[0], x_range[1])
+                y_range = self.legend_list[i][j][0].group_info.get("yRange")
+                if y_range is not None:
+                    plot_item.setYRange(y_range[0], y_range[1])
 
         # design
         for i, p in enumerate(self.view.ci.items.keys()):
