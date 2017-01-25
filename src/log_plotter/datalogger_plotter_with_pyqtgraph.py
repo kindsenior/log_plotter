@@ -90,13 +90,13 @@ class DataloggerLogParser:
             for log_info in leg_info['data']:
                 if type(log_info['column'][0]) == str:
                     log_info['column'] = expand_str_to_list(log_info['column'][0])
-        for title in self.layout_dict:
-            for leg in self.layout_dict[title]['legends']:
+        for dict_title in self.layout_dict:
+            for leg in self.layout_dict[dict_title]['legends']:
                 if type(leg['id'][0]) == str:
                     leg['id'] = expand_str_to_list(leg['id'][0])
-            self.layout_dict[title].setdefault('newline', True)
-            self.layout_dict[title].setdefault('left_label', False)
-            self.layout_dict[title].setdefault('bottom_label', "time [s]")
+            self.layout_dict[dict_title].setdefault('newline', True)
+            self.layout_dict[dict_title].setdefault('left_label', False)
+            self.layout_dict[dict_title].setdefault('bottom_label', "time [s]")
 
         # setup view
         self.view = pyqtgraph.GraphicsLayoutWidget()
