@@ -51,13 +51,13 @@ main:
     legends:
       - { key: watt, id: [0-5] }
 ```
-<img src="materials/watt_sample_plot.png" height="320px">  
+<img src="doc/materials/watt_sample_plot.png" height="320px">  
 ```
   watt:
     legends:
       - { key: watt, id: [0,2,4] }
 ```
-<img src="materials/watt_sample_plot2.png" height="320px">  
+<img src="doc/materials/watt_sample_plot2.png" height="320px">  
 
 ### plot.yaml
 plot.yamlは凡例ごとの描画方法を記述している。  
