@@ -161,7 +161,7 @@ class DataloggerLogParser:
                 # add graph
                 plot_item = self.view.addPlot(viewBox = pyqtgraph.ViewBox(border = pyqtgraph.mkPen(color='k', width=2)))
                 self.legend_list[graph_row].append([])
-                plot_item.setTitle(title+" "+str(j))
+                plot_item.setTitle(title+" "+ (str(j) if group_len != 1 else ""))
                 plot_item.showGrid(x=True, y=True, alpha=1)
                 if group.has_key('downsampling'):
                     plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
