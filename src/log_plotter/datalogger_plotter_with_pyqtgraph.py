@@ -244,9 +244,9 @@ class DataloggerLogParser:
     def setItemSize(self):
         # set graph size
         qdw = pyqtgraph.QtGui.QDesktopWidget()
-        for i, title in enumerate(self.layout_dict):
-            group = self.layout_dict[title]
+        for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
+                group = self.legend_list[i][j][0].group_info
                 cur_item = self.view.ci.rows[i][j]
                 vb = cur_item.getViewBox()
                 bottom_ax = cur_item.getAxis('bottom')
@@ -296,8 +296,7 @@ class DataloggerLogParser:
                     if i != 0:
                         p.setYLink(target_item)
         # check axis range
-        for i, title in enumerate(self.layout_dict):
-            group = self.layout_dict[title]
+        for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
                 plot_item = self.view.ci.rows[i][j]
                 x_range = self.legend_list[i][j][0].group_info.get("xRange")
