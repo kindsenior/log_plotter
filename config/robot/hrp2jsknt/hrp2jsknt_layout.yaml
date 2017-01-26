@@ -1,82 +1,18 @@
 extend:
-  ../../st_layout.yaml
+  - hrp2jsknt_joint_angle_layout.yaml
+  - ../../st_layout.yaml
+  - ../../force_sensors_layout.yaml
+  - ../../imu_layout.yaml
 
 main:
-  joint_angle(rleg):
-    legends:
-      - { key: sh_qOut, id: [0-6] }
-      - { key: abc_q, id: [0-6] }
-      - { key: st_q, id: [0-6] }
-      - { key: RobotHardware0_q, id: [0-6] }
-
-  joint_angle(lleg):
-    legends:
-      - { key: sh_qOut, id: [7-13] }
-      - { key: abc_q, id: [7-13] }
-      - { key: st_q, id: [7-13] }
-      - { key: RobotHardware0_q, id: [7-13] }
-
-  joint_angle(torso): # chest0, chest1, head0, head1
-    legends:
-      - { key: sh_qOut, id: [14-17] }
-      - { key: abc_q, id: [14-17] }
-      - { key: st_q, id: [14-17] }
-      - { key: RobotHardware0_q, id: [14-17] }
-
-  joint_angle(rarm):
-    legends:
-      - { key: sh_qOut, id: [18-25] }
-      - { key: abc_q, id: [18-25] }
-      - { key: st_q, id: [18-25] }
-      - { key: RobotHardware0_q, id: [18-25] }
-
-  joint_angle(larm):
-    legends:
-      - { key: sh_qOut, id: [26-33] }
-      - { key: abc_q, id: [26-33] }
-      - { key: st_q, id: [26-33] }
-      - { key: RobotHardware0_q, id: [26-33] }
-
-  cog:
-    legends:
-      - { key: abc_cogOut, id: [0-2]}
-      - { key: st_originActCog, id: [0-2]}
-      - { key: st_originRefCog, id: [0-2]}
-
   tracking:
     legends:
       - {key: rh_st_diff, id: [0-5] }
-
-  right_foot_force: # something bad
-    legends:
-      - { key: rmfo_off_rfsensor, id: [0-5] }
-      - { key: sh_rfsensorOut, id: [0-5] }
-      - { key: RobotHardware0_rfsensor, id: [0-5] }
-
-
-  imu_gsensor:
-    legends:
-      - { key: imu_gsensor, id: [0], label: x }
-      - { key: imu_gsensor, id: [1], label: y }
-      - { key: imu_gsensor, id: [2], label: z }
-    newline: False
-    downsampling: {ds: 100, auto: False, mode: peak}
-
-  imu_gyrometer:
-    legends:
-      - { key: imu_gyrometer, id: [0], label: x }
-      - { key: imu_gyrometer, id: [1], label: y }
-      - { key: imu_gyrometer, id: [2], label: z }
-    downsampling: {ds: 100, auto: False, mode: peak}
 
   comp:
     legends:
       - { key: comp, id: [0-5] }
 
-  ZMP:
-    legends:
-      - { key: st_zmp, id: [0,1] }
-
-  watt:
-    legends:
-      - { key: watt, id: [0-5] }
+  # watt:
+  #   legends:
+  #     - { key: watt, id: [0-5] }
