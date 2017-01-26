@@ -1,1 +1,1 @@
-from datalogger_plotter_with_pyqtgraph import *
+from LogPlotter import *

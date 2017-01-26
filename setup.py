@@ -7,7 +7,7 @@ try: # install in catkin work space
     d = generate_distutils_setup(
         packages=['log_plotter'],
         package_dir={'': 'src'},
-        scripts=['src/log_plotter/datalogger_plotter_with_pyqtgraph.py'],
+        scripts=['src/log_plotter/LogPlotter.py'],
     )
     setup(**d)
 except: # install in /usr/local/
@@ -20,6 +20,6 @@ except: # install in /usr/local/
           packages=[join('src', package) for package in find_packages(where='./src/')],
           entry_points="""
           [console_scripts]
-          datalogger-plotter-with-pyqtgraph = log_plotter:main
+          log-plotter-with-pyqtgraph = log_plotter:main
           """,)
 
