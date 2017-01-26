@@ -1,0 +1,46 @@
+main:
+  # right_foot_force:
+  #   legends:
+  #     - { key: rmfo_off_rfsensor, id: [0-5] }
+  #     - { key: sh_rfsensorOut, id: [0-5] }
+  #     - { key: RobotHardware0_rfsensor, id: [0-5] }
+
+  # left_foot_force:
+  #   legends:
+  #     - { key: rmfo_off_lfsensor, id: [0-5] }
+  #     - { key: sh_lfsensorOut, id: [0-5] }
+  #     - { key: RobotHardware0_lfsensor, id: [0-5] }
+
+  # right_hand_force:
+  #   legends:
+  #     - { key: rmfo_off_rhsensor, id: [0-5] }
+  #     - { key: sh_rhsensorOut, id: [0-5] }
+  #     - { key: RobotHardware0_rhsensor, id: [0-5] }
+
+  # left_hand_force:
+  #   legends:
+  #     - { key: rmfo_off_lhsensor, id: [0-5] }
+  #     - { key: sh_lhsensorOut, id: [0-5] }
+  #     - { key: RobotHardware0_lhsensor, id: [0-5] }
+
+  attitude:
+    legends:
+      - { key: sh_baseRpyOut, id: [0-2] }
+      - { key: st_actBaseRpy, id: [0-2] }
+      - { key: st_currentBaseRpy, id: [0-2] }
+      - { key: kf_rpy, id: [0-2] }
+
+  imu_gsensor:
+    legends:
+      - { key: imu_gsensor, id: [0], label: x }
+      - { key: imu_gsensor, id: [1], label: y }
+      - { key: imu_gsensor, id: [2], label: z }
+    # downsampling: {ds: 100, auto: False, mode: peak}
+    newline: False
+
+  imu_gyrometer:
+    legends:
+      - { key: imu_gyrometer, id: [0], label: x }
+      - { key: imu_gyrometer, id: [1], label: y }
+      - { key: imu_gyrometer, id: [2], label: z }
+    # downsampling: {ds: 100, auto: False, mode: peak}

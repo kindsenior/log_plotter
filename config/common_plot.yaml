@@ -93,6 +93,10 @@ imu_gyrometer:
   data:
     - { log: RobotHardware0_gyrometer, column: [0-2] }
 # rpy
+sh_baseRpyOut:
+  func: plot_rad2deg
+  data:
+    - { log: sh_baseRpyOut, column: [0-2] }
 st_actBaseRpy:
   func: plot_rad2deg
   data:
