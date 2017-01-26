@@ -2,7 +2,7 @@
 ## 使用方法
 ### 1. コマンドラインで
 ```
-python datalogger_plotter_with_pyqtgraph.py -f file-name --plot plot.yaml --layout layout.yaml
+datalogger_plotter_with_pyqtgraph.py -f file-name [--plot plot.yaml] [--layout layout.yaml]
 ```
 
 ### 2. nautilusから右クリックで
@@ -16,7 +16,7 @@ hrpsysのファイルを
 ```
 右クリック→スクリプト→plot.sh
 ```
-と選択し、plot.yaml, layout.yamlの順に選択をする。
+と選択し、plot.yaml, layout.yamlを選択を行い,"OK"をクリックする。
 
 ## 設定ファイルの記述方法
 
