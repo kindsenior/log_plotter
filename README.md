@@ -25,7 +25,7 @@ hrpsysのファイルを
 以下のように記述すると、`joint_angle(rleg)`というタイトルのグラフが横一列に7つ並ぶ。  
 描画の詳細は`plot.yaml`と`src/log_plotter/plot_method`で定義されている。
 `extend:`で別のyamlファイルをincludeできる。
-```
+```yaml
 extend:
   ../../st_layout.yaml
 
@@ -46,13 +46,13 @@ main:
 は、plot.yamlの中で定義されている`sh_qOut`の0~6番を描画することを意味する。
 
 #### 例
-```
+```yaml
   watt:
     legends:
       - { key: watt, id: [0-5] }
 ```
 <img src="doc/materials/watt_sample_plot.png" height="320px">  
-```
+```yaml
   watt:
     legends:
       - { key: watt, id: [0,2,4] }
@@ -80,11 +80,4 @@ watt:
     - { log: RobotHardware0_dq, column: [0-33]  }
     - { log: RobotHardware0_tau, column: [0-33] }
 ```
-
-## nautilus scriptのパス
-###### Ubuntu earlier than 14.04
-save the following commands as ~/.gnome2/nautilus-scripts/plot.sh and ``chmod +x ~/.gnome2/nautilus-scripts/plot.sh`` and then ``nautilus -q``
-
-###### ubuntu14.04 or above
-save the following commands as ~/.local/share/nautilus/scripts/plot.sh and ``chmod +x ~/.local/share/nautilus/scripts/plot.sh`` and then ``nautilus -q``
 
