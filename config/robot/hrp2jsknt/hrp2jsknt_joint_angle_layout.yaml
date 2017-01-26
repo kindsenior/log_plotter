@@ -1,0 +1,35 @@
+main:
+  joint_angle(rleg):
+    legends:
+      - { key: sh_qOut, id: [0-6] }
+      - { key: abc_q, id: [0-6] }
+      - { key: st_q, id: [0-6] }
+      - { key: RobotHardware0_q, id: [0-6] }
+
+  joint_angle(lleg):
+    legends:
+      - { key: sh_qOut, id: [7-13] }
+      - { key: abc_q, id: [7-13] }
+      - { key: st_q, id: [7-13] }
+      - { key: RobotHardware0_q, id: [7-13] }
+
+  joint_angle(torso): # chest0, chest1, head0, head1
+    legends:
+      - { key: sh_qOut, id: [14-17] }
+      - { key: abc_q, id: [14-17] }
+      - { key: st_q, id: [14-17] }
+      - { key: RobotHardware0_q, id: [14-17] }
+
+  joint_angle(rarm):
+    legends:
+      - { key: sh_qOut, id: [18-25] }
+      - { key: abc_q, id: [18-25] }
+      - { key: st_q, id: [18-25] }
+      - { key: RobotHardware0_q, id: [18-25] }
+
+  joint_angle(larm):
+    legends:
+      - { key: sh_qOut, id: [26-33] }
+      - { key: abc_q, id: [26-33] }
+      - { key: st_q, id: [26-33] }
+      - { key: RobotHardware0_q, id: [26-33] }
