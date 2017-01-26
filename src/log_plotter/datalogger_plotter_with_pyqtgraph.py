@@ -194,15 +194,28 @@ class DataloggerLogParser:
         #                     [[],              [],...]]
         for i, group_legends in enumerate(self.legend_list):
             for j, graph_legends in enumerate(group_legends):
+                x_range = self.legend_list[i][j][0].group_info.get('xRange')
                 cur_item = self.view.ci.rows[i][j]
                 cur_item.addLegend(offset=(0, 0))
+                # check plot range
+                x_range = self.legend_list[i][j][0].group_info.get('xRange')
+                x_offset = 0
+                if x_range is not None:
+                    if x_range.get('zero', False):
+                        cur_item.setXRange(0, x_range['max']-x_range['min'])
+                        x_offset = -x_range['min']
+                    else:
+                        cur_item.setXRange(x_range['min'], x_range['max'])
+                y_range = self.legend_list[i][j][0].group_info.get("yRange")
+                if y_range is not None:
+                    cur_item.setYRange(y_range['min'], y_range['max'])
                 for k, legend in enumerate(graph_legends):
                     func = legend.info['func']
                     logs = [d['log'] for d in legend.info['data']]
                     log_cols = [d['column'] for d in legend.info['data']]
                     cur_col = j
                     key = legend.info['label']
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, logs, log_cols, cur_col, key, k)
+                    getattr(plot_method.PlotMethod, func)(cur_item, times+x_offset, data_dict, logs, log_cols, cur_col, key, k)
 
     @my_time
     def setLabel(self):
@@ -295,17 +308,6 @@ class DataloggerLogParser:
                 for i, p in enumerate(all_items):
                     if i != 0:
                         p.setYLink(target_item)
-        # check axis range
-        for i, _ in enumerate(self.legend_list):
-            for j in range(len(self.legend_list[i])):
-                plot_item = self.view.ci.rows[i][j]
-                x_range = self.legend_list[i][j][0].group_info.get("xRange")
-                if x_range is not None:
-                    plot_item.setXRange(x_range[0], x_range[1])
-                y_range = self.legend_list[i][j][0].group_info.get("yRange")
-                if y_range is not None:
-                    plot_item.setYRange(y_range[0], y_range[1])
-
         # design
         for i, p in enumerate(self.view.ci.items.keys()):
             ax = p.getAxis('bottom')
@@ -427,10 +429,10 @@ class DataloggerLogParser:
         '''
         self.readData()
         self.setLayout()
+        self.linkAxes()
         self.plotData()
         self.setLabel()
         self.setItemSize()
-        self.linkAxes()
         self.setFont()
         self.customMenu()
         self.customMenu2()
