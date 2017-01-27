@@ -2,13 +2,18 @@
 
 import metayaml
 import multiprocessing
-from log_plotter.plot_utils import readOneTopic, replaceRH
-from log_plotter.graph_legend import expand_str_to_list
+from plot_utils import readOneTopic, replaceRH
+from graph_legend import expand_str_to_list
 
 
 class LogParser(object):
 
     def __init__(self, fname, plot_conf, layout_conf, read_yaml = True):
+        '''
+        :param str fname: file name of log
+        :param str/dict plot_conf: plot yaml file name / dict loaded from plot.yaml
+        :param str/dict layout_conf: layout yaml file name / dcit loaded from layout.yaml
+        '''
         self.fname = fname
         if read_yaml:
             self.plot_dict = metayaml.read(plot_conf)

@@ -1,18 +1,17 @@
 #!/usr/bin/env python
-
 import functools
 import argparse
 import math
 import sys
 import yaml
 import signal
-import log_plotter.pyqtgraph_LegendItem_patch
-import log_plotter.plot_method as plot_method
-import log_plotter.yaml_selector as yaml_selector
-import log_plotter.graph_tools as graph_tools
-from log_plotter.graph_legend import GraphLegendInfo
-from log_plotter.plot_utils import my_time
-from log_plotter.LogParser import LogParser
+import pyqtgraph_LegendItem_patch
+import plot_method as plot_method
+import yaml_selector as yaml_selector
+import graph_tools as graph_tools
+from graph_legend import GraphLegendInfo
+from plot_utils import my_time
+from LogParser import LogParser
 try:
     import pyqtgraph
 except:
@@ -22,6 +21,12 @@ except:
 
 class LogPlotter(object):
     def __init__(self, fname, plot_conf_name, layout_conf_name, title):
+        '''
+        :param str fname: file name of log
+        :param str plot_conf_name: plot yaml file name
+        :param str layout_conf_name: layout yaml file name
+        :param str title: window title
+        '''
         # set args
         self.fname = fname
         self.plot_conf_name = plot_conf_name
