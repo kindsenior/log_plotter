@@ -6,6 +6,11 @@ sh_qOut:
   data:
     - { log: sh_qOut, column: [0-33] }
 
+ic_q:
+  func: plot_rad2deg
+  data:
+    - { log: ic_q, column: [0-33] }
+
 abc_q:
   func: plot_rad2deg
   data:
