@@ -86,21 +86,21 @@ class PlotMethod(object):
     def plot_rad2deg(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         data_rad=data_dict[logs[0]][:, log_cols[0]]
         data_deg=[math.degrees(x) for x in data_rad]
-        plot_item.plot(times, data_deg,pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=(len(logs)-i+3), style=PlotMethod.linetypes["style"][i]), name=key)
+        plot_item.plot(times, data_deg,pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
 
     @staticmethod
     def plot_watt(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         joint_vel=data_dict[logs[0]][:, log_cols[0]]
         joint_tau=data_dict[logs[1]][:, log_cols[1]]
         watt=joint_vel*joint_tau
-        plot_item.plot(times, watt,pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=len(logs)-i, style=PlotMethod.linetypes["style"][i]), name=key, fillLevel=0, fillBrush=PlotMethod.linetypes["color"][i])
+        plot_item.plot(times, watt,pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key, fillLevel=0, fillBrush=PlotMethod.linetypes["color"][i])
 
     @staticmethod
     def plot_diff(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         data_minuend = data_dict[logs[0]][:, log_cols[0]]
         data_subtrahend = data_dict[logs[1]][:, log_cols[1]]
         data = data_minuend - data_subtrahend
-        plot_item.plot(times, data, pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=len(logs)-i, style=PlotMethod.linetypes["style"][i]), name=key)
+        plot_item.plot(times, data, pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
 
     @staticmethod
     def plot_rad2deg_diff(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
@@ -110,7 +110,7 @@ class PlotMethod(object):
     @staticmethod
     def plot_comp(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         plot_item.plot(times, data_dict[logs[0]][:, log_cols[0]],
-                       pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=1+len(logs)-i, style=PlotMethod.linetypes["style"][i]), name=key)
+                       pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
         if log_cols[0] % 6 < 3: # position
             plot_item.setYRange(-0.025, +0.025) # compensation limit
         else: # rotation
