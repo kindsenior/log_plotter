@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import numpy
 import metayaml
 import multiprocessing
 from log_plotter.plot_utils import readOneTopic, replaceRH
@@ -67,3 +68,4 @@ class LogParser(object):
         if 'RobotHardware0_servoState' in topic_list:
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = numpy.fromstring(ss_tmp.astype('i').tostring(), dtype='f').reshape(ss_tmp.shape)
+        return self.dataListDict
