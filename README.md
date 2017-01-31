@@ -2,7 +2,7 @@
 ## 使用方法
 ### 1. コマンドラインで
 ```
-python datalogger_plotter_with_pyqtgraph.py -f file-name --plot plot.yaml --layout layout.yaml
+datalogger_plotter_with_pyqtgraph.py -f file-name [--plot plot.yaml] [--layout layout.yaml]
 ```
 
 ### 2. nautilusから右クリックで
@@ -16,7 +16,7 @@ hrpsysのファイルを
 ```
 右クリック→スクリプト→plot.sh
 ```
-と選択し、plot.yaml, layout.yamlの順に選択をする。
+と選択し、plot.yaml, layout.yamlを選択を行い,"OK"をクリックする。
 
 ## 設定ファイルの記述方法
 
@@ -25,7 +25,7 @@ hrpsysのファイルを
 以下のように記述すると、`joint_angle(rleg)`というタイトルのグラフが横一列に7つ並ぶ。  
 描画の詳細は`plot.yaml`と`src/log_plotter/plot_method`で定義されている。
 `extend:`で別のyamlファイルをincludeできる。
-```
+```yaml
 extend:
   ../../st_layout.yaml
 
@@ -46,18 +46,18 @@ main:
 は、plot.yamlの中で定義されている`sh_qOut`の0~6番を描画することを意味する。
 
 #### 例
-```
+```yaml
   watt:
     legends:
       - { key: watt, id: [0-5] }
 ```
-<img src="materials/watt_sample_plot.png" height="320px">  
-```
+<img src="doc/materials/watt_sample_plot.png" height="150px">  
+```yaml
   watt:
     legends:
       - { key: watt, id: [0,2,4] }
 ```
-<img src="materials/watt_sample_plot2.png" height="320px">  
+<img src="doc/materials/watt_sample_plot2.png" height="300px">  
 
 ### plot.yaml
 plot.yamlは凡例ごとの描画方法を記述している。  
@@ -80,11 +80,4 @@ watt:
     - { log: RobotHardware0_dq, column: [0-33]  }
     - { log: RobotHardware0_tau, column: [0-33] }
 ```
-
-## nautilus scriptのパス
-###### Ubuntu earlier than 14.04
-save the following commands as ~/.gnome2/nautilus-scripts/plot.sh and ``chmod +x ~/.gnome2/nautilus-scripts/plot.sh`` and then ``nautilus -q``
-
-###### ubuntu14.04 or above
-save the following commands as ~/.local/share/nautilus/scripts/plot.sh and ``chmod +x ~/.local/share/nautilus/scripts/plot.sh`` and then ``nautilus -q``
 
