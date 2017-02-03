@@ -123,3 +123,8 @@ abc_contactStates:
 abc_controlSwingSupportTime:
   data:
     - { log: abc_controlSwingSupportTime, column: [0-3] }
+# time
+time:
+  func: plot_time
+  data:
+    - { log: sh_qOut, column: [0]}
