@@ -23,6 +23,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+version.py
 
 # yaml_selector history
 .log_plotter
