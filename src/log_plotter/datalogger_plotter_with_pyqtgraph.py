@@ -2,9 +2,7 @@
 
 import functools
 import argparse
-import math
 import sys
-import yaml
 import signal
 import log_plotter.pyqtgraph_LegendItem_patch
 import log_plotter.plot_method as plot_method
