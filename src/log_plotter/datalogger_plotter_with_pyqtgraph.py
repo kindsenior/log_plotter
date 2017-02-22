@@ -110,7 +110,12 @@ class LogPlotter(object):
                     log_cols = [d['column'] for d in legend.info['data']]
                     cur_col = j
                     key = legend.info['label']
-                    getattr(plot_method.PlotMethod, func)(cur_item, times, data_dict, logs, log_cols, cur_col, key, k)
+                    x_offset = 0
+                    if legend.group_info.get('xRange') and legend.group_info.get('xRange').get('zero'):
+                        x_offset = -legend.group_info['xRange']['min']
+                    getattr(plot_method.PlotMethod, func)(cur_item,
+                                                          times + x_offset if x_offset else times,
+                                                          data_dict, logs, log_cols, cur_col, key, k)
 
     @my_time
     def setLabel(self):
@@ -183,24 +188,30 @@ class LogPlotter(object):
         '''
         link all X axes
         '''
-        # X axis
-        all_items = self.view.ci.items.keys()
-        target_item = all_items[0]
-        for i, p in enumerate(all_items):
-            if i != 0:
-                p.setXLink(target_item)
-            else:
-                p.enableAutoRange()
         # check axis range
+        x_range_flag = False # True when xRange exists
         for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
                 plot_item = self.view.ci.rows[i][j]
                 x_range = self.legend_list[i][j][0].group_info.get("xRange")
-                if x_range is not None:
-                    plot_item.setXRange(x_range[0], x_range[1])
+                if x_range:
+                    plot_item.setXRange(0 if x_range.get('zero') else x_range['min'],
+                                        x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'])
+                    x_range_flag = True
                 y_range = self.legend_list[i][j][0].group_info.get("yRange")
-                if y_range is not None:
-                    plot_item.setYRange(y_range[0], y_range[1])
+                if y_range:
+                    plot_item.setYRange(y_range['min'], y_range['max'])
+
+        # link X axis
+        if not x_range_flag:
+            all_items = self.view.ci.items.keys()
+            target_item = all_items[0]
+            for i, p in enumerate(all_items):
+                if i != 0:
+                    p.setXLink(target_item)
+                else:
+                    p.enableAutoRange()
+
 
         # design
         for i, p in enumerate(self.view.ci.items.keys()):
