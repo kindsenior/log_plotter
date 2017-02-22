@@ -181,7 +181,7 @@ class LogPlotter(object):
     @my_time
     def linkAxes(self):
         '''
-        link all X axes and some Y axes
+        link all X axes
         '''
         # X axis
         all_items = self.view.ci.items.keys()
@@ -191,18 +191,6 @@ class LogPlotter(object):
                 p.setXLink(target_item)
             else:
                 p.enableAutoRange()
-        # Y axis
-        for cur_row_dict in self.view.ci.rows.values():
-            all_items = cur_row_dict.values()
-            target_item = all_items[0]
-            title = target_item.titleLabel.text
-            if title.find("joint_angle") == -1 and title.find("_force") == -1 and title != "imu" and title.find("comp") == -1:
-                y_min = min([ci.viewRange()[1][0] for ci in all_items])
-                y_max = max([ci.viewRange()[1][1] for ci in all_items])
-                target_item.setYRange(y_min, y_max)
-                for i, p in enumerate(all_items):
-                    if i != 0:
-                        p.setYLink(target_item)
         # check axis range
         for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
