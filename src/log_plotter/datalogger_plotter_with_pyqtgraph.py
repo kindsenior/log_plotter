@@ -112,7 +112,10 @@ class LogPlotter(object):
                     key = legend.info['label']
                     x_offset = 0
                     if legend.group_info.get('xRange') and legend.group_info.get('xRange').get('zero'):
-                        x_offset = -legend.group_info['xRange']['min']
+                        try:
+                            x_offset = -legend.group_info['xRange'].get('min')
+                        except TypeError: # when legend.group_info['xRange']['min'] is None
+                            raise TypeError('[{graph_title}/{label}] please set xRange/min to use xRange/zero option'.format(graph_title=legend.graph_title, label=legend.info['label']))
                     getattr(plot_method.PlotMethod, func)(cur_item,
                                                           times + x_offset if x_offset else times,
                                                           data_dict, logs, log_cols, cur_col, key, k)
@@ -195,6 +198,14 @@ class LogPlotter(object):
                 plot_item = self.view.ci.rows[i][j]
                 x_range = self.legend_list[i][j][0].group_info.get("xRange")
                 if x_range:
+                    if x_range.get('min') is None:
+                        ax = plot_item.getAxis('bottom')
+                        x_range.setdefault('min', ax.range[0])
+                        del ax
+                    if x_range.get('max') is None:
+                        ax = plot_item.getAxis('bottom')
+                        x_range.setdefault('max', ax.range[1])
+                        del ax
                     plot_item.setXRange(0 if x_range.get('zero') else x_range['min'],
                                         x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'])
                     x_range_flag = True
