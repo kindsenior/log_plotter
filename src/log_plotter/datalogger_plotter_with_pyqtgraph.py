@@ -19,7 +19,7 @@ except:
 
 
 class LogPlotter(object):
-    def __init__(self, fname, plot_conf_name, layout_conf_name, title):
+    def __init__(self, fname, plot_conf_name, layout_conf_name, title=None):
         '''
         :param str fname: file name of log
         :param str plot_conf_name: plot yaml file name
