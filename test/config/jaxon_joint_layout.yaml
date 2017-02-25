@@ -1,0 +1,4 @@
+main:
+  rleg_joint_angle:
+    legends:
+      - { key: st_q, id: [0-5] }
