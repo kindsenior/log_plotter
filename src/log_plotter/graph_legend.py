@@ -11,7 +11,7 @@ class GraphLegendInfo(object):
         :param int  j: jth column in layout_yaml
         :param int  k: kth legend in graph
         '''
-        # self.group_info = layout_yaml[i]
+        self.graph_title = layout_yaml.keys()[i]
         self.group_info = layout_yaml.values()[i]
         self.plot_dict = plot_yaml
         self.group_index = i

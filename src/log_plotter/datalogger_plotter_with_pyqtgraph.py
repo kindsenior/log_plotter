@@ -2,9 +2,7 @@
 
 import functools
 import argparse
-import math
 import sys
-import yaml
 import signal
 import log_plotter.pyqtgraph_LegendItem_patch
 import log_plotter.plot_method as plot_method
@@ -104,28 +102,23 @@ class LogPlotter(object):
         #                     [[],              [],...]]
         for i, group_legends in enumerate(self.legend_list):
             for j, graph_legends in enumerate(group_legends):
-                x_range = self.legend_list[i][j][0].group_info.get('xRange')
                 cur_item = self.view.ci.rows[i][j]
                 cur_item.addLegend(offset=(0, 0))
-                # check plot range
-                x_range = self.legend_list[i][j][0].group_info.get('xRange')
-                x_offset = 0
-                if x_range is not None:
-                    if x_range.get('zero', False):
-                        cur_item.setXRange(0, x_range['max']-x_range['min'])
-                        x_offset = -x_range['min']
-                    else:
-                        cur_item.setXRange(x_range['min'], x_range['max'])
-                y_range = self.legend_list[i][j][0].group_info.get("yRange")
-                if y_range is not None:
-                    cur_item.setYRange(y_range['min'], y_range['max'])
                 for k, legend in enumerate(graph_legends):
                     func = legend.info['func']
                     logs = [d['log'] for d in legend.info['data']]
                     log_cols = [d['column'] for d in legend.info['data']]
                     cur_col = j
                     key = legend.info['label']
-                    getattr(plot_method.PlotMethod, func)(cur_item, times+x_offset, data_dict, logs, log_cols, cur_col, key, k)
+                    x_offset = 0
+                    if legend.group_info.get('xRange') and legend.group_info.get('xRange').get('zero'):
+                        try:
+                            x_offset = -legend.group_info['xRange'].get('min')
+                        except TypeError: # when legend.group_info['xRange']['min'] is None
+                            raise TypeError('[{graph_title}/{label}] please set xRange/min to use xRange/zero option'.format(graph_title=legend.graph_title, label=legend.info['label']))
+                    getattr(plot_method.PlotMethod, func)(cur_item,
+                                                          times + x_offset if x_offset else times,
+                                                          data_dict, logs, log_cols, cur_col, key, k)
 
     @my_time
     def setLabel(self):
@@ -196,28 +189,41 @@ class LogPlotter(object):
     @my_time
     def linkAxes(self):
         '''
-        link all X axes and some Y axes
+        link all X axes
         '''
-        # X axis
-        all_items = self.view.ci.items.keys()
-        target_item = all_items[0]
-        for i, p in enumerate(all_items):
-            if i != 0:
-                p.setXLink(target_item)
-            else:
-                p.enableAutoRange()
-        # Y axis
-        for cur_row_dict in self.view.ci.rows.values():
-            all_items = cur_row_dict.values()
+        # check axis range
+        x_range_flag = False # True when xRange exists
+        for i, _ in enumerate(self.legend_list):
+            for j in range(len(self.legend_list[i])):
+                plot_item = self.view.ci.rows[i][j]
+                x_range = self.legend_list[i][j][0].group_info.get("xRange")
+                if x_range:
+                    if x_range.get('min') is None:
+                        ax = plot_item.getAxis('bottom')
+                        x_range.setdefault('min', ax.range[0])
+                        del ax
+                    if x_range.get('max') is None:
+                        ax = plot_item.getAxis('bottom')
+                        x_range.setdefault('max', ax.range[1])
+                        del ax
+                    plot_item.setXRange(0 if x_range.get('zero') else x_range['min'],
+                                        x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'])
+                    x_range_flag = True
+                y_range = self.legend_list[i][j][0].group_info.get("yRange")
+                if y_range:
+                    plot_item.setYRange(y_range['min'], y_range['max'])
+
+        # link X axis
+        if not x_range_flag:
+            all_items = self.view.ci.items.keys()
             target_item = all_items[0]
-            title = target_item.titleLabel.text
-            if title.find("joint_angle") == -1 and title.find("_force") == -1 and title != "imu" and title.find("comp") == -1:
-                y_min = min([ci.viewRange()[1][0] for ci in all_items])
-                y_max = max([ci.viewRange()[1][1] for ci in all_items])
-                target_item.setYRange(y_min, y_max)
-                for i, p in enumerate(all_items):
-                    if i != 0:
-                        p.setYLink(target_item)
+            for i, p in enumerate(all_items):
+                if i != 0:
+                    p.setXLink(target_item)
+                else:
+                    p.enableAutoRange()
+
+
         # design
         for i, p in enumerate(self.view.ci.items.keys()):
             ax = p.getAxis('bottom')
@@ -339,10 +345,10 @@ class LogPlotter(object):
         '''
         self.getData()
         self.setLayout()
-        self.linkAxes()
         self.plotData()
         self.setLabel()
         self.setItemSize()
+        self.linkAxes()
         self.setFont()
         self.customMenu()
         self.customMenu2()
