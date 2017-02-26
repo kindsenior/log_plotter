@@ -54,16 +54,26 @@ class HorizenLegend(GraphicsWidget):
 def LegendItem_updateSize(self):
     if self.size is not None:
         return
-    height = 0
-    width = 0
+    margins = self.layout.getContentsMargins()
+    height = margins[1] + margins[3]
+    width = margins[0] + margins[2] + self.layout.horizontalSpacing()
     #print("-------")
     for sample, label in self.items:
-        height += max(sample.height(), label.height()) + 3
+        height += max(sample.height(), label.height()) + self.layout.verticalSpacing()
         width = max(width, sample.width()+label.width())
         #print(width, height)
+    height -= self.layout.verticalSpacing()
     #print width, height
     # self.setGeometry(0, 0, width+25, height)
-    self.setGeometry(0, 0, width+35, height)
+    self.setGeometry(0, 0, width, height)
+
+# set default value in LegendItem
+LegendItem_init_orig = pyqtgraph.graphicsItems.LegendItem.LegendItem.__init__
+def LegendItem_init(self, *args, **kwargs):
+    LegendItem_init_orig(self, *args, **kwargs)
+    self.layout.setContentsMargins(9.,0.,9.,0.)
+    self.layout.setVerticalSpacing(-5.)
+    self.layout.setHorizontalSpacing(25)
 
 # justify left for legend label
 from pyqtgraph.graphicsItems.LabelItem import LabelItem
@@ -79,7 +89,7 @@ def LegendItem_addItem(self, item, name):
     self.layout.addItem(label, row, 1)
     self.updateSize()
 
-
+pyqtgraph.graphicsItems.LegendItem.LegendItem.__init__ = LegendItem_init
 pyqtgraph.graphicsItems.LegendItem.LegendItem.paint = white_foreground_legend_item_paint
 pyqtgraph.graphicsItems.LegendItem.LegendItem.updateSize = LegendItem_updateSize
 pyqtgraph.graphicsItems.LegendItem.LegendItem.addItem = LegendItem_addItem
