@@ -210,7 +210,8 @@ class LogPlotter(object):
                         x_range.setdefault('max', ax.range[1])
                         del ax
                     plot_item.setXRange(0 if x_range.get('zero') else x_range['min'],
-                                        x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'])
+                                        x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'],
+                                        padding=0)
                 # set yRange
                 y_range = self.legend_list[i][j][0].group_info.get("yRange")
                 if y_range:
@@ -222,7 +223,7 @@ class LogPlotter(object):
                         ax = plot_item.getAxis('left')
                         y_range.setdefault('max', ax.range[1])
                         del ax
-                    plot_item.setYRange(y_range['min'], y_range['max'])
+                    plot_item.setYRange(y_range['min'], y_range['max'], padding=0)
 
         all_items = self.view.ci.items.keys()
         # link X axis and set AutoRange
