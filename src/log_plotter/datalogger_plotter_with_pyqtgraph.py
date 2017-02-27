@@ -192,12 +192,15 @@ class LogPlotter(object):
         link all X axes
         '''
         # check axis range
-        x_range_flag = False # True when xRange exists
+        set_x_range = False # True when xRange exists
         for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
                 plot_item = self.view.ci.rows[i][j]
+
+                # set xRange
                 x_range = self.legend_list[i][j][0].group_info.get("xRange")
                 if x_range:
+                    set_x_range = True
                     if x_range.get('min') is None:
                         ax = plot_item.getAxis('bottom')
                         x_range.setdefault('min', ax.range[0])
@@ -208,21 +211,34 @@ class LogPlotter(object):
                         del ax
                     plot_item.setXRange(0 if x_range.get('zero') else x_range['min'],
                                         x_range['max']-x_range['min'] if x_range.get('zero') else x_range['max'])
-                    x_range_flag = True
+                # set yRange
                 y_range = self.legend_list[i][j][0].group_info.get("yRange")
                 if y_range:
+                    if y_range.get('min') is None:
+                        ax = plot_item.getAxis('left')
+                        x_range.setdefault('min', ax.range[0])
+                        del ax
+                    if y_range.get('max') is None:
+                        ax = plot_item.getAxis('left')
+                        y_range.setdefault('max', ax.range[1])
+                        del ax
                     plot_item.setYRange(y_range['min'], y_range['max'])
 
-        # link X axis
-        if not x_range_flag:
-            all_items = self.view.ci.items.keys()
+        all_items = self.view.ci.items.keys()
+        # link X axis and set AutoRange
+        if not set_x_range:
             target_item = all_items[0]
             for i, p in enumerate(all_items):
                 if i != 0:
                     p.setXLink(target_item)
                 else:
-                    p.enableAutoRange()
-
+                    p.enableAutoRange(p.getViewBox().XAxis)
+        # set AutoRange for Y axis when yRange is not set
+        for i, _ in enumerate(self.legend_list):
+            for j in range(len(self.legend_list[i])):
+                if self.legend_list[i][j][0].group_info.get("yRange") is None:
+                    p = self.view.ci.rows[i][j]
+                    p.enableAutoRange(p.getViewBox().YAxis)
 
         # design
         for i, p in enumerate(self.view.ci.items.keys()):
