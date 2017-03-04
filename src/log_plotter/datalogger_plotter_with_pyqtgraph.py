@@ -171,16 +171,22 @@ class LogPlotter(object):
                 w = group.get('width', False)
                 if w:
                     if 'mm' in str(w):
-                        w = int(w.replace('mm', '')) # todo: support px, pt,...
+                        w = float(w.replace('mm', ''))
                         w = qdw.physicalDpiX() / 25.4 * w
+                    elif 'pt' in str(w):
+                        w = float(w.replace('pt', ''))
+                        w = qdw.physicalDpiX() / 72.0 * w
                     vb.setFixedWidth(w)
                     bottom_ax.setFixedWidth(w)
                     cur_item.setFixedWidth(cur_item.minimumWidth())
                 h = group.get('height', False)
                 if h:
                     if 'mm' in str(h):
-                        h = int(h.replace('mm', '')) # todo: support px, pt,...
+                        h = float(h.replace('mm', '')) # todo: support px, pt,...
                         h = qdw.physicalDpiY() / 25.4 * h
+                    elif 'pt' in str(h):
+                        h = float(h.replace('pt', ''))
+                        h = qdw.physicalDpiX() / 72.0 * h
                     vb.setFixedHeight(h)
                     left_ax.setFixedHeight(h)
                     right_ax.setFixedHeight(h)
