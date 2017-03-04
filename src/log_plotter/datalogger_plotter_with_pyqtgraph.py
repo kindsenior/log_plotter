@@ -176,9 +176,7 @@ class LogPlotter(object):
                     elif 'pt' in str(w):
                         w = float(w.replace('pt', ''))
                         w = qdw.physicalDpiX() / 72.0 * w
-                    vb.setFixedWidth(w)
-                    bottom_ax.setFixedWidth(w)
-                    cur_item.setFixedWidth(cur_item.minimumWidth())
+                    cur_item.setFixedWidth(w)
                 h = group.get('height', False)
                 if h:
                     if 'mm' in str(h):
