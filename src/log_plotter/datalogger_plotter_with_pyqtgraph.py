@@ -180,15 +180,16 @@ class LogPlotter(object):
                 h = group.get('height', False)
                 if h:
                     if 'mm' in str(h):
-                        h = float(h.replace('mm', '')) # todo: support px, pt,...
+                        h = float(h.replace('mm', ''))
                         h = qdw.physicalDpiY() / 25.4 * h
                     elif 'pt' in str(h):
                         h = float(h.replace('pt', ''))
                         h = qdw.physicalDpiX() / 72.0 * h
-                    vb.setFixedHeight(h)
-                    left_ax.setFixedHeight(h)
-                    right_ax.setFixedHeight(h)
-                    cur_item.setFixedHeight(cur_item.minimumHeight())
+                    # To set view box height
+                    # vb.setFixedHeight(h)
+                    # left_ax.setFixedHeight(h)
+                    # right_ax.setFixedHeight(h)
+                    cur_item.setFixedHeight(h)
 
     @my_time
     def linkAxes(self):
