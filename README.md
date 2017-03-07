@@ -1,4 +1,23 @@
 # log_plotter
+## インストール方法
+### catkin packageとしてインストール
+1. 依存パッケージの導入
+```bash
+sudo pip install metayaml pyqtgraph
+```
+2. パッケージのbuild
+```bash
+cd catkin_ws/src
+git clone https://github.com/kindsenior/log_plotter.git
+cd log_plotter
+catkin build --this
+```
+
+### pip でインストール
+```bash
+pip install git+https://github.com/kindsenior/log_plotter.git
+```
+
 ## 使用方法
 ### 1. コマンドラインで
 ```
