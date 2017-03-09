@@ -1,0 +1,7 @@
+"topicName": 'abc_q'
+"portName": '/localhost:15005/abc.rtc:q'
+"msgType": ["hrpsys_ros_bridge", "RTC_TimedDoubleSeq"]
+
+# msg
+"rule": [ "msg.data=data.data" ]
+
