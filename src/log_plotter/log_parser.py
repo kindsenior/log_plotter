@@ -32,6 +32,7 @@ class LogParser(object):
                 if type(leg['id'][0]) == str:
                     leg['id'] = expand_str_to_list(leg['id'][0])
             self.layout_dict[dict_title].setdefault('newline', True)
+            self.layout_dict[dict_title].setdefault('title', True)
             self.layout_dict[dict_title].setdefault('left_label', False)
             self.layout_dict[dict_title].setdefault('bottom_label', "time [s]")
 
