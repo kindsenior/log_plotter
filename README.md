@@ -78,6 +78,23 @@ main:
 ```
 <img src="doc/materials/watt_sample_plot2.png" height="300px">  
 
+#### オプション
+グラフ毎にオプションを付けることで細かい設定をすることができる．
+* `newline: bool (default: True)`  
+Falseにすることで前にグラフと同じ行に表示することができる
+* `title: bool`  
+Falseにすることでグラフ上部のタイトルを非表示にする
+* `bottom_label: 'string' (default: "time [s]")`  
+横軸ラベルを設定
+* `left_label: 'string' (default: False)`  
+縦軸ラベルを設定
+* `xRange: {min: float, max: float, zero: bool})`  
+横軸のrangeを設定．それぞれ必須ではない(zero == Trueの時のみminが必要)．zero == Trueとするとグラフの開始を0に合わせることができる．
+* `yRange: {min: float, max: float})`  
+横軸のrangeを設定．それぞれ必須ではない．
+* `downsampling: {ds: float, auto: bool, mode: 'string'} (default: {ds: 100, auto: False, mode: 'peak'})`  
+setDownsamplingを使用するための設定．
+
 ### plot.yaml
 plot.yamlは凡例ごとの描画方法を記述している。  
 通常は、plot.yamlで定義された凡例をlayout.yamlの中で組み合わせて使用することを想定している。  
