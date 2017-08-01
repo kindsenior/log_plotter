@@ -408,5 +408,11 @@ def main():
         signal.signal(signal.SIGINT, signal.SIG_DFL)
         pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
 
+def plot_with_log_plotter(fname, plot_conf_name, layout_conf_name, title):
+    app = pyqtgraph.Qt.QtGui.QApplication([])
+    lp = LogPlotter(fname, plot_conf_name, layout_conf_name, title)
+    lp.main()
+    pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+
 if __name__ == '__main__':
     main()
