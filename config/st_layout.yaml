@@ -16,6 +16,12 @@ main:
     legends:
       - { key: st_zmp, id: [0-1] }
       - { key: abc_zmpOut, id: [0-1] }
+    newline: false
+
+  optional_data:
+    legends:
+      - { key: abc_contactStates, id: [0], label: rleg }
+      - { key: abc_contactStates, id: [1], label: lleg }
 
   act/ref force:
     legends:
