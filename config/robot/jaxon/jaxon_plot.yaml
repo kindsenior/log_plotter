@@ -21,6 +21,16 @@ RobotHardware0_q:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
 
+RobotHardware_choreonoid0_q:
+  func: plot_rad2deg
+  data:
+    - { log: RobotHardware_choreonoid0_q, column: [0-33] }
+
+RobotHardware_choreonoid0_dq:
+  func: plot_rad2deg
+  data:
+    - { log: RobotHardware_choreonoid0_dq, column: [0-33] }
+
 rh_st_diff:
   func: plot_rh_q_st_q
   data:
@@ -61,6 +71,14 @@ current:
   func: plot_current
   data:
     - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+
+torque:
+  data:
+    - { log: RobotHardware0_tau, column: [0-32] }
+
+choreonoid_torque:
+  data:
+    - { log: RobotHardware_choreonoid0_tau, column: [0-32] }
 
 imu_gsensor:
   data:

@@ -84,6 +84,12 @@ st_ref_rhsensor:
 st_ref_lhsensor:
   data:
     - { log: st_allRefWrench, column: [18-23] }
+abc_rfsensor:
+  data:
+    - { log: abc_rfsensor, column: [0-2] }
+abc_lfsensor:
+  data:
+    - { log: abc_lfsensor, column: [0-2] }
 # imu
 imu_gsensor:
   data:
