@@ -52,6 +52,12 @@ rh_st_diff:
     - { log: RobotHardware0_q, column: [0-33] }
     - { log: st_q, column: [0-33] }
 
+rh_el_diff:
+  func: plot_rad2deg_diff
+  data:
+    - { log: RobotHardware0_q, column: [0-33] }
+    - { log: el_q, column: [0-33] }
+
 abs_enc_diff:
   func: plot_abs_enc
   data:
