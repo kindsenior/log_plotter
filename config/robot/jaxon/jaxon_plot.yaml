@@ -21,6 +21,11 @@ RobotHardware0_q:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
 
+RobotHardware0_dq:
+  func: plot_rad2deg
+  data:
+    - { log: RobotHardware0_dq, column: [0-33] }
+
 RobotHardware_choreonoid0_q:
   func: plot_rad2deg
   data:
