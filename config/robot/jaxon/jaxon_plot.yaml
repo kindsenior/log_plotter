@@ -16,6 +16,11 @@ st_q:
   data:
     - { log: st_q, column: [0-33] }
 
+el_q:
+  func: plot_rad2deg
+  data:
+    - { log: el_q, column: [0-33] }
+
 RobotHardware0_q:
   func: plot_rad2deg
   data:
@@ -25,6 +30,11 @@ RobotHardware0_dq:
   func: plot_rad2deg
   data:
     - { log: RobotHardware0_dq, column: [0-33] }
+
+el_dq:
+  func: plot_rad2deg_vel
+  data:
+    - { log: el_q, column: [0-33] }
 
 RobotHardware_choreonoid0_q:
   func: plot_rad2deg
