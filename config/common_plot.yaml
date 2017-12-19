@@ -90,6 +90,23 @@ abc_rfsensor:
 abc_lfsensor:
   data:
     - { log: abc_lfsensor, column: [0-2] }
+# comp
+st_rfcomp:
+  func: plot_comp
+  data:
+    - { log: st_allEEComp, column: [0-5] }
+st_lfcomp:
+  func: plot_comp
+  data:
+    - { log: st_allEEComp, column: [6-11] }
+st_rhcomp:
+  func: plot_comp
+  data:
+    - { log: st_allEEComp, column: [12-17] }
+st_lhcomp:
+  func: plot_comp
+  data:
+    - { log: st_allEEComp, column: [18-23] }
 # imu
 imu_gsensor:
   data:

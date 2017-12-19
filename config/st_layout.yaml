@@ -37,6 +37,17 @@ main:
       - { key: st_ref_rfsensor, id: [3-5] }
       - { key: st_ref_lfsensor, id: [3-5] }
 
+  moment comp:
+    legends:
+      - { key: st_rfcomp, id: [3-4] }
+      - { key: st_lfcomp, id: [3-4] }
+    newline: false
+
+  force comp:
+    legends:
+      - { key: st_rfcomp, id: [2] }
+      - { key: st_lfcomp, id: [2] }
+
   # optional_data:
   #   legends:
   #     - { key: abc_contactStates, id: [0-3] }
