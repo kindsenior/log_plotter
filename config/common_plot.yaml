@@ -61,9 +61,11 @@ RobotHardware0_lhsensor:
   data:
     - { log: RobotHardware0_lhsensor, column: [0-5] }
 rmfo_off_rfsensor:
+  func: plot_inverse
   data:
     - { log: rmfo_off_rfsensor, column: [0-5] }
 rmfo_off_lfsensor:
+  func: plot_inverse
   data:
     - { log: rmfo_off_lfsensor, column: [0-5] }
 rmfo_off_rhsensor:
