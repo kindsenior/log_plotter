@@ -127,12 +127,12 @@ main:
       # - { key: st_tau, id: [3], label: st_knee-p}
       # - { key: st_tau, id: [4], label: st_ankle-p}
       # - { key: st_tau, id: [5], label: st_ankle-r}
-      - { key: torque, id: [0], label: hip-y}
-      - { key: torque, id: [1], label: hip-r}
-      - { key: torque, id: [2], label: hip-p}
-      - { key: torque, id: [3], label: knee-p}
-      - { key: torque, id: [4], label: ankle-p}
-      - { key: torque, id: [5], label: ankle-r}
+      - { key: torque, id: [0], label: rh_hip-y}
+      - { key: torque, id: [1], label: rh_hip-r}
+      - { key: torque, id: [2], label: rh_hip-p}
+      - { key: torque, id: [3], label: rh_knee-p}
+      - { key: torque, id: [4], label: rh_ankle-p}
+      - { key: torque, id: [5], label: rh_ankle-r}
     newline: false
 
   lleg tau:
@@ -143,12 +143,12 @@ main:
       # - { key: st_tau, id: [9], label: st_knee-p}
       # - { key: st_tau, id: [10], label: st_ankle-p}
       # - { key: st_tau, id: [11], label: st_ankle-r}
-      - { key: torque, id: [6], label: hip-y}
-      - { key: torque, id: [7], label: hip-r}
-      - { key: torque, id: [8], label: hip-p}
-      - { key: torque, id: [9], label: knee-p}
-      - { key: torque, id: [10], label: ankle-p}
-      - { key: torque, id: [11], label: ankle-r}
+      - { key: torque, id: [6], label: rh_hip-y}
+      - { key: torque, id: [7], label: rh_hip-r}
+      - { key: torque, id: [8], label: rh_hip-p}
+      - { key: torque, id: [9], label: rh_knee-p}
+      - { key: torque, id: [10], label: rh_ankle-p}
+      - { key: torque, id: [11], label: rh_ankle-r}
 
   rleg 80V:
     legends:
