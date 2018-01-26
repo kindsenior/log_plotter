@@ -2,24 +2,67 @@ extend:
   st_layout.yaml
 
 main:
-  rleg_torque:
+  rleg diff q:
     legends:
-      # - { key: torque, id: [0], label: r-hip-y }
-      # - { key: torque, id: [1], label: r-hip-r }
-      - { key: torque, id: [2], label: r-hip-p }
-      - { key: torque, id: [3], label: r-knee-p }
-      - { key: torque, id: [4], label: r-ankle-p }
-      - { key: torque, id: [5], label: r-ankle-r }
+      - { key: rh_st_diff, id: [0],label: hip-y  }
+      - { key: rh_st_diff, id: [1],label: hip-r  }
+      - { key: rh_st_diff, id: [2],label: hip-p  }
+      - { key: rh_st_diff, id: [3],label: knee-p }
+      - { key: rh_st_diff, id: [4],label: ankle-p}
+      - { key: rh_st_diff, id: [5],label: ankle-r}
+      # - { key: rh_el_diff, id: [0],label: hip-y  }
+      # - { key: rh_el_diff, id: [1],label: hip-r  }
+      # - { key: rh_el_diff, id: [2],label: hip-p  }
+      # - { key: rh_el_diff, id: [3],label: knee-p }
+      # - { key: rh_el_diff, id: [4],label: ankle-p}
+      # - { key: rh_el_diff, id: [5],label: ankle-r}
     newline: false
 
-  lleg_torque:
+  lleg diff q:
     legends:
-      # - { key: torque, id: [6], label: l-hip-y }
-      # - { key: torque, id: [7], label: l-hip-r }
-      - { key: torque, id: [8], label: l-hip-p }
-      - { key: torque, id: [9], label: l-knee-p }
-      - { key: torque, id: [10], label: l-ankle-p }
-      - { key: torque, id: [11], label: l-ankle-r }
+      - { key: rh_st_diff, id: [6],  label: hip-y  }
+      - { key: rh_st_diff, id: [7],  label: hip-r  }
+      - { key: rh_st_diff, id: [8],  label: hip-p  }
+      - { key: rh_st_diff, id: [9],  label: knee-p }
+      - { key: rh_st_diff, id: [10], label: ankle-p}
+      - { key: rh_st_diff, id: [11], label: ankle-r}
+      # - { key: rh_el_diff, id: [6],  label: hip-y  }
+      # - { key: rh_el_diff, id: [7],  label: hip-r  }
+      # - { key: rh_el_diff, id: [8],  label: hip-p  }
+      # - { key: rh_el_diff, id: [9],  label: knee-p }
+      # - { key: rh_el_diff, id: [10], label: ankle-p}
+      # - { key: rh_el_diff, id: [11], label: ankle-r}
+
+  rleg tau:
+    legends:
+      # - { key: st_tau, id: [0], label: st_hip-y}
+      # - { key: st_tau, id: [1], label: st_hip-r}
+      # - { key: st_tau, id: [2], label: st_hip-p}
+      # - { key: st_tau, id: [3], label: st_knee-p}
+      # - { key: st_tau, id: [4], label: st_ankle-p}
+      # - { key: st_tau, id: [5], label: st_ankle-r}
+      - { key: torque, id: [0], label: rh_hip-y}
+      - { key: torque, id: [1], label: rh_hip-r}
+      - { key: torque, id: [2], label: rh_hip-p}
+      - { key: torque, id: [3], label: rh_knee-p}
+      - { key: torque, id: [4], label: rh_ankle-p}
+      - { key: torque, id: [5], label: rh_ankle-r}
+    newline: false
+
+  lleg tau:
+    legends:
+      # - { key: st_tau, id: [6], label: st_hip-y}
+      # - { key: st_tau, id: [7], label: st_hip-r}
+      # - { key: st_tau, id: [8], label: st_hip-p}
+      # - { key: st_tau, id: [9], label: st_knee-p}
+      # - { key: st_tau, id: [10], label: st_ankle-p}
+      # - { key: st_tau, id: [11], label: st_ankle-r}
+      - { key: torque, id: [6], label: rh_hip-y}
+      - { key: torque, id: [7], label: rh_hip-r}
+      - { key: torque, id: [8], label: rh_hip-p}
+      - { key: torque, id: [9], label: rh_knee-p}
+      - { key: torque, id: [10], label: rh_ankle-p}
+      - { key: torque, id: [11], label: rh_ankle-r}
 
   rleg_q:
     legends:
