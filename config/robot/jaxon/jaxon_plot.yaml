@@ -97,6 +97,10 @@ torque:
   data:
     - { log: RobotHardware0_tau, column: [0-32] }
 
+st_tau:
+  data:
+    - { log: st_tau, column: [0-32] }
+
 choreonoid_torque:
   data:
     - { log: RobotHardware_choreonoid0_tau, column: [0-32] }

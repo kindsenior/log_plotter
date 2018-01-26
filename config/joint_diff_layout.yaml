@@ -121,6 +121,12 @@ main:
 
   rleg tau:
     legends:
+      # - { key: st_tau, id: [0], label: st_hip-y}
+      # - { key: st_tau, id: [1], label: st_hip-r}
+      # - { key: st_tau, id: [2], label: st_hip-p}
+      # - { key: st_tau, id: [3], label: st_knee-p}
+      # - { key: st_tau, id: [4], label: st_ankle-p}
+      # - { key: st_tau, id: [5], label: st_ankle-r}
       - { key: torque, id: [0], label: hip-y}
       - { key: torque, id: [1], label: hip-r}
       - { key: torque, id: [2], label: hip-p}
@@ -131,6 +137,12 @@ main:
 
   lleg tau:
     legends:
+      # - { key: st_tau, id: [6], label: st_hip-y}
+      # - { key: st_tau, id: [7], label: st_hip-r}
+      # - { key: st_tau, id: [8], label: st_hip-p}
+      # - { key: st_tau, id: [9], label: st_knee-p}
+      # - { key: st_tau, id: [10], label: st_ankle-p}
+      # - { key: st_tau, id: [11], label: st_ankle-r}
       - { key: torque, id: [6], label: hip-y}
       - { key: torque, id: [7], label: hip-r}
       - { key: torque, id: [8], label: hip-p}
