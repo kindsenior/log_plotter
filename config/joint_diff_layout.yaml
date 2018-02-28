@@ -57,6 +57,7 @@ main:
       - { key: RobotHardware0_q, id: [9],label: rh_knee-p }
       - { key: RobotHardware0_q, id: [10],label: rh_ankle-p}
       - { key: RobotHardware0_q, id: [11],label: rh_ankle-r}
+    bottom_label:
 
   rleg vel:
     legends:
@@ -72,6 +73,7 @@ main:
       - { key: RobotHardware0_dq, id: [3], label: rh_knee}
       - { key: RobotHardware0_dq, id: [4], label: rh_ankle-p}
       - { key: RobotHardware0_dq, id: [5], label: rh_ankle-r}
+    bottom_label:
     newline: false
 
   lleg vel:
@@ -88,6 +90,7 @@ main:
       - { key: RobotHardware0_dq, id: [9],  label: rh_knee}
       - { key: RobotHardware0_dq, id: [10], label: rh_ankle-p}
       - { key: RobotHardware0_dq, id: [11], label: rh_ankle-r}
+    bottom_label:
 
   rleg diff q:
     legends:
@@ -103,6 +106,7 @@ main:
       # - { key: rh_el_diff, id: [3],label: knee-p }
       # - { key: rh_el_diff, id: [4],label: ankle-p}
       # - { key: rh_el_diff, id: [5],label: ankle-r}
+    bottom_label:
     newline: false
 
   lleg diff q:
@@ -119,6 +123,7 @@ main:
       # - { key: rh_el_diff, id: [9],  label: knee-p }
       # - { key: rh_el_diff, id: [10], label: ankle-p}
       # - { key: rh_el_diff, id: [11], label: ankle-r}
+    bottom_label:
 
   rleg tau:
     legends:
