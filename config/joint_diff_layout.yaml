@@ -124,6 +124,23 @@ main:
       # - { key: rh_el_diff, id: [10], label: ankle-p}
       # - { key: rh_el_diff, id: [11], label: ankle-r}
     bottom_label:
+    newline: false
+
+  leg ServoState:
+    legends:
+      - { key: ServoState, id: [0], label: r-hip-y  }
+      - { key: ServoState, id: [1], label: r-hip-r  }
+      - { key: ServoState, id: [2], label: r-hip-p  }
+      - { key: ServoState, id: [3], label: r-knee-p }
+      - { key: ServoState, id: [4], label: r-ankle-p}
+      - { key: ServoState, id: [5], label: r-ankle-r}
+      - { key: ServoState, id: [6], label: l-hip-y  }
+      - { key: ServoState, id: [7], label: l-hip-r  }
+      - { key: ServoState, id: [8], label: l-hip-p  }
+      - { key: ServoState, id: [9], label: l-knee-p }
+      - { key: ServoState, id: [10], label: l-ankle-p}
+      - { key: ServoState, id: [11], label: l-ankle-r}
+    bottom_label:
 
   rleg tau:
     legends:
@@ -155,25 +172,22 @@ main:
       - { key: torque, id: [9], label: rh_knee-p}
       - { key: torque, id: [10], label: rh_ankle-p}
       - { key: torque, id: [11], label: rh_ankle-r}
-
-  rleg 80V:
-    legends:
-      - { key: 80V, id: [0], label: hip-y  }
-      - { key: 80V, id: [1], label: hip-r  }
-      - { key: 80V, id: [2], label: hip-p  }
-      - { key: 80V, id: [3], label: knee-p }
-      - { key: 80V, id: [4], label: ankle-p}
-      - { key: 80V, id: [5], label: ankle-r}
     newline: false
 
-  lleg 80V:
+  leg 80V:
     legends:
-      - { key: 80V, id: [6], label: hip-y  }
-      - { key: 80V, id: [7], label: hip-r  }
-      - { key: 80V, id: [8], label: hip-p  }
-      - { key: 80V, id: [9], label: knee-p }
-      - { key: 80V, id: [10], label: ankle-p}
-      - { key: 80V, id: [11], label: ankle-r}
+      - { key: 80V, id: [0], label: r-hip-y  }
+      - { key: 80V, id: [1], label: r-hip-r  }
+      - { key: 80V, id: [2], label: r-hip-p  }
+      - { key: 80V, id: [3], label: r-knee-p }
+      - { key: 80V, id: [4], label: r-ankle-p}
+      - { key: 80V, id: [5], label: r-ankle-r}
+      - { key: 80V, id: [6], label: l-hip-y  }
+      - { key: 80V, id: [7], label: l-hip-r  }
+      - { key: 80V, id: [8], label: l-hip-p  }
+      - { key: 80V, id: [9], label: l-knee-p }
+      - { key: 80V, id: [10], label: l-ankle-p}
+      - { key: 80V, id: [11], label: l-ankle-r}
 
   rleg 12V:
     legends:
@@ -193,25 +207,6 @@ main:
       - { key: 12V, id: [9], label: knee-p }
       - { key: 12V, id: [10], label: ankle-p}
       - { key: 12V, id: [11], label: ankle-r}
-
-  rleg ServoState:
-    legends:
-      - { key: ServoState, id: [0], label: hip-y  }
-      - { key: ServoState, id: [1], label: hip-r  }
-      - { key: ServoState, id: [2], label: hip-p  }
-      - { key: ServoState, id: [3], label: knee-p }
-      - { key: ServoState, id: [4], label: ankle-p}
-      - { key: ServoState, id: [5], label: ankle-r}
-    newline: false
-
-  lleg ServoState:
-    legends:
-      - { key: ServoState, id: [6], label: hip-y  }
-      - { key: ServoState, id: [7], label: hip-r  }
-      - { key: ServoState, id: [8], label: hip-p  }
-      - { key: ServoState, id: [9], label: knee-p }
-      - { key: ServoState, id: [10], label: ankle-p}
-      - { key: ServoState, id: [11], label: ankle-r}
 
   # rleg abs/enc diff:
   #   legends:
