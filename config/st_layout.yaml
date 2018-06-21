@@ -48,6 +48,13 @@ main:
       - { key: st_rfcomp, id: [2] }
       - { key: st_lfcomp, id: [2] }
 
+  act/ref base rpy:
+    legends:
+      - { key: sh_baseRpyOut, id: [0-2] }
+      - { key: st_currentBaseRpy, id: [0-2] }
+      - { key: st_actBaseRpy, id: [0-2] }
+
+
   # optional_data:
   #   legends:
   #     - { key: abc_contactStates, id: [0-3] }
