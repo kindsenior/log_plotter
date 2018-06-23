@@ -58,6 +58,22 @@ main:
       - { key: RobotHardware0_q, id: [10],label: rh_ankle-p}
       - { key: RobotHardware0_q, id: [11],label: rh_ankle-r}
     bottom_label:
+    newline: false
+
+  leg 12V:
+    legends:
+      - { key: 12V, id: [0], label: r-hip-y  }
+      - { key: 12V, id: [1], label: r-hip-r  }
+      - { key: 12V, id: [2], label: r-hip-p  }
+      - { key: 12V, id: [3], label: r-knee-p }
+      - { key: 12V, id: [4], label: r-ankle-p}
+      - { key: 12V, id: [5], label: r-ankle-r}
+      - { key: 12V, id: [6], label: l-hip-y  }
+      - { key: 12V, id: [7], label: l-hip-r  }
+      - { key: 12V, id: [8], label: l-hip-p  }
+      - { key: 12V, id: [9], label: l-knee-p }
+      - { key: 12V, id: [10], label: l-ankle-p}
+      - { key: 12V, id: [11], label: l-ankle-r}
 
   rleg vel:
     legends:
@@ -189,24 +205,7 @@ main:
       - { key: 80V, id: [10], label: l-ankle-p}
       - { key: 80V, id: [11], label: l-ankle-r}
 
-  rleg 12V:
-    legends:
-      - { key: 12V, id: [0], label: hip-y  }
-      - { key: 12V, id: [1], label: hip-r  }
-      - { key: 12V, id: [2], label: hip-p  }
-      - { key: 12V, id: [3], label: knee-p }
-      - { key: 12V, id: [4], label: ankle-p}
-      - { key: 12V, id: [5], label: ankle-r}
-    newline: false
 
-  lleg 12V:
-    legends:
-      - { key: 12V, id: [6], label: hip-y  }
-      - { key: 12V, id: [7], label: hip-r  }
-      - { key: 12V, id: [8], label: hip-p  }
-      - { key: 12V, id: [9], label: knee-p }
-      - { key: 12V, id: [10], label: ankle-p}
-      - { key: 12V, id: [11], label: ankle-r}
 
   # rleg abs/enc diff:
   #   legends:
