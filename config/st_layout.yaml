@@ -54,6 +54,11 @@ main:
       - { key: st_currentBaseRpy, id: [0-2] }
       - { key: st_actBaseRpy, id: [0-2] }
 
+  act/ref base rpy vel:
+    legends:
+      - { key: sh_baseRpyVel, id: [0-2] }
+      - { key: st_currentBaseRpyVel, id: [0-2] }
+      - { key: st_actBaseRpyVel, id: [0-2] }
 
   # optional_data:
   #   legends:

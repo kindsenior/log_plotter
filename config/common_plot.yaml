@@ -134,6 +134,18 @@ kf_rpy:
   func: plot_rad2deg
   data:
     - { log: kf_rpy, column: [0-2] }
+sh_baseRpyVel:
+  func: plot_rad2deg_vel
+  data:
+    - { log: sh_baseRpyOut, column: [0-2] }
+st_currentBaseRpyVel:
+  func: plot_rad2deg_vel
+  data:
+    - { log: st_currentBaseRpy, column: [0-2] }
+st_actBaseRpyVel:
+  func: plot_rad2deg_vel
+  data:
+    - { log: st_actBaseRpy, column: [0-2] }
 # pos
 abc_basePos:
   data:
