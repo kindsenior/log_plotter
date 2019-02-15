@@ -5,8 +5,8 @@ from pyqtgraph import QtGui
 from pyqtgraph import QtCore
 
 class GraphSize(QtGui.QWidget):
-   sig_graph_width = QtCore.pyqtSignal(long)
-   sig_graph_height = QtCore.pyqtSignal(long)
+   sig_graph_width = QtCore.pyqtSignal(int)
+   sig_graph_height = QtCore.pyqtSignal(int)
    def __init__(self, plot_item, plot_item_parent):
       QtGui.QWidget.__init__(self)
       self.layout = QtGui.QGridLayout()
@@ -91,4 +91,3 @@ class GraphSize(QtGui.QWidget):
    def set_layout_height(self, spinbox):
       val = spinbox.value()
       self.plot_item_parent.setFixedHeight(val)
-

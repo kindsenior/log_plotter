@@ -3,7 +3,8 @@
 import numpy
 import metayaml
 import multiprocessing
-from log_plotter.plot_utils import readOneTopic, replaceRH
+from functools import reduce
+from log_plotter.plot_utils import readOneTopic, replaceRHString
 from log_plotter.graph_legend import expand_str_to_list
 
 
@@ -55,7 +56,7 @@ class LogParser(object):
         self._topic_list = topic_list
 
         # store data in parallel
-        fname_list = replaceRH([self.fname + '.' + ext for ext in topic_list])
+        fname_list = replaceRHString([self.fname + '.' + ext for ext in topic_list])
         pl = multiprocessing.Pool()
         data_list = pl.map(readOneTopic, fname_list)
         for topic, data in zip(topic_list, data_list):
@@ -65,7 +66,7 @@ class LogParser(object):
         for topic in topic_list:
             raw_time = self.dataListDict[topic][:, 0]
             self.dataListDict[topic][:, 0] = [x - min_time for x in raw_time]
-        # fix servoState
+        # convert servoState from int to float
         if 'RobotHardware0_servoState' in topic_list:
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
             self.dataListDict['RobotHardware0_servoState'][:, 1:] = numpy.fromstring(ss_tmp.astype('i').tostring(), dtype='f').reshape(ss_tmp.shape)

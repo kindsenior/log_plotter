@@ -7,7 +7,7 @@ import sys
 try:
     import pyqtgraph
 except:
-    print "please install pyqtgraph. see http://www.pyqtgraph.org/"
+    print("please install pyqtgraph. see http://www.pyqtgraph.org/")
     sys.exit(1)
 
 class PlotMethod(object):
