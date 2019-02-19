@@ -42,7 +42,11 @@ class PathSelector (QtGui.QGroupBox):
       callback function when 'select' button was pressed.
       '''
       d = QtGui.QFileDialog()
-      pathname = d.getOpenFileName(directory=os.path.dirname(self.path), filter=filter)
+      # Compatible with Qt5 and Qt4
+      if QtCore.QT_VERSION >= 0x050000:
+         pathname, _filter = d.getOpenFileName(directory=os.path.dirname(self.path), filter=filter)
+      else:
+         pathname = d.getOpenFileName(directory=os.path.dirname(self.path), filter=filter)
       if not pathname == "":
          self.set_path(pathname)
 
@@ -143,4 +147,4 @@ if __name__ == '__main__':
    app = QtGui.QApplication([])
    get_yamls_path = MainDialog()
    plot_yaml_path, layout_yaml_path = get_yamls_path()
-   print plot_yaml_path, layout_yaml_path
+   print(plot_yaml_path, layout_yaml_path)

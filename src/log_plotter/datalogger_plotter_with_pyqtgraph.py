@@ -14,7 +14,7 @@ from log_plotter.log_parser import LogParser
 try:
     import pyqtgraph
 except:
-    print "please install pyqtgraph. see http://www.pyqtgraph.org/"
+    print("please install pyqtgraph. see http://www.pyqtgraph.org/")
     sys.exit(1)
 
 
@@ -72,7 +72,7 @@ class LogPlotter(object):
                 if group['title']:
                     plot_item.setTitle(title+" "+ (str(j) if group_len != 1 else ""))
                 plot_item.showGrid(x=True, y=True, alpha=1)
-                if group.has_key('downsampling'):
+                if 'downsampling' in group.keys():
                     plot_item.setDownsampling(ds = group['downsampling'].get('ds', 100),
                                               auto=group['downsampling'].get('auto', False),
                                               mode=group['downsampling'].get('mode', 'peak'))
@@ -234,7 +234,7 @@ class LogPlotter(object):
         all_items = self.view.ci.items.keys()
         # link X axis and set AutoRange
         if not set_x_range:
-            target_item = all_items[0]
+            target_item = list(all_items)[0]
             for i, p in enumerate(all_items):
                 if i != 0:
                     p.setXLink(target_item)
@@ -314,7 +314,7 @@ class LogPlotter(object):
                 for i in del_list:
                     self.view.ci.removeItem(i)
             def hideExcCB(item):
-                del_list = self.view.ci.items.keys()
+                del_list = list(self.view.ci.items.keys())
                 del_list.remove(item)
                 for i in del_list:
                     self.view.ci.removeItem(i)
@@ -398,10 +398,10 @@ def main():
     if args.i:
         [app.processEvents() for i in range(2)]
         # start ipython
-        print '====='
-        print "please use \033[33mapp.processEvents()\033[m to update graph."
-        print "you can use \033[33ma\033[m as LogPlotter instance."
-        print '====='
+        print('=====')
+        print("please use \033[33mapp.processEvents()\033[m to update graph.")
+        print("you can use \033[33ma\033[m as LogPlotter instance.")
+        print('=====')
         from IPython import embed
         embed()
     else:

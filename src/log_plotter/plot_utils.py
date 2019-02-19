@@ -8,40 +8,38 @@ import fnmatch
 import numpy
 import functools
 
-# decorator for time measurement
-
-
 def my_time(func):
+    """
+    Decorator for time measurement
+    """
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
-        print("start : " + func.func_name)
+        print("start : " + func.__name__)
         result = func(*args, **kwargs)
-        print('{0:>10} : {1:3.3f} [s]'.format(func.func_name,
+        print('{0:>10} : {1:3.3f} [s]'.format(func.__name__,
                                               time.time() - start))
         return result
     return wrapper
 
 # seems that we should declare global function for multiprocess
-
-
 def readOneTopic(fname):
-    tmp = []
+    data = []
     try:
         with open(fname, 'r') as f:
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
                 dl = filter(lambda x: x != '', row)
-                tmp.append([float(x) for x in dl])
+                data.append([float(x) for x in dl])
     except Exception as e:
-        print '[readOneToopic] error occured while reading {}'.format(fname)
+        print('[readOneTopic] error occured while reading {}'.format(fname))
         raise e
-    return numpy.array(tmp)
-
-# return file list matching specific substring
-
+    return numpy.array(data)
 
 def findFile(pattern, path):
+    """
+    Return file list matching specific substring
+    """
     result = []
     for root, dirs, files in os.walk(path):
         for name in files:
@@ -49,10 +47,10 @@ def findFile(pattern, path):
                 result.append(os.path.join(root, name))
     return result
 
-# replace RobotHardware0 to each simulation one
-
-
-def replaceRH(fname_list):
+def replaceRHString(fname_list):
+    """
+    Replace RobotHardware0 to each simulation-specific string
+    """
     log_dir = os.path.dirname(os.path.abspath(fname_list[0]))
     base_name = os.path.splitext(os.path.basename(fname_list[0]))[0]
     # choreonoid
