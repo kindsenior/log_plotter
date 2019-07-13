@@ -160,6 +160,10 @@ abc_contactStates:
 abc_controlSwingSupportTime:
   data:
     - { log: abc_controlSwingSupportTime, column: [0-3] }
+# debug data
+st_debugData:
+  data:
+    - { log: st_debugData, column:[0-3] }
 # time
 time:
   func: plot_time
