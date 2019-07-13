@@ -11,8 +11,8 @@ class GraphLegendInfo(object):
         :param int  j: jth column in layout_yaml
         :param int  k: kth legend in graph
         '''
-        self.graph_title = layout_yaml.keys()[i]
-        self.group_info = layout_yaml.values()[i]
+        self.graph_title = list(layout_yaml.keys())[i]
+        self.group_info = list(layout_yaml.values())[i]
         self.plot_dict = plot_yaml
         self.group_index = i
         self.graph_index = j
@@ -35,7 +35,7 @@ class GraphLegendInfo(object):
 
         # check contents
         for info_name in ['key', 'data', 'id', 'func', 'label']:
-            assert my_info.has_key(info_name)
+            assert info_name in my_info
         self.info = my_info
 
 def expand_str_to_list (input_str):
@@ -64,7 +64,6 @@ if __name__=='__main__':
     for i, group in enumerate(layout_list):
         for k, legend in enumerate(group['legends']):
             for j, legend_id in enumerate(legend['id']):
-                # print 'title= {}, column= {}, legend= {}'.format(group['title'], j, legend['key'])
+                # print('title= {}, column= {}, legend= {}'.format(group['title'], j, legend['key']))
                 legend_info = GraphLegendInfo(layout_list, plot_dict, i, j, k)
-                print legend_info.info
-
+                print(legend_info.info)

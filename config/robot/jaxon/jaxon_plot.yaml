@@ -136,17 +136,17 @@ watt:
 ServoState:
   func: plot_servostate
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-32] }
 
 12V:
   func: plot_12V
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-32] }
 
 80V:
   func: plot_80V
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-32] }
 
 
 st_zmp:
