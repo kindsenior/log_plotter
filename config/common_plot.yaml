@@ -164,6 +164,55 @@ abc_controlSwingSupportTime:
 st_debugData:
   data:
     - { log: st_debugData, column:[0-3] }
+# COP
+sh_rfcop:
+  data:
+    - { log: sh_rfsensorOut, column: [0-5] }
+  func: plot_COP
+sh_lfcop:
+  data:
+    - { log: sh_lfsensorOut, column: [0-5] }
+  func: plot_COP
+st_rfcop:
+  data:
+    - { log: st_allRefWrench, column: [0-5] }
+  func: plot_COP
+st_lfcop:
+  data:
+    - { log: st_allRefWrench, column: [6-11] }
+  func: plot_COP
+rmfo_rfcop:
+  data:
+    - { log: rmfo_off_rfsensor, column: [0-5] }
+  func: plot_COP
+rmfo_lfcop:
+  data:
+    - { log: rmfo_off_lfsensor, column: [0-5] }
+  func: plot_COP
+sh_rhcop:
+  data:
+    - { log: sh_rhsensorOut, column: [0-5] }
+  func: plot_COP
+sh_lhcop:
+  data:
+    - { log: sh_lhsensorOut, column: [0-5] }
+  func: plot_COP
+st_rhcop:
+  data:
+    - { log: st_allRefWrench, column: [12-17] }
+  func: plot_COP
+st_lhcop:
+  data:
+    - { log: st_allRefWrench, column: [17-23] }
+  func: plot_COP
+rmfo_rhcop:
+  data:
+    - { log: rmfo_off_rhsensor, column: [0-5] }
+  func: plot_COP
+rmfo_lhcop:
+  data:
+    - { log: rmfo_off_lhsensor, column: [0-5] }
+  func: plot_COP
 # time
 time:
   func: plot_time

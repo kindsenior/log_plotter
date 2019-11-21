@@ -147,13 +147,21 @@ class PlotMethod(object):
 
     @staticmethod
     def plot_COP(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
-        offset = log_cols[0]*6
+        # offset = log_cols[0]*6
         arg = logs[min(len(logs)-1,cur_col)]
-        f_z = data_dict[arg][:, offset+2]
-        tau_x = data_dict[arg][:, offset+3]
-        tau_y = data_dict[arg][:, offset+4]
-        plot_item.plot(times, -tau_y/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
-        plot_item.plot(times,  tau_x/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i+1], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
+        # f_z = data_dict[arg][:, offset+2]
+        # tau_x = data_dict[arg][:, offset+3]
+        # tau_y = data_dict[arg][:, offset+4]
+        # plot_item.plot(times, -tau_y/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
+        # plot_item.plot(times,  tau_x/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i+1], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
+        f_z = data_dict[logs[0]][:, log_cols[0]+2]
+        if logs[0].find('rmfo'): f_z = -f_z
+        tau_x = data_dict[logs[0]][:, log_cols[0]+3]
+        if logs[0].find('rmfo'): tau_x = -tau_x
+        tau_y = data_dict[logs[0]][:, log_cols[0]+4]
+        plot_item.plot(times, -tau_y/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i], width=2, style=PlotMethod.linetypes["style"][i]), name=key+"_x")
+        plot_item.plot(times,  tau_x/f_z, pen=pyqtgraph.mkPen(PlotMethod.color_list[2*i+1], width=2, style=PlotMethod.linetypes["style"][i]), name=key+"_y")
+
 
     @staticmethod
     def plot_inverse(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
