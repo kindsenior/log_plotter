@@ -16,10 +16,13 @@ class PlotMethod(object):
     # default color set on gnuplot 5.0
     color_list = ["9400D3", "009E73", "56B4E9", "E69F00", "F0E442", "0072B2", "E51E10", "0000FF"]
     linetypes = {
-        "color": color_list * 2,
-        "style": [pyqtgraph.QtCore.Qt.SolidLine] * len(color_list) + [pyqtgraph.QtCore.Qt.DotLine] * len(color_list)
+        "color": color_list * 5,
+        "style": [pyqtgraph.QtCore.Qt.SolidLine] * len(color_list)
+        + [pyqtgraph.QtCore.Qt.DotLine] * len(color_list)
+        + [pyqtgraph.QtCore.Qt.DashLine] * len(color_list)
+        + [pyqtgraph.QtCore.Qt.DashDotLine] * len(color_list)
+        + [pyqtgraph.QtCore.Qt.DashDotDotLine] * len(color_list)
     }
-
 
     @staticmethod
     def __plot_urata_servo(plot_item, times, data_dict, logs, log_cols, cur_col, key, i, offset1, offset2=1):
