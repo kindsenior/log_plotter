@@ -26,6 +26,11 @@ RobotHardware0_q:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
 
+enc_q:
+  func: plot_enc
+  data:
+    - { log: RobotHardware0_servoState, column: [0-33] }
+
 RobotHardware0_dq:
   func: plot_rad2deg
   data:
@@ -33,6 +38,11 @@ RobotHardware0_dq:
 
 el_dq:
   func: plot_rad2deg_vel
+  data:
+    - { log: el_q, column: [0-33] }
+
+el_dq_adv:
+  func: plot_rad2deg_vel_advanced
   data:
     - { log: el_q, column: [0-33] }
 
