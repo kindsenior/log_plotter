@@ -1,0 +1,3 @@
+extend:
+  - ../../wrench-4limb_layout.yaml
+  - jaxon-joint-4limb_layout.yaml

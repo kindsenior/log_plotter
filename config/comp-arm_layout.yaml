@@ -1,0 +1,11 @@
+main:
+  arm force comp:
+    legends:
+      - { key: st_rhcomp, id: [2] }
+      - { key: st_lhcomp, id: [2] }
+    newline: false
+
+  arm moment comp:
+    legends:
+      - { key: st_rhcomp, id: [3-4] }
+      - { key: st_lhcomp, id: [3-4] }

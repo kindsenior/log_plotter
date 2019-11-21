@@ -1,0 +1,55 @@
+main:
+# leg main
+  force z (leg):
+    legends:
+      - { key: sh_rfsensorOut, id: [2] }
+      - { key: sh_lfsensorOut, id: [2] }
+      - { key: st_ref_rfsensor, id: [2] }
+      - { key: st_ref_lfsensor, id: [2] }
+      - { key: rmfo_off_rfsensor, id: [2] }
+      - { key: rmfo_off_lfsensor, id: [2] }
+    bottom_label:
+    newline: false
+
+  moment xy (leg):
+    legends:
+      - { key: sh_rfsensorOut, id: [3-4] }
+      - { key: sh_lfsensorOut, id: [3-4] }
+      - { key: st_ref_rfsensor, id: [3-4] }
+      - { key: st_ref_lfsensor, id: [3-4] }
+      - { key: rmfo_off_rfsensor, id: [3-4] }
+      - { key: rmfo_off_lfsensor, id: [3-4] }
+    bottom_label:
+    newline: false
+
+  optional_data (leg):
+    legends:
+      - { key: abc_contactStates, id: [0], label: rleg }
+      - { key: abc_contactStates, id: [1], label: lleg }
+      - { key: st_debugData, id: [0], label: rleg_contact_phase }
+      - { key: st_debugData, id: [1], label: lleg_contact_phase }
+      - { key: abc_controlSwingSupportTime, id: [0], label: rleg_time }
+      - { key: abc_controlSwingSupportTime, id: [1], label: lleg_time }
+    bottom_label:
+
+# leg sub
+  force xy (leg):
+    legends:
+      - { key: sh_rfsensorOut, id: [0-1] }
+      - { key: sh_lfsensorOut, id: [0-1] }
+      - { key: st_ref_rfsensor, id: [0-1] }
+      - { key: st_ref_lfsensor, id: [0-1] }
+      - { key: rmfo_off_rfsensor, id: [0-1] }
+      - { key: rmfo_off_lfsensor, id: [0-1] }
+    bottom_label:
+    newline: false
+
+  moment z (leg):
+    legends:
+      - { key: sh_rfsensorOut, id: [5] }
+      - { key: sh_lfsensorOut, id: [5] }
+      - { key: st_ref_rfsensor, id: [5] }
+      - { key: st_ref_lfsensor, id: [5] }
+      - { key: rmfo_off_rfsensor, id: [5] }
+      - { key: rmfo_off_lfsensor, id: [5] }
+    bottom_label:

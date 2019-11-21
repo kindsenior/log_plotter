@@ -1,0 +1,4 @@
+extend:
+  - jaxon-joint-leg_layout.yaml
+  - jaxon-joint-arm_layout.yaml
+  - jaxon-joint-torso_layout.yaml

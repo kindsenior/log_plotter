@@ -1,0 +1,35 @@
+main:
+  cog zmp:
+    legends:
+      - { key: st_originActCog, id: [0-2]}
+      - { key: st_originRefCog, id: [0-2]}
+      - { key: st_originRefZmp, id: [0-2]}
+      - { key: st_originNewZmp, id: [0-2]}
+      - { key: st_originActZmp, id: [0-2]}
+    bottom_label:
+
+  cog velocity:
+    legends:
+      - { key: st_originActCogVel, id: [0-2]}
+      - { key: st_originRefCogVel, id: [0-2]}
+    bottom_label:
+
+  # root-link relative zmp:
+  #   legends:
+  #     - { key: st_zmp, id: [0-1] }
+  #     - { key: abc_zmpOut, id: [0-1] }
+  #   bottom_label:
+  #   # newline: false
+
+# rpy
+  base rpy:
+    legends:
+      - { key: sh_baseRpyOut, id: [0-2] }
+      - { key: st_currentBaseRpy, id: [0-2] }
+      - { key: st_actBaseRpy, id: [0-2] }
+
+  base rpy vel:
+    legends:
+      - { key: sh_baseRpyVel, id: [0-2] }
+      - { key: st_currentBaseRpyVel, id: [0-2] }
+      - { key: st_actBaseRpyVel, id: [0-2] }

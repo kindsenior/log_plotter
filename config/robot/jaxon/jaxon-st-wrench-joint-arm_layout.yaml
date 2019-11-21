@@ -1,0 +1,4 @@
+extend:
+  - ../../st-main_layout.yaml
+  - ../../st-wrench-arm_layout.yaml
+  - jaxon-joint-arm_layout.yaml

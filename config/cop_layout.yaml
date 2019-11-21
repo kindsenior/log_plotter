@@ -1,0 +1,18 @@
+main:
+  foot cop:
+    legends:
+      - { key: sh_rfcop, id: [0-1] }
+      - { key: sh_lfcop, id: [0-1] }
+      - { key: st_rfcop, id: [0-1] }
+      - { key: rmfo_rfcop, id: [0-1] }
+    bottom_label:
+    newline: false
+
+  hand cop:
+    legends:
+      - { key: sh_rhcop, id: [0-1] }
+      - { key: sh_lhcop, id: [0-1] }
+      - { key: st_rhcop, id: [0-1] }
+      - { key: rmfo_rhcop, id: [0-1] }
+    bottom_label:
+

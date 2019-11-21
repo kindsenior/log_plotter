@@ -1,0 +1,3 @@
+extend:
+  - comp-leg_layout.yaml
+  - comp-arm_layout.yaml
