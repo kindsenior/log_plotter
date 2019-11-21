@@ -106,6 +106,22 @@ class PlotMethod(object):
         plot_item.plot(times, numpy.append(data,[0]), pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
 
     @staticmethod
+    def plot_rad2deg_vel_advanced(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
+        cutoff = 20
+        dt2pif = 0.002*2*math.pi*cutoff
+        T = 0.01
+        # T = 0.018
+        T = 0.025
+        tau = 1.0/(2*math.pi*cutoff)
+        a = (T+tau)/tau
+        command_vels = numpy.diff(data_dict[logs[0]][:, log_cols[0]])/numpy.diff(times)
+        command_vel_prev = [command_vels[0]]
+        ref_vel_prev = [command_vels[0]]
+        ref_vel = [0]
+        data = [math.degrees(ref_vel[0]) if ref_vel.__setitem__(0,command_vel*(a+dt2pif)/(1+dt2pif) - command_vel_prev[0]*a/(1+dt2pif) + ref_vel_prev[0]/(1+dt2pif)) or command_vel_prev.__setitem__(0,command_vel) or ref_vel_prev.__setitem__(0,ref_vel[0]) or True else -1 for command_vel in command_vels]
+        plot_item.plot(times, numpy.append(data,[0]), pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
+
+    @staticmethod
     def plot_diff(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         data_minuend = data_dict[logs[0]][:, log_cols[0]]
         data_subtrahend = data_dict[logs[1]][:, log_cols[1]]
