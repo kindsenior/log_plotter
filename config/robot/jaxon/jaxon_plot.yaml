@@ -101,19 +101,19 @@ rfu_ref_lhsensorOut:
 current:
   func: plot_current
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 torque:
   data:
-    - { log: RobotHardware0_tau, column: [0-32] }
+    - { log: RobotHardware0_tau, column: [0-33] }
 
 st_tau:
   data:
-    - { log: st_tau, column: [0-32] }
+    - { log: st_tau, column: [0-33] }
 
 choreonoid_torque:
   data:
-    - { log: RobotHardware_choreonoid0_tau, column: [0-32] }
+    - { log: RobotHardware_choreonoid0_tau, column: [0-33] }
 
 imu_gsensor:
   data:
@@ -126,12 +126,12 @@ imu_gyrometer:
 motor_temp:
   func: plot_motor_temp
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 motor_outer_temp:
   func: plot_motor_outer_temp
   data:
-    - { log: RobotHardware0_servoState, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 comp:
   func: plot_comp
@@ -141,22 +141,22 @@ comp:
 watt:
   func: plot_watt
   data:
-    - { log: RobotHardware0_dq, column: [0,1,2,3,4,5]  }
-    - { log: RobotHardware0_tau, column: [0,1,2,3,4,5] }
+    - { log: RobotHardware0_dq, column: [0-33]  }
+    - { log: RobotHardware0_tau, column: [0-33] }
 ServoState:
   func: plot_servostate
   data:
-    - { log: RobotHardware0_servoState, column: [0-32] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 12V:
   func: plot_12V
   data:
-    - { log: RobotHardware0_servoState, column: [0-32] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 80V:
   func: plot_80V
   data:
-    - { log: RobotHardware0_servoState, column: [0-32] }
+    - { log: RobotHardware0_servoState, column: [0-33] }
 
 
 st_zmp:
