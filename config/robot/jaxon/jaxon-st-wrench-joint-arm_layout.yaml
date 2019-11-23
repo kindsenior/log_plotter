@@ -1,4 +1,5 @@
 extend:
   - ../../st-main_layout.yaml
   - ../../st-wrench-arm_layout.yaml
-  - jaxon-joint-arm_layout.yaml
+  - jaxon-joint-real-arm_layout.yaml
+  # - jaxon-joint-simulator-arm_layout.yaml

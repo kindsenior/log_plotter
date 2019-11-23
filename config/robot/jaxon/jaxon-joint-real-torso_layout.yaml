@@ -1,0 +1,67 @@
+extend:
+  jaxon-joint-simulator-torso_layout.yaml
+
+main:
+  torso q:
+    legends:
+      - { key: st_q, id: [12],label: st_chest-r  }
+      - { key: st_q, id: [13],label: st_chest-p  }
+      - { key: st_q, id: [14],label: st_chest-y  }
+      - { key: st_q, id: [15],label: st_neck-y }
+      - { key: st_q, id: [16],label: st_neck-p }
+      # - { key: abc_q, id: [12],label: abc_chest-r  }
+      # - { key: abc_q, id: [13],label: abc_chest-p  }
+      # - { key: abc_q, id: [14],label: abc_chest-y  }
+      # - { key: abc_q, id: [15],label: abc_neck-y }
+      # - { key: abc_q, id: [16],label: abc_neck-p}
+      # - { key: el_q, id: [12],label: el_chest-r  }
+      # - { key: el_q, id: [13],label: el_chest-p  }
+      # - { key: el_q, id: [14],label: el_chest-y  }
+      # - { key: el_q, id: [15],label: el_neck-y }
+      # - { key: el_q, id: [16],label: el_neck-p}
+      - { key: RobotHardware0_q, id: [12],label: rh_chest-r  }
+      - { key: RobotHardware0_q, id: [13],label: rh_chest-p  }
+      - { key: RobotHardware0_q, id: [14],label: rh_chest-y  }
+      - { key: RobotHardware0_q, id: [15],label: rh_neck-y }
+      - { key: RobotHardware0_q, id: [16],label: rh_neck-p}
+      - { key: enc_q, id: [12], label: enc_chest-r  }
+      - { key: enc_q, id: [13], label: enc_chest-p  }
+      - { key: enc_q, id: [14], label: enc_chest-y  }
+      - { key: enc_q, id: [15], label: enc_neck-y }
+      - { key: enc_q, id: [16], label: enc_neck-p}
+    bottom_label:
+
+  torso ServoState:
+    legends:
+      - { key: ServoState, id: [12], label: r-chest-r  }
+      - { key: ServoState, id: [13], label: r-chest-p  }
+      - { key: ServoState, id: [14], label: r-chest-y  }
+      - { key: ServoState, id: [15], label: r-neck-y }
+      - { key: ServoState, id: [16], label: r-neck-p}
+    bottom_label:
+    newline: false
+
+  torso 12V:
+    legends:
+      - { key: 12V, id: [12], label: r-chest-r  }
+      - { key: 12V, id: [13], label: r-chest-p  }
+      - { key: 12V, id: [14], label: r-chest-y  }
+      - { key: 12V, id: [15], label: r-neck-y }
+      - { key: 12V, id: [16], label: r-neck-p}
+    newline: false
+
+  torso 80V:
+    legends:
+      - { key: 80V, id: [12], label: r-chest-r  }
+      - { key: 80V, id: [13], label: r-chest-p  }
+      - { key: 80V, id: [14], label: r-chest-y  }
+      - { key: 80V, id: [15], label: r-neck-y }
+      - { key: 80V, id: [16], label: r-neck-p}
+
+  # torso abs/enc diff:
+  #   legends:
+  #     - { key: abs_enc_diff, id: [12], label: chest-r  }
+  #     - { key: abs_enc_diff, id: [13], label: chest-p  }
+  #     - { key: abs_enc_diff, id: [14], label: chest-y  }
+  #     - { key: abs_enc_diff, id: [15], label: neck-y }
+  #     - { key: abs_enc_diff, id: [16], label: neck-p}

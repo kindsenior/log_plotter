@@ -1,0 +1,3 @@
+extend:
+  - jaxon-joint-simulator-leg_layout.yaml
+  - jaxon-joint-simulator-arm_layout.yaml
