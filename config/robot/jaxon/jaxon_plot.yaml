@@ -133,10 +133,6 @@ motor_outer_temp:
   data:
     - { log: RobotHardware0_servoState, column: [0-33] }
 
-comp:
-  func: plot_comp
-  data:
-    -  { log: st_allEEComp, column: [0, 1, 2, 3, 4, 5] }
 
 watt:
   func: plot_watt
@@ -159,6 +155,3 @@ ServoState:
     - { log: RobotHardware0_servoState, column: [0-33] }
 
 
-st_zmp:
-  data:
-    - { log: st_zmp, column: [0,1] }
