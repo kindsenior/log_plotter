@@ -33,7 +33,9 @@ def readOneTopic(fname):
                 data.append([float(x) for x in dl])
     except Exception as e:
         print('[readOneTopic] error occured while reading {}'.format(fname))
-        raise e
+        print('[readOneTopic] {} may not exist.'.format(os.path.basename(fname)))
+        print('[readOneTopic] skip data and return None data')
+        return None
     return numpy.array(data)
 
 def findFile(pattern, path):

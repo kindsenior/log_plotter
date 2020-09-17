@@ -62,10 +62,9 @@ class LogParser(object):
         for topic, data in zip(topic_list, data_list):
             self.dataListDict[topic] = data
         # set the fastest time as 0
-        min_time = min([self.dataListDict[topic][0][0] for topic in topic_list])
-        for topic in topic_list:
-            raw_time = self.dataListDict[topic][:, 0]
-            self.dataListDict[topic][:, 0] = [x - min_time for x in raw_time]
+        min_time = min([data[0][0] for data in self.dataListDict.values() if data is not None])
+        for log_name, data in self.dataListDict.items():
+            if data is not None: self.dataListDict[log_name][:, 0] = data[:, 0] - min_time
         # convert servoState from int to float
         if 'RobotHardware0_servoState' in topic_list:
             ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
