@@ -16,6 +16,11 @@ st_q:
   data:
     - { log: st_q, column: [0-33] }
 
+abst_q:
+  func: plot_rad2deg
+  data:
+    - { log: abst_q, column: [0-33] }
+
 el_q:
   func: plot_rad2deg
   data:
@@ -61,6 +66,18 @@ rh_st_diff:
   data:
     - { log: RobotHardware0_q, column: [0-33] }
     - { log: st_q, column: [0-33] }
+
+rh_abc_diff:
+  func: plot_rh_q_st_q
+  data:
+    - { log: RobotHardware0_q, column: [0-33] }
+    - { log: abc_q, column: [0-33] }
+
+rh_abst_diff:
+  func: plot_rh_q_st_q
+  data:
+    - { log: RobotHardware0_q, column: [0-33] }
+    - { log: abst_q, column: [0-33] }
 
 rh_el_diff:
   func: plot_rad2deg_diff
@@ -110,6 +127,14 @@ torque:
 st_tau:
   data:
     - { log: st_tau, column: [0-33] }
+
+abc_tau:
+  data:
+    - { log: abc_tau, column: [0-33] }
+
+abst_tau:
+  data:
+    - { log: abst_tau, column: [0-33] }
 
 choreonoid_torque:
   data:

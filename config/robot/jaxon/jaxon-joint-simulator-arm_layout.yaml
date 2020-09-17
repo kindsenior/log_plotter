@@ -17,6 +17,14 @@ main:
       # - { key: abc_q, id: [22],label: abc_wrist-y }
       # - { key: abc_q, id: [23],label: abc_wrist-r }
       # - { key: abc_q, id: [24],label: abc_wrist-p }
+      - { key: abst_q, id: [17],label: abst_collar-y }
+      - { key: abst_q, id: [18],label: abst_shoulder-p }
+      - { key: abst_q, id: [19],label: abst_shoulder-r }
+      - { key: abst_q, id: [20],label: abst_shoulder-y }
+      - { key: abst_q, id: [21],label: abst_elbow-p }
+      - { key: abst_q, id: [22],label: abst_wrist-y }
+      - { key: abst_q, id: [23],label: abst_wrist-r }
+      - { key: abst_q, id: [24],label: abst_wrist-p }
       # - { key: el_q, id: [17],label: el_collar-y }
       # - { key: el_q, id: [18],label: el_shoulder-p }
       # - { key: el_q, id: [19],label: el_shoulder-r }
@@ -54,6 +62,14 @@ main:
       # - { key: abc_q, id: [30], label: abc_wrist-y }
       # - { key: abc_q, id: [31], label: abc_wrist-r }
       # - { key: abc_q, id: [32], label: abc_wrist-p }
+      - { key: abst_q, id: [25],  label: abst_collar-y }
+      - { key: abst_q, id: [26],  label: abst_shoulder-p }
+      - { key: abst_q, id: [27],  label: abst_shoulder-r }
+      - { key: abst_q, id: [28],  label: abst_shoulder-y }
+      - { key: abst_q, id: [29], label: abst_elbow-p }
+      - { key: abst_q, id: [30], label: abst_wrist-y }
+      - { key: abst_q, id: [31], label: abst_wrist-r }
+      - { key: abst_q, id: [32], label: abst_wrist-p }
       # - { key: el_q, id: [25],  label: el_collar-y }
       # - { key: el_q, id: [26],  label: el_shoulder-p }
       # - { key: el_q, id: [27],  label: el_shoulder-r }
@@ -130,6 +146,22 @@ main:
       - { key: st_tau, id: [22], label: st_wrist-y }
       - { key: st_tau, id: [23], label: st_wrist-r }
       - { key: st_tau, id: [24], label: st_wrist-p }
+      - { key: abc_tau, id: [17], label: abc_collar-y }
+      - { key: abc_tau, id: [18], label: abc_shoulder-p }
+      - { key: abc_tau, id: [19], label: abc_shoulder-r }
+      - { key: abc_tau, id: [20], label: abc_shoulder-y }
+      - { key: abc_tau, id: [21], label: abc_elbow-p }
+      - { key: abc_tau, id: [22], label: abc_wrist-y }
+      - { key: abc_tau, id: [23], label: abc_wrist-r }
+      - { key: abc_tau, id: [24], label: abc_wrist-p }
+      - { key: abst_tau, id: [17], label: abst_collar-y }
+      - { key: abst_tau, id: [18], label: abst_shoulder-p }
+      - { key: abst_tau, id: [19], label: abst_shoulder-r }
+      - { key: abst_tau, id: [20], label: abst_shoulder-y }
+      - { key: abst_tau, id: [21], label: abst_elbow-p }
+      - { key: abst_tau, id: [22], label: abst_wrist-y }
+      - { key: abst_tau, id: [23], label: abst_wrist-r }
+      - { key: abst_tau, id: [24], label: abst_wrist-p }
       - { key: torque, id: [17], label: rh_collar-y }
       - { key: torque, id: [18], label: rh_shoulder-p }
       - { key: torque, id: [19], label: rh_shoulder-r }
@@ -150,6 +182,22 @@ main:
       - { key: st_tau, id: [30], label: st_wrist-y }
       - { key: st_tau, id: [31], label: st_wrist-r }
       - { key: st_tau, id: [32], label: st_wrist-p }
+      - { key: abc_tau, id: [25], label: abc_collar-y }
+      - { key: abc_tau, id: [26], label: abc_shoulder-p }
+      - { key: abc_tau, id: [27], label: abc_shoulder-r }
+      - { key: abc_tau, id: [28], label: abc_shoulder-y }
+      - { key: abc_tau, id: [29], label: abc_elbow-p }
+      - { key: abc_tau, id: [30], label: abc_wrist-y }
+      - { key: abc_tau, id: [31], label: abc_wrist-r }
+      - { key: abc_tau, id: [32], label: abc_wrist-p }
+      - { key: abst_tau, id: [25], label: abst_collar-y }
+      - { key: abst_tau, id: [26], label: abst_shoulder-p }
+      - { key: abst_tau, id: [27], label: abst_shoulder-r }
+      - { key: abst_tau, id: [28], label: abst_shoulder-y }
+      - { key: abst_tau, id: [29], label: abst_elbow-p }
+      - { key: abst_tau, id: [30], label: abst_wrist-y }
+      - { key: abst_tau, id: [31], label: abst_wrist-r }
+      - { key: abst_tau, id: [32], label: abst_wrist-p }
       - { key: torque, id: [25], label: rh_collar-y }
       - { key: torque, id: [26], label: rh_shoulder-p }
       - { key: torque, id: [27], label: rh_shoulder-r }
@@ -170,6 +218,22 @@ main:
       - { key: rh_st_diff, id: [22],label: wrist-y }
       - { key: rh_st_diff, id: [23],label: wrist-r }
       - { key: rh_st_diff, id: [24],label: wrist-p }
+      - { key: rh_abc_diff, id: [17],label: collar-y }
+      - { key: rh_abc_diff, id: [18],label: shoulder-p }
+      - { key: rh_abc_diff, id: [19],label: shoulder-r }
+      - { key: rh_abc_diff, id: [20],label: shoulder-y }
+      - { key: rh_abc_diff, id: [21],label: elbow-p }
+      - { key: rh_abc_diff, id: [22],label: wrist-y }
+      - { key: rh_abc_diff, id: [23],label: wrist-r }
+      - { key: rh_abc_diff, id: [24],label: wrist-p }
+      - { key: rh_abst_diff, id: [17],label: collar-y }
+      - { key: rh_abst_diff, id: [18],label: shoulder-p }
+      - { key: rh_abst_diff, id: [19],label: shoulder-r }
+      - { key: rh_abst_diff, id: [20],label: shoulder-y }
+      - { key: rh_abst_diff, id: [21],label: elbow-p }
+      - { key: rh_abst_diff, id: [22],label: wrist-y }
+      - { key: rh_abst_diff, id: [23],label: wrist-r }
+      - { key: rh_abst_diff, id: [24],label: wrist-p }
       # - { key: rh_el_diff, id: [17],label: collar-y }
       # - { key: rh_el_diff, id: [18],label: shoulder-p }
       # - { key: rh_el_diff, id: [19],label: shoulder-r }
@@ -191,6 +255,22 @@ main:
       - { key: rh_st_diff, id: [30], label: wrist-y }
       - { key: rh_st_diff, id: [31], label: wrist-r }
       - { key: rh_st_diff, id: [32], label: wrist-p }
+      - { key: rh_abc_diff, id: [25],  label: collar-y }
+      - { key: rh_abc_diff, id: [26],  label: shoulder-p }
+      - { key: rh_abc_diff, id: [27],  label: shoulder-r }
+      - { key: rh_abc_diff, id: [28],  label: shoulder-y }
+      - { key: rh_abc_diff, id: [29], label: elbow-p }
+      - { key: rh_abc_diff, id: [30], label: wrist-y }
+      - { key: rh_abc_diff, id: [31], label: wrist-r }
+      - { key: rh_abc_diff, id: [32], label: wrist-p }
+      - { key: rh_abst_diff, id: [25],  label: collar-y }
+      - { key: rh_abst_diff, id: [26],  label: shoulder-p }
+      - { key: rh_abst_diff, id: [27],  label: shoulder-r }
+      - { key: rh_abst_diff, id: [28],  label: shoulder-y }
+      - { key: rh_abst_diff, id: [29], label: elbow-p }
+      - { key: rh_abst_diff, id: [30], label: wrist-y }
+      - { key: rh_abst_diff, id: [31], label: wrist-r }
+      - { key: rh_abst_diff, id: [32], label: wrist-p }
       # - { key: rh_el_diff, id: [25],  label: collar-y }
       # - { key: rh_el_diff, id: [26],  label: shoulder-p }
       # - { key: rh_el_diff, id: [27],  label: shoulder-r }

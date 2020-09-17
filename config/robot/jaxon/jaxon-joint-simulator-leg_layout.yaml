@@ -13,6 +13,12 @@ main:
       # - { key: abc_q, id: [3],label: abc_knee-p }
       # - { key: abc_q, id: [4],label: abc_ankle-p}
       # - { key: abc_q, id: [5],label: abc_ankle-r}
+      - { key: abst_q, id: [0],label: abst_hip-y  }
+      - { key: abst_q, id: [1],label: abst_hip-r  }
+      - { key: abst_q, id: [2],label: abst_hip-p  }
+      - { key: abst_q, id: [3],label: abst_knee-p }
+      - { key: abst_q, id: [4],label: abst_ankle-p}
+      - { key: abst_q, id: [5],label: abst_ankle-r}
       # - { key: el_q, id: [0],label: el_hip-y  }
       # - { key: el_q, id: [1],label: el_hip-r  }
       # - { key: el_q, id: [2],label: el_hip-p  }
@@ -42,6 +48,12 @@ main:
       # - { key: abc_q, id: [9],  label: abc_knee-p }
       # - { key: abc_q, id: [10], label: abc_ankle-p}
       # - { key: abc_q, id: [11], label: abc_ankle-r}
+      - { key: abst_q, id: [6],  label: abst_hip-y  }
+      - { key: abst_q, id: [7],  label: abst_hip-r  }
+      - { key: abst_q, id: [8],  label: abst_hip-p  }
+      - { key: abst_q, id: [9],  label: abst_knee-p }
+      - { key: abst_q, id: [10], label: abst_ankle-p}
+      - { key: abst_q, id: [11], label: abst_ankle-r}
       # - { key: el_q, id: [6],  label: el_hip-y  }
       # - { key: el_q, id: [7],  label: el_hip-r  }
       # - { key: el_q, id: [8],  label: el_hip-p  }
@@ -105,6 +117,18 @@ main:
       - { key: st_tau, id: [3], label: st_knee-p}
       - { key: st_tau, id: [4], label: st_ankle-p}
       - { key: st_tau, id: [5], label: st_ankle-r}
+      - { key: abc_tau, id: [0], label: abc_hip-y}
+      - { key: abc_tau, id: [1], label: abc_hip-r}
+      - { key: abc_tau, id: [2], label: abc_hip-p}
+      - { key: abc_tau, id: [3], label: abc_knee-p}
+      - { key: abc_tau, id: [4], label: abc_ankle-p}
+      - { key: abc_tau, id: [5], label: abc_ankle-r}
+      - { key: abst_tau, id: [0], label: abst_hip-y}
+      - { key: abst_tau, id: [1], label: abst_hip-r}
+      - { key: abst_tau, id: [2], label: abst_hip-p}
+      - { key: abst_tau, id: [3], label: abst_knee-p}
+      - { key: abst_tau, id: [4], label: abst_ankle-p}
+      - { key: abst_tau, id: [5], label: abst_ankle-r}
       - { key: torque, id: [0], label: rh_hip-y}
       - { key: torque, id: [1], label: rh_hip-r}
       - { key: torque, id: [2], label: rh_hip-p}
@@ -121,6 +145,18 @@ main:
       - { key: st_tau, id: [9], label: st_knee-p}
       - { key: st_tau, id: [10], label: st_ankle-p}
       - { key: st_tau, id: [11], label: st_ankle-r}
+      - { key: abc_tau, id: [6], label: abc_hip-y}
+      - { key: abc_tau, id: [7], label: abc_hip-r}
+      - { key: abc_tau, id: [8], label: abc_hip-p}
+      - { key: abc_tau, id: [9], label: abc_knee-p}
+      - { key: abc_tau, id: [10], label: abc_ankle-p}
+      - { key: abc_tau, id: [11], label: abc_ankle-r}
+      - { key: abst_tau, id: [6], label: abst_hip-y}
+      - { key: abst_tau, id: [7], label: abst_hip-r}
+      - { key: abst_tau, id: [8], label: abst_hip-p}
+      - { key: abst_tau, id: [9], label: abst_knee-p}
+      - { key: abst_tau, id: [10], label: abst_ankle-p}
+      - { key: abst_tau, id: [11], label: abst_ankle-r}
       - { key: torque, id: [6], label: rh_hip-y}
       - { key: torque, id: [7], label: rh_hip-r}
       - { key: torque, id: [8], label: rh_hip-p}
@@ -137,6 +173,18 @@ main:
       - { key: rh_st_diff, id: [3],label: knee-p }
       - { key: rh_st_diff, id: [4],label: ankle-p}
       - { key: rh_st_diff, id: [5],label: ankle-r}
+      # - { key: rh_abc_diff, id: [0],label: hip-y  }
+      # - { key: rh_abc_diff, id: [1],label: hip-r  }
+      # - { key: rh_abc_diff, id: [2],label: hip-p  }
+      # - { key: rh_abc_diff, id: [3],label: knee-p }
+      # - { key: rh_abc_diff, id: [4],label: ankle-p}
+      # - { key: rh_abc_diff, id: [5],label: ankle-r}
+      - { key: rh_abst_diff, id: [0],label: hip-y  }
+      - { key: rh_abst_diff, id: [1],label: hip-r  }
+      - { key: rh_abst_diff, id: [2],label: hip-p  }
+      - { key: rh_abst_diff, id: [3],label: knee-p }
+      - { key: rh_abst_diff, id: [4],label: ankle-p}
+      - { key: rh_abst_diff, id: [5],label: ankle-r}
       # - { key: rh_el_diff, id: [0],label: hip-y  }
       # - { key: rh_el_diff, id: [1],label: hip-r  }
       # - { key: rh_el_diff, id: [2],label: hip-p  }
@@ -154,6 +202,18 @@ main:
       - { key: rh_st_diff, id: [9],  label: knee-p }
       - { key: rh_st_diff, id: [10], label: ankle-p}
       - { key: rh_st_diff, id: [11], label: ankle-r}
+      # - { key: rh_abc_diff, id: [6],  label: hip-y  }
+      # - { key: rh_abc_diff, id: [7],  label: hip-r  }
+      # - { key: rh_abc_diff, id: [8],  label: hip-p  }
+      # - { key: rh_abc_diff, id: [9],  label: knee-p }
+      # - { key: rh_abc_diff, id: [10], label: ankle-p}
+      # - { key: rh_abc_diff, id: [11], label: ankle-r}
+      - { key: rh_abst_diff, id: [6],  label: hip-y  }
+      - { key: rh_abst_diff, id: [7],  label: hip-r  }
+      - { key: rh_abst_diff, id: [8],  label: hip-p  }
+      - { key: rh_abst_diff, id: [9],  label: knee-p }
+      - { key: rh_abst_diff, id: [10], label: ankle-p}
+      - { key: rh_abst_diff, id: [11], label: ankle-r}
       # - { key: rh_el_diff, id: [6],  label: hip-y  }
       # - { key: rh_el_diff, id: [7],  label: hip-r  }
       # - { key: rh_el_diff, id: [8],  label: hip-p  }

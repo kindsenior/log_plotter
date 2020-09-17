@@ -16,6 +16,12 @@ main:
       # - { key: abc_q, id: [3],label: abc_knee-p }
       # - { key: abc_q, id: [4],label: abc_ankle-p}
       # - { key: abc_q, id: [5],label: abc_ankle-r}
+      - { key: abst_q, id: [0],label: abst_hip-y  }
+      - { key: abst_q, id: [1],label: abst_hip-r  }
+      - { key: abst_q, id: [2],label: abst_hip-p  }
+      - { key: abst_q, id: [3],label: abst_knee-p }
+      - { key: abst_q, id: [4],label: abst_ankle-p}
+      - { key: abst_q, id: [5],label: abst_ankle-r}
       # - { key: el_q, id: [0],label: el_hip-y  }
       # - { key: el_q, id: [1],label: el_hip-r  }
       # - { key: el_q, id: [2],label: el_hip-p  }
@@ -51,6 +57,12 @@ main:
       # - { key: abc_q, id: [9],  label: abc_knee-p }
       # - { key: abc_q, id: [10], label: abc_ankle-p}
       # - { key: abc_q, id: [11], label: abc_ankle-r}
+      - { key: abst_q, id: [6],  label: abst_hip-y  }
+      - { key: abst_q, id: [7],  label: abst_hip-r  }
+      - { key: abst_q, id: [8],  label: abst_hip-p  }
+      - { key: abst_q, id: [9],  label: abst_knee-p }
+      - { key: abst_q, id: [10], label: abst_ankle-p}
+      - { key: abst_q, id: [11], label: abst_ankle-r}
       # - { key: el_q, id: [6],  label: el_hip-y  }
       # - { key: el_q, id: [7],  label: el_hip-r  }
       # - { key: el_q, id: [8],  label: el_hip-p  }

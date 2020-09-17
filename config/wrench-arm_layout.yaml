@@ -5,6 +5,10 @@ main:
       - { key: sh_lhsensorOut, id: [0-2] }
       - { key: st_ref_rhsensor, id: [0-2] }
       - { key: st_ref_lhsensor, id: [0-2] }
+      - { key: abc_ref_rhsensor, id: [0-2] }
+      - { key: abc_ref_lhsensor, id: [0-2] }
+      - { key: abst_ref_rhsensor, id: [0-2] }
+      - { key: abst_ref_lhsensor, id: [0-2] }
       - { key: rmfo_off_rhsensor, id: [0-2] }
       - { key: rmfo_off_lhsensor, id: [0-2] }
     bottom_label:
@@ -16,6 +20,10 @@ main:
       - { key: abc_contactStates, id: [3], label: larm }
       - { key: st_debugData, id: [2], label: rarm_contact_phase }
       - { key: st_debugData, id: [3], label: larm_contact_phase }
+      - { key: abc_debugData, id: [2], label: rarm_contact_phase }
+      - { key: abc_debugData, id: [3], label: larm_contact_phase }
+      - { key: abst_debugData, id: [2], label: rarm_contact_phase }
+      - { key: abst_debugData, id: [3], label: larm_contact_phase }
       - { key: abc_controlSwingSupportTime, id: [2], label: rarm_time }
       - { key: abc_controlSwingSupportTime, id: [3], label: larm_time }
     bottom_label:
@@ -26,6 +34,10 @@ main:
       - { key: sh_lhsensorOut, id: [3-5] }
       - { key: st_ref_rhsensor, id: [3-5] }
       - { key: st_ref_lhsensor, id: [3-5] }
+      - { key: abc_ref_rhsensor, id: [3-5] }
+      - { key: abc_ref_lhsensor, id: [3-5] }
+      - { key: abst_ref_rhsensor, id: [3-5] }
+      - { key: abst_ref_lhsensor, id: [3-5] }
       - { key: rmfo_off_rhsensor, id: [3-5] }
       - { key: rmfo_off_lhsensor, id: [3-5] }
     bottom_label:
