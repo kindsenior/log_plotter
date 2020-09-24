@@ -6,12 +6,26 @@ main:
       - { key: st_originRefZmp, id: [0-2]}
       - { key: st_originNewZmp, id: [0-2]}
       - { key: st_originActZmp, id: [0-2]}
+      - { key: abc_originActCog, id: [0-2]}
+      - { key: abc_originRefCog, id: [0-2]}
+      - { key: abc_originRefZmp, id: [0-2]}
+      - { key: abc_originNewZmp, id: [0-2]}
+      - { key: abc_originActZmp, id: [0-2]}
+      - { key: abst_originActCog, id: [0-2]}
+      - { key: abst_originRefCog, id: [0-2]}
+      - { key: abst_originRefZmp, id: [0-2]}
+      - { key: abst_originNewZmp, id: [0-2]}
+      - { key: abst_originActZmp, id: [0-2]}
     bottom_label:
 
   cog velocity:
     legends:
       - { key: st_originActCogVel, id: [0-2]}
       - { key: st_originRefCogVel, id: [0-2]}
+      - { key: abc_originActCogVel, id: [0-2]}
+      - { key: abc_originRefCogVel, id: [0-2]}
+      - { key: abst_originActCogVel, id: [0-2]}
+      - { key: abst_originRefCogVel, id: [0-2]}
     bottom_label:
 
   # root-link relative zmp:
@@ -27,9 +41,17 @@ main:
       - { key: sh_baseRpyOut, id: [0-2] }
       - { key: st_currentBaseRpy, id: [0-2] }
       - { key: st_actBaseRpy, id: [0-2] }
+      - { key: abc_currentBaseRpy, id: [0-2] }
+      - { key: abc_actBaseRpy, id: [0-2] }
+      - { key: abst_currentBaseRpy, id: [0-2] }
+      - { key: abst_actBaseRpy, id: [0-2] }
 
   base rpy vel:
     legends:
       - { key: sh_baseRpyVel, id: [0-2] }
       - { key: st_currentBaseRpyVel, id: [0-2] }
       - { key: st_actBaseRpyVel, id: [0-2] }
+      - { key: abc_currentBaseRpyVel, id: [0-2] }
+      - { key: abc_actBaseRpyVel, id: [0-2] }
+      - { key: abst_currentBaseRpyVel, id: [0-2] }
+      - { key: abst_actBaseRpyVel, id: [0-2] }

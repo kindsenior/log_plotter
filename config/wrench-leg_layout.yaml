@@ -6,6 +6,10 @@ main:
       - { key: sh_lfsensorOut, id: [2] }
       - { key: st_ref_rfsensor, id: [2] }
       - { key: st_ref_lfsensor, id: [2] }
+      - { key: abc_ref_rfsensor, id: [2] }
+      - { key: abc_ref_lfsensor, id: [2] }
+      - { key: abst_ref_rfsensor, id: [2] }
+      - { key: abst_ref_lfsensor, id: [2] }
       - { key: rmfo_off_rfsensor, id: [2] }
       - { key: rmfo_off_lfsensor, id: [2] }
     bottom_label:
@@ -17,6 +21,10 @@ main:
       - { key: sh_lfsensorOut, id: [3-4] }
       - { key: st_ref_rfsensor, id: [3-4] }
       - { key: st_ref_lfsensor, id: [3-4] }
+      - { key: abc_ref_rfsensor, id: [3-4] }
+      - { key: abc_ref_lfsensor, id: [3-4] }
+      - { key: abst_ref_rfsensor, id: [3-4] }
+      - { key: abst_ref_lfsensor, id: [3-4] }
       - { key: rmfo_off_rfsensor, id: [3-4] }
       - { key: rmfo_off_lfsensor, id: [3-4] }
     bottom_label:
@@ -28,6 +36,10 @@ main:
       - { key: abc_contactStates, id: [1], label: lleg }
       - { key: st_debugData, id: [0], label: rleg_contact_phase }
       - { key: st_debugData, id: [1], label: lleg_contact_phase }
+      - { key: abc_debugData, id: [0], label: rleg_contact_phase }
+      - { key: abc_debugData, id: [1], label: lleg_contact_phase }
+      - { key: abst_debugData, id: [0], label: rleg_contact_phase }
+      - { key: abst_debugData, id: [1], label: lleg_contact_phase }
       - { key: abc_controlSwingSupportTime, id: [0], label: rleg_time }
       - { key: abc_controlSwingSupportTime, id: [1], label: lleg_time }
     bottom_label:
@@ -39,6 +51,10 @@ main:
       - { key: sh_lfsensorOut, id: [0-1] }
       - { key: st_ref_rfsensor, id: [0-1] }
       - { key: st_ref_lfsensor, id: [0-1] }
+      - { key: abc_ref_rfsensor, id: [0-1] }
+      - { key: abc_ref_lfsensor, id: [0-1] }
+      - { key: abst_ref_rfsensor, id: [0-1] }
+      - { key: abst_ref_lfsensor, id: [0-1] }
       - { key: rmfo_off_rfsensor, id: [0-1] }
       - { key: rmfo_off_lfsensor, id: [0-1] }
     bottom_label:
@@ -50,6 +66,10 @@ main:
       - { key: sh_lfsensorOut, id: [5] }
       - { key: st_ref_rfsensor, id: [5] }
       - { key: st_ref_lfsensor, id: [5] }
+      - { key: abc_ref_rfsensor, id: [5] }
+      - { key: abc_ref_lfsensor, id: [5] }
+      - { key: abst_ref_rfsensor, id: [5] }
+      - { key: abst_ref_lfsensor, id: [5] }
       - { key: rmfo_off_rfsensor, id: [5] }
       - { key: rmfo_off_lfsensor, id: [5] }
     bottom_label:

@@ -3,9 +3,17 @@ main:
     legends:
       - { key: st_rfcomp, id: [2] }
       - { key: st_lfcomp, id: [2] }
+      - { key: abc_rfcomp, id: [2] }
+      - { key: abc_lfcomp, id: [2] }
+      - { key: abst_rfcomp, id: [2] }
+      - { key: abst_lfcomp, id: [2] }
     newline: false
 
   leg moment comp:
     legends:
       - { key: st_rfcomp, id: [3-4] }
       - { key: st_lfcomp, id: [3-4] }
+      - { key: abc_rfcomp, id: [3-4] }
+      - { key: abc_lfcomp, id: [3-4] }
+      - { key: abst_rfcomp, id: [3-4] }
+      - { key: abst_lfcomp, id: [3-4] }
