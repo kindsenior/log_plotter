@@ -67,6 +67,7 @@ class LogParser(object):
             if data is not None: self.dataListDict[log_name][:, 0] = data[:, 0] - min_time
         # convert servoState from int to float
         if 'RobotHardware0_servoState' in topic_list:
-            ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
-            self.dataListDict['RobotHardware0_servoState'][:, 1:] = numpy.fromstring(ss_tmp.astype('i').tostring(), dtype='f').reshape(ss_tmp.shape)
+            if self.dataListDict['RobotHardware0_servoState'] is not None:
+                ss_tmp = self.dataListDict['RobotHardware0_servoState'][:, 1:]
+                self.dataListDict['RobotHardware0_servoState'][:, 1:] = numpy.fromstring(ss_tmp.astype('i').tostring(), dtype='f').reshape(ss_tmp.shape)
         return self.dataListDict
