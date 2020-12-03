@@ -125,6 +125,10 @@ class PlotMethod(object):
         plot_item.plot(times, numpy.append(data,[0]), pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
 
     @staticmethod
+    def plot_add(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
+        plot_item.plot(times, data_dict[logs[0]][:, log_cols[0]]+data_dict[logs[1]][:, log_cols[1]], pen=pyqtgraph.mkPen(PlotMethod.linetypes["color"][i], width=2, style=PlotMethod.linetypes["style"][i]), name=key)
+
+    @staticmethod
     def plot_diff(plot_item, times, data_dict, logs, log_cols, cur_col, key, i):
         data_minuend = data_dict[logs[0]][:, log_cols[0]]
         data_subtrahend = data_dict[logs[1]][:, log_cols[1]]
