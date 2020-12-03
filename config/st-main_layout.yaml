@@ -35,6 +35,28 @@ main:
   #   bottom_label:
   #   # newline: false
 
+  base pos:
+    legends:
+      - { key: abc_basePos, id: [0-1] }
+      - { key: abst_basePos, id: [0-1] }
+    bottom_label:
+    newline: false
+
+  world cog/zmp:
+    legends:
+      # - { key: abc_zmpOut, id: [0-1] }
+      # - { key: st_zmp, id: [0-1] }
+      - { key: abc_refCog, id: [0-1] }
+      - { key: abc_refZmp, id: [0-1] }
+      # - { key: st_refZmp, id: [0-1] }
+      # - { key: st_actZmp, id: [0-1] }
+      - { key: abst_abcRefCog, id: [0-1] }
+      - { key: abst_abcRefZmp, id: [0-1] }
+      - { key: abst_refZmp, id: [0-1] }
+      - { key: abst_actZmp, id: [0-1] }
+    bottom_label:
+    # newline: false
+
 # rpy
   base rpy:
     legends:

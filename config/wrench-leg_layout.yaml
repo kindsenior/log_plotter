@@ -34,6 +34,10 @@ main:
     legends:
       - { key: abc_contactStates, id: [0], label: rleg }
       - { key: abc_contactStates, id: [1], label: lleg }
+      - { key: abst_refContactStates, id: [0], label: ref_rleg }
+      - { key: abst_refContactStates, id: [1], label: ref_lleg }
+      - { key: abst_actContactStates, id: [0], label: act_rleg }
+      - { key: abst_actContactStates, id: [1], label: act_lleg }
       - { key: st_debugData, id: [0], label: rleg_contact_phase }
       - { key: st_debugData, id: [1], label: lleg_contact_phase }
       - { key: abc_debugData, id: [0], label: rleg_contact_phase }
@@ -42,6 +46,8 @@ main:
       - { key: abst_debugData, id: [1], label: lleg_contact_phase }
       - { key: abc_controlSwingSupportTime, id: [0], label: rleg_time }
       - { key: abc_controlSwingSupportTime, id: [1], label: lleg_time }
+      - { key: abst_controlSwingSupportTime, id: [0], label: rleg_time }
+      - { key: abst_controlSwingSupportTime, id: [1], label: lleg_time }
     bottom_label:
 
 # leg sub
