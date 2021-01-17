@@ -29,8 +29,13 @@ def readOneTopic(fname):
         with open(fname, 'r') as f:
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
-                dl = filter(lambda x: x != '', row)
-                data.append([float(x) for x in dl])
+                try:
+                    dl = filter(lambda x: x != '', row)
+                    data.append([float(x) for x in dl])
+                except ValueError as e:
+                    print('[readOneTopic] ValueError occured while reading {}'.format(fname))
+                    print('[readOneTopic]   row:{}'.format(row))
+                    continue
     except Exception as e:
         print('[readOneTopic] error occured while reading {}'.format(fname))
         print('[readOneTopic] {} may not exist.'.format(os.path.basename(fname)))
