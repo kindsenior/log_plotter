@@ -42,7 +42,17 @@ abst_originActCogVel:
 abst_originRefCogVel:
   data:
     - { log: abst_refCogVelOut, column: [0-2] } # old abc port?
+## CP
+abst_refEndCp:
+  data:
+    - { log: abst_refEndCpOut, column: [0-2] }
+abst_newRefCp:
+  data:
+    - { log: abst_newRefCpOut, column: [0-2] }
 ## zmp
+abst_nominalZmp:
+  data:
+    - { log: abst_nominalZmpOut, column: [0-2] }
 abc_zmpOut:
   data:
     - { log: abc_zmpOut, column: [0-2] }

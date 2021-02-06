@@ -51,7 +51,10 @@ main:
       # - { key: st_refZmp, id: [0-1] }
       # - { key: st_actZmp, id: [0-1] }
       - { key: abst_abcRefCog, id: [0-1] }
+      - { key: abst_nominalZmp, id: [0-1] }
       - { key: abst_abcRefZmp, id: [0-1] }
+      - { key: abst_refEndCp, id: [0-1] }
+      - { key: abst_newRefCp, id: [0-1] }
       - { key: abst_refZmp, id: [0-1] }
       - { key: abst_actZmp, id: [0-1] }
     bottom_label:
