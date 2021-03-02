@@ -23,15 +23,28 @@ def my_time(func):
     return wrapper
 
 # seems that we should declare global function for multiprocess
-def readOneTopic(fname):
+def readOneTopic(args):
+    fname = args[0]
+    start = 0
+    length = 0
+    if len(args) > 1:
+        start = args[1]
+    if len(args) > 2:
+        length = args[2]
     data = []
+    cntr = 0
+    endidx = start + length
     try:
         with open(fname, 'r') as f:
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
                 try:
                     dl = filter(lambda x: x != '', row)
-                    data.append([float(x) for x in dl])
+                    if cntr >= start:
+                        data.append([float(x) for x in dl])
+                    cntr = cntr + 1
+                    if cntr == endidx:
+                        break
                 except ValueError as e:
                     print('[readOneTopic] ValueError occured while reading {}'.format(fname))
                     print('[readOneTopic]   row:{}'.format(row))

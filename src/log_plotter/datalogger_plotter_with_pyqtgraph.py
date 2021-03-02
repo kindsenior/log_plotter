@@ -19,7 +19,7 @@ except:
 
 
 class LogPlotter(object):
-    def __init__(self, fname, plot_conf_name, layout_conf_name, title):
+    def __init__(self, fname, plot_conf_name, layout_conf_name, title, start_idx = 0, data_length = 0):
         '''
         :param str fname: file name of log
         :param str plot_conf_name: plot yaml file name
@@ -40,13 +40,17 @@ class LogPlotter(object):
         self.font_type = 'Times New Roman'
         self.font_size = 12
         self.font_color = 'black'
+        #
+        self.start_idx = start_idx
+        self.data_length = data_length
 
     @my_time
     def getData(self):
         '''
         get data using LogParser
         '''
-        log_parser = LogParser(self.fname, self.plot_conf_name, self.layout_conf_name)
+        log_parser = LogParser(self.fname, self.plot_conf_name, self.layout_conf_name,
+                               start_idx = self.start_idx, data_length = self.data_length)
         log_parser.readData()
         self.plot_dict = log_parser.plot_dict
         self.layout_dict = log_parser.layout_dict
@@ -397,6 +401,8 @@ def main():
     parser.add_argument('--layout', type=str, help='layout configure file', metavar='file')
     parser.add_argument('-t', type=str, help='title', default=None)
     parser.add_argument("-i", action='store_true', help='interactive (start IPython)')
+    parser.add_argument('--start', type=int, default = 0, help='row index to start reading')
+    parser.add_argument('--length', type=int, default = 0, help='maximum length for reading data')
     parser.set_defaults(feature=False)
     args = parser.parse_args()
     # main
@@ -404,7 +410,7 @@ def main():
     if args.plot is None or args.layout is None: # check args
         get_yamls_path = yaml_selector.MainDialog()
         args.plot, args.layout = get_yamls_path()
-    a = LogPlotter(args.f, args.plot, args.layout, args.t)
+    a = LogPlotter(args.f, args.plot, args.layout, args.t, start_idx=args.start, data_length=args.length)
     a.main()
 
     if args.i:
