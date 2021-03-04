@@ -1,0 +1,4 @@
+main:
+  watt:
+    legends:
+      - { key: watt, id: [0-5] }
