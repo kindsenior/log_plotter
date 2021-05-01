@@ -111,6 +111,10 @@ abc_zmp:
 abst_zmp:
   data:
     - { log: abst_baseFrameActZmp, column: [0-2] }
+# angular momentum
+abst_refAngularMomentum:
+  data:
+    - { log: abst_genAngularMomentumRpy, column: [0-2] }
 ## force
 sh_rfsensorOut:
   data:

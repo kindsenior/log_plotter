@@ -28,6 +28,10 @@ main:
       - { key: abst_refCogVel, id: [0-2]}
     bottom_label:
 
+  angular momentum:
+    legends:
+      - { key: abst_refAngularMomentum, id: [0-2]}
+
   # root-link relative zmp:
   #   legends:
   #     - { key: st_zmp, id: [0-1] }
