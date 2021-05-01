@@ -134,7 +134,7 @@ abc_tau:
 
 abst_tau:
   data:
-    - { log: abst_tau, column: [0-33] }
+    - { log: abst_modTau, column: [0-33] }
 
 choreonoid_torque:
   data:

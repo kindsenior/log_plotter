@@ -4,7 +4,7 @@ abc_refCog:
     - { log: abc_cogOut, column: [0-2] }
 abst_abcRefCog:
   data:
-    - { log: abst_refCogOut, column: [0-2] }
+    - { log: abst_genCog, column: [0-2] }
 st_originActCog:
   data:
     - { log: st_originActCog, column: [0-2] }
@@ -19,10 +19,10 @@ abc_originRefCog:
     - { log: abc_originRefCog, column: [0-2] }
 abst_originActCog:
   data:
-    - { log: abst_footOriginActCog, column: [0-2] }
+    - { log: abst_footFrameActCog, column: [0-2] }
 abst_originRefCog:
   data:
-    - { log: abst_footOriginRefCog, column: [0-2] }
+    - { log: abst_footFrameGenCog, column: [0-2] }
 ## cog velocity
 st_originActCogVel:
   data:
@@ -38,21 +38,21 @@ abc_originRefCogVel:
     - { log: abc_originRefCogVel, column: [0-2] }
 abst_originActCogVel:
   data:
-    - { log: abst_originActCogVel, column: [0-2] }
-abst_originRefCogVel:
+    - { log: abst_footFrameActCogVel, column: [0-2] }
+abst_refCogVel:
   data:
-    - { log: abst_refCogVelOut, column: [0-2] } # old abc port?
+    - { log: abst_genCogVel, column: [0-2] } # old abc port?
 ## CP
 abst_refEndCp:
   data:
-    - { log: abst_refEndCpOut, column: [0-2] }
+    - { log: abst_genEndCp, column: [0-2] }
 abst_newRefCp:
   data:
-    - { log: abst_newRefCpOut, column: [0-2] }
+    - { log: abst_genCp, column: [0-2] }
 ## zmp
 abst_nominalZmp:
   data:
-    - { log: abst_nominalZmpOut, column: [0-2] }
+    - { log: abst_nominalZmp, column: [0-2] }
 abc_zmpOut:
   data:
     - { log: abc_zmpOut, column: [0-2] }
@@ -63,17 +63,17 @@ abc_refZmp:
     - { log: abc_baseTformOut, column: [0-2] }
 abst_abcRefZmp:
   data:
-    - { log: abst_refZmpOut, column: [0-2] }
+    - { log: abst_genZmp, column: [0-2] }
 abst_refZmp:
   func: plot_add
   data:
-    - { log: abst_baseOriginRefZmp, column: [0-2] }
-    - { log: abst_baseTformOut, column: [0-2] }
+    - { log: abst_baseFrameGenZmp, column: [0-2] }
+    - { log: abst_genBaseTform, column: [0-2] }
 abst_actZmp:
   func: plot_add
   data:
-    - { log: abst_baseOriginActZmp, column: [0-2] }
-    - { log: abst_baseTformOut, column: [0-2] }
+    - { log: abst_baseFrameActZmp, column: [0-2] }
+    - { log: abst_genBaseTform, column: [0-2] }
 st_originActZmp:
   data:
     - { log: st_originActZmp, column: [0-2] }
@@ -94,13 +94,13 @@ abc_originNewZmp:
     - { log: abc_originNewZmp, column: [0-2] }
 abst_originActZmp:
   data:
-    - { log: abst_originActZmp, column: [0-2] }
+    - { log: abst_footFrameActZmp, column: [0-2] }
 abst_originRefZmp:
   data:
-    - { log: abst_originRefZmp, column: [0-2] }
+    - { log: abst_footFrameGenZmp, column: [0-2] }
 abst_originNewZmp:
   data:
-    - { log: abst_originNewRefZmp, column: [0-2] }
+    - { log: abst_footFrameModZmp, column: [0-2] }
 # root-link relative zmp
 st_zmp:
   data:
@@ -110,7 +110,7 @@ abc_zmp:
     - { log: abc_zmp, column: [0-2] }
 abst_zmp:
   data:
-    - { log: abst_zmp, column: [0-2] }
+    - { log: abst_baseFrameActZmp, column: [0-2] }
 ## force
 sh_rfsensorOut:
   data:
@@ -176,16 +176,16 @@ abc_ref_lhsensor:
     - { log: abc_allRefWrench, column: [18-23] }
 abst_ref_rfsensor:
   data:
-    - { log: abst_newRefWrenches, column: [0-5] }
+    - { log: abst_modWrenches, column: [0-5] }
 abst_ref_lfsensor:
   data:
-    - { log: abst_newRefWrenches, column: [6-11] }
+    - { log: abst_modWrenches, column: [6-11] }
 abst_ref_rhsensor:
   data:
-    - { log: abst_newRefWrenches, column: [12-17] }
+    - { log: abst_modWrenches, column: [12-17] }
 abst_ref_lhsensor:
   data:
-    - { log: abst_newRefWrenches, column: [18-23] }
+    - { log: abst_modWrenches, column: [18-23] }
 abc_rfsensor:
   data:
     - { log: abc_rfsensor, column: [0-2] }
@@ -316,7 +316,7 @@ abc_basePos:
     - { log: abc_baseTformOut, column: [0-2] }
 abst_basePos:
   data:
-    - { log: abst_baseTformOut, column: [0-2] }
+    - { log: abst_genBaseTform, column: [0-2] }
 st_currentBasePos:
   data:
     - { log: st_currentBasePos, column: [0-2] }
@@ -335,13 +335,13 @@ abc_controlSwingSupportTime:
     - { log: abc_controlSwingSupportTime, column: [0-3] }
 abst_refContactStates:
   data:
-    - { log: abst_refContactStates, column: [0-3] }
+    - { log: abst_genContactStates, column: [0-3] }
 abst_actContactStates:
   data:
     - { log: abst_actContactStates, column: [0-3] }
 abst_controlSwingSupportTime:
   data:
-    - { log: abst_controlSwingSupportTime, column: [0-3] }
+    - { log: abst_genRemainTime, column: [0-3] }
 # debug data
 st_debugData:
   data:
@@ -379,11 +379,11 @@ abc_lfcop:
   func: plot_COP
 abst_rfcop:
   data:
-    - { log: abst_newRefWrenches, column: [0-5] }
+    - { log: abst_modWrenches, column: [0-5] }
   func: plot_COP
 abst_lfcop:
   data:
-    - { log: abst_newRefWrenches, column: [6-11] }
+    - { log: abst_modWrenches, column: [6-11] }
   func: plot_COP
 rmfo_rfcop:
   data:
@@ -419,11 +419,11 @@ abc_lhcop:
   func: plot_COP
 abst_rhcop:
   data:
-    - { log: abst_newRefWrenches, column: [12-17] }
+    - { log: abst_modWrenches, column: [12-17] }
   func: plot_COP
 abst_lhcop:
   data:
-    - { log: abst_newRefWrenches, column: [17-23] }
+    - { log: abst_modWrenches, column: [17-23] }
   func: plot_COP
 rmfo_rhcop:
   data:

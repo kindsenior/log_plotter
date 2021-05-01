@@ -25,7 +25,7 @@ main:
       - { key: abc_originActCogVel, id: [0-2]}
       - { key: abc_originRefCogVel, id: [0-2]}
       - { key: abst_originActCogVel, id: [0-2]}
-      - { key: abst_originRefCogVel, id: [0-2]}
+      - { key: abst_refCogVel, id: [0-2]}
     bottom_label:
 
   # root-link relative zmp:
