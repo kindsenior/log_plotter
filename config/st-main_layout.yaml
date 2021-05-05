@@ -11,11 +11,11 @@ main:
       - { key: abc_originRefZmp, id: [0-2]}
       - { key: abc_originNewZmp, id: [0-2]}
       - { key: abc_originActZmp, id: [0-2]}
-      - { key: abst_originActCog, id: [0-2]}
-      - { key: abst_originRefCog, id: [0-2]}
-      - { key: abst_originRefZmp, id: [0-2]}
-      - { key: abst_originNewZmp, id: [0-2]}
-      - { key: abst_originActZmp, id: [0-2]}
+      - { key: abst_footActCog, id: [0-2]}
+      - { key: abst_footGenCog, id: [0-2]}
+      - { key: abst_footGenZmp, id: [0-2]}
+      - { key: abst_footModZmp, id: [0-2]}
+      - { key: abst_footActZmp, id: [0-2]}
     bottom_label:
 
   cog velocity:
@@ -24,13 +24,13 @@ main:
       - { key: st_originRefCogVel, id: [0-2]}
       - { key: abc_originActCogVel, id: [0-2]}
       - { key: abc_originRefCogVel, id: [0-2]}
-      - { key: abst_originActCogVel, id: [0-2]}
-      - { key: abst_refCogVel, id: [0-2]}
+      - { key: abst_footActCogVel, id: [0-2]}
+      - { key: abst_genCogVel, id: [0-2]}
     bottom_label:
 
   angular momentum:
     legends:
-      - { key: abst_refAngularMomentum, id: [0-2]}
+      - { key: abst_genAngularMomentum, id: [0-2]}
 
   # root-link relative zmp:
   #   legends:
@@ -54,13 +54,13 @@ main:
       - { key: abc_refZmp, id: [0-1] }
       # - { key: st_refZmp, id: [0-1] }
       # - { key: st_actZmp, id: [0-1] }
-      - { key: abst_abcRefCog, id: [0-1] }
+      - { key: abst_genCog, id: [0-1] }
       - { key: abst_nominalZmp, id: [0-1] }
-      - { key: abst_abcRefZmp, id: [0-1] }
-      - { key: abst_refEndCp, id: [0-1] }
-      - { key: abst_newRefCp, id: [0-1] }
-      - { key: abst_refZmp, id: [0-1] }
-      - { key: abst_actZmp, id: [0-1] }
+      - { key: abst_genZmp, id: [0-1] }
+      - { key: abst_genEndCp, id: [0-1] }
+      - { key: abst_genCp, id: [0-1] }
+      - { key: abst_genZmpTf, id: [0-1] }
+      - { key: abst_actZmpTf, id: [0-1] }
     bottom_label:
     # newline: false
 

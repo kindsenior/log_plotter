@@ -2,7 +2,7 @@
 abc_refCog:
   data:
     - { log: abc_cogOut, column: [0-2] }
-abst_abcRefCog:
+abst_genCog:
   data:
     - { log: abst_genCog, column: [0-2] }
 st_originActCog:
@@ -17,10 +17,10 @@ abc_originActCog:
 abc_originRefCog:
   data:
     - { log: abc_originRefCog, column: [0-2] }
-abst_originActCog:
+abst_footActCog:
   data:
     - { log: abst_footFrameActCog, column: [0-2] }
-abst_originRefCog:
+abst_footGenCog:
   data:
     - { log: abst_footFrameGenCog, column: [0-2] }
 ## cog velocity
@@ -36,17 +36,17 @@ abc_originActCogVel:
 abc_originRefCogVel:
   data:
     - { log: abc_originRefCogVel, column: [0-2] }
-abst_originActCogVel:
+abst_footActCogVel:
   data:
     - { log: abst_footFrameActCogVel, column: [0-2] }
-abst_refCogVel:
+abst_genCogVel:
   data:
     - { log: abst_genCogVel, column: [0-2] } # old abc port?
 ## CP
-abst_refEndCp:
+abst_genEndCp:
   data:
     - { log: abst_genEndCp, column: [0-2] }
-abst_newRefCp:
+abst_genCp:
   data:
     - { log: abst_genCp, column: [0-2] }
 ## zmp
@@ -61,15 +61,15 @@ abc_refZmp:
   data:
     - { log: abc_zmpOut, column: [0-2] }
     - { log: abc_baseTformOut, column: [0-2] }
-abst_abcRefZmp:
+abst_genZmp:
   data:
     - { log: abst_genZmp, column: [0-2] }
-abst_refZmp:
+abst_genZmpTf:
   func: plot_add
   data:
     - { log: abst_baseFrameGenZmp, column: [0-2] }
     - { log: abst_genBaseTform, column: [0-2] }
-abst_actZmp:
+abst_actZmpTf:
   func: plot_add
   data:
     - { log: abst_baseFrameActZmp, column: [0-2] }
@@ -92,13 +92,13 @@ abc_originRefZmp:
 abc_originNewZmp:
   data:
     - { log: abc_originNewZmp, column: [0-2] }
-abst_originActZmp:
+abst_footActZmp:
   data:
     - { log: abst_footFrameActZmp, column: [0-2] }
-abst_originRefZmp:
+abst_footGenZmp:
   data:
     - { log: abst_footFrameGenZmp, column: [0-2] }
-abst_originNewZmp:
+abst_footModZmp:
   data:
     - { log: abst_footFrameModZmp, column: [0-2] }
 # root-link relative zmp
@@ -112,7 +112,7 @@ abst_zmp:
   data:
     - { log: abst_baseFrameActZmp, column: [0-2] }
 # angular momentum
-abst_refAngularMomentum:
+abst_genAngularMomentum:
   data:
     - { log: abst_genAngularMomentumRpy, column: [0-2] }
 ## force
@@ -178,16 +178,16 @@ abc_ref_rhsensor:
 abc_ref_lhsensor:
   data:
     - { log: abc_allRefWrench, column: [18-23] }
-abst_ref_rfsensor:
+abst_mod_rfsensor:
   data:
     - { log: abst_modWrenches, column: [0-5] }
-abst_ref_lfsensor:
+abst_mod_lfsensor:
   data:
     - { log: abst_modWrenches, column: [6-11] }
-abst_ref_rhsensor:
+abst_mod_rhsensor:
   data:
     - { log: abst_modWrenches, column: [12-17] }
-abst_ref_lhsensor:
+abst_mod_lhsensor:
   data:
     - { log: abst_modWrenches, column: [18-23] }
 abc_rfsensor:
@@ -337,7 +337,7 @@ abc_contactStates:
 abc_controlSwingSupportTime:
   data:
     - { log: abc_controlSwingSupportTime, column: [0-3] }
-abst_refContactStates:
+abst_genContactStates:
   data:
     - { log: abst_genContactStates, column: [0-3] }
 abst_actContactStates:

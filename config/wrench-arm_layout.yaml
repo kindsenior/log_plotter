@@ -7,8 +7,8 @@ main:
       - { key: st_ref_lhsensor, id: [0-2] }
       - { key: abc_ref_rhsensor, id: [0-2] }
       - { key: abc_ref_lhsensor, id: [0-2] }
-      - { key: abst_ref_rhsensor, id: [0-2] }
-      - { key: abst_ref_lhsensor, id: [0-2] }
+      - { key: abst_mod_rhsensor, id: [0-2] }
+      - { key: abst_mod_lhsensor, id: [0-2] }
       - { key: rmfo_off_rhsensor, id: [0-2] }
       - { key: rmfo_off_lhsensor, id: [0-2] }
     bottom_label:
@@ -36,8 +36,8 @@ main:
       - { key: st_ref_lhsensor, id: [3-5] }
       - { key: abc_ref_rhsensor, id: [3-5] }
       - { key: abc_ref_lhsensor, id: [3-5] }
-      - { key: abst_ref_rhsensor, id: [3-5] }
-      - { key: abst_ref_lhsensor, id: [3-5] }
+      - { key: abst_mod_rhsensor, id: [3-5] }
+      - { key: abst_mod_lhsensor, id: [3-5] }
       - { key: rmfo_off_rhsensor, id: [3-5] }
       - { key: rmfo_off_lhsensor, id: [3-5] }
     bottom_label:
