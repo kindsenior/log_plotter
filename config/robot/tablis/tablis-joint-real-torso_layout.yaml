@@ -1,0 +1,42 @@
+main:
+  torso q:
+    legends:
+      - { key: sh_qOut, id: [12],label: sh_chest-y  }
+      - { key: RobotHardware0_q, id: [12],label: rh_chest-y  }
+      - { key: enc_q, id: [12], label: enc_chest-y  }
+    newline: false
+
+  torso vel:
+    legends:
+      - { key: RobotHardware0_dq, id: [12], label: rh_chest-y}
+    newline: false
+
+  torso tau:
+    legends:
+      # - { key: hc_tau, id: [12], label: hc_chest-y}
+      - { key: torque, id: [12], label: rh_chest-y}
+    newline: true
+
+  torso ServoState:
+    legends:
+      - { key: ServoState, id: [12], label: r-chest-y  }
+    newline: false
+
+  torso 12V:
+    legends:
+      - { key: 12V, id: [12], label: r-chest-y  }
+    newline: false
+
+  torso 80V:
+    legends:
+      - { key: 80V, id: [12], label: r-chest-y  }
+  newline: false
+
+  torso motor_temp:
+    legends:
+      - { key: motor_temp, id: [12], label: r_chest-y}
+    newline: false
+
+  # torso abs/enc diff:
+  #   legends:
+  #     - { key: abs_enc_diff, id: [12], label: chest-r  }
