@@ -1,0 +1,4 @@
+extend:
+  - tablis-joint-real-leg_layout.yaml
+  - tablis-joint-real-arm_layout.yaml
+  - tablis-joint-real-torso_layout.yaml

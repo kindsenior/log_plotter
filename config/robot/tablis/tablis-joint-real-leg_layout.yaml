@@ -1,0 +1,179 @@
+main:
+  rleg q:
+    legends:
+      - { key: sh_qOut, id: [0],label: sh_hip-y  }
+      - { key: sh_qOut, id: [1],label: sh_hip-r  }
+      - { key: sh_qOut, id: [2],label: sh_hip-p  }
+      - { key: sh_qOut, id: [3],label: sh_knee-p }
+      - { key: sh_qOut, id: [4],label: sh_ankle-p}
+      - { key: sh_qOut, id: [5],label: sh_ankle-r}
+      - { key: RobotHardware0_q, id: [0],label: rh_hip-y  }
+      - { key: RobotHardware0_q, id: [1],label: rh_hip-r  }
+      - { key: RobotHardware0_q, id: [2],label: rh_hip-p  }
+      - { key: RobotHardware0_q, id: [3],label: rh_knee-p }
+      - { key: RobotHardware0_q, id: [4],label: rh_ankle-p}
+      - { key: RobotHardware0_q, id: [5],label: rh_ankle-r}
+      - { key: enc_q, id: [0], label: enc_hip-y  }
+      - { key: enc_q, id: [1], label: enc_hip-r  }
+      - { key: enc_q, id: [2], label: enc_hip-p  }
+      - { key: enc_q, id: [3], label: enc_knee-p }
+      - { key: enc_q, id: [4], label: enc_ankle-p}
+      - { key: enc_q, id: [5], label: enc_ankle-r}
+    newline: false
+
+  lleg q:
+    legends:
+      - { key: sh_qOut, id: [6],  label: sh_hip-y  }
+      - { key: sh_qOut, id: [7],  label: sh_hip-r  }
+      - { key: sh_qOut, id: [8],  label: sh_hip-p  }
+      - { key: sh_qOut, id: [9],  label: sh_knee-p }
+      - { key: sh_qOut, id: [10], label: sh_ankle-p}
+      - { key: sh_qOut, id: [11], label: sh_ankle-r}
+      - { key: RobotHardware0_q, id: [6],label: rh_hip-y  }
+      - { key: RobotHardware0_q, id: [7],label: rh_hip-r  }
+      - { key: RobotHardware0_q, id: [8],label: rh_hip-p  }
+      - { key: RobotHardware0_q, id: [9],label: rh_knee-p }
+      - { key: RobotHardware0_q, id: [10],label: rh_ankle-p}
+      - { key: RobotHardware0_q, id: [11],label: rh_ankle-r}
+      - { key: enc_q, id: [6], label: enc_hip-y  }
+      - { key: enc_q, id: [7], label: enc_hip-r  }
+      - { key: enc_q, id: [8], label: enc_hip-p  }
+      - { key: enc_q, id: [9], label: enc_knee-p }
+      - { key: enc_q, id: [10], label: enc_ankle-p}
+      - { key: enc_q, id: [11], label: enc_ankle-r}
+    newline: false
+
+  rleg vel:
+    legends:
+      - { key: RobotHardware0_dq, id: [0], label: rh_hip-y}
+      - { key: RobotHardware0_dq, id: [1], label: rh_hip-r}
+      - { key: RobotHardware0_dq, id: [2], label: rh_hip-p}
+      - { key: RobotHardware0_dq, id: [3], label: rh_knee}
+      - { key: RobotHardware0_dq, id: [4], label: rh_ankle-p}
+      - { key: RobotHardware0_dq, id: [5], label: rh_ankle-r}
+    newline: false
+
+  lleg vel:
+    legends:
+      - { key: RobotHardware0_dq, id: [6],  label: rh_hip-y}
+      - { key: RobotHardware0_dq, id: [7],  label: rh_hip-r}
+      - { key: RobotHardware0_dq, id: [8],  label: rh_hip-p}
+      - { key: RobotHardware0_dq, id: [9],  label: rh_knee}
+      - { key: RobotHardware0_dq, id: [10], label: rh_ankle-p}
+      - { key: RobotHardware0_dq, id: [11], label: rh_ankle-r}
+    newline: false
+
+  rleg tau:
+    legends:
+      # - { key: hc_tau, id: [0], label: hc_hip-y}
+      # - { key: hc_tau, id: [1], label: hc_hip-r}
+      # - { key: hc_tau, id: [2], label: hc_hip-p}
+      # - { key: hc_tau, id: [3], label: hc_knee-p}
+      # - { key: hc_tau, id: [4], label: hc_ankle-p}
+      # - { key: hc_tau, id: [5], label: hc_ankle-r}
+      - { key: torque, id: [0], label: rh_hip-y}
+      - { key: torque, id: [1], label: rh_hip-r}
+      - { key: torque, id: [2], label: rh_hip-p}
+      - { key: torque, id: [3], label: rh_knee-p}
+      - { key: torque, id: [4], label: rh_ankle-p}
+      - { key: torque, id: [5], label: rh_ankle-r}
+    newline: false
+
+  lleg tau:
+    legends:
+      - { key: hc_tau, id: [6], label: hc_hip-y}
+      - { key: hc_tau, id: [7], label: hc_hip-r}
+      - { key: hc_tau, id: [8], label: hc_hip-p}
+      - { key: hc_tau, id: [9], label: hc_knee-p}
+      - { key: hc_tau, id: [10], label: hc_ankle-p}
+      - { key: hc_tau, id: [11], label: hc_ankle-r}
+      - { key: torque, id: [6], label: rh_hip-y}
+      - { key: torque, id: [7], label: rh_hip-r}
+      - { key: torque, id: [8], label: rh_hip-p}
+      - { key: torque, id: [9], label: rh_knee-p}
+      - { key: torque, id: [10], label: rh_ankle-p}
+      - { key: torque, id: [11], label: rh_ankle-r}
+    newline: true
+
+  leg ServoState:
+    legends:
+      - { key: ServoState, id: [0], label: r-hip-y  }
+      - { key: ServoState, id: [1], label: r-hip-r  }
+      - { key: ServoState, id: [2], label: r-hip-p  }
+      - { key: ServoState, id: [3], label: r-knee-p }
+      - { key: ServoState, id: [4], label: r-ankle-p}
+      - { key: ServoState, id: [5], label: r-ankle-r}
+      - { key: ServoState, id: [6], label: l-hip-y  }
+      - { key: ServoState, id: [7], label: l-hip-r  }
+      - { key: ServoState, id: [8], label: l-hip-p  }
+      - { key: ServoState, id: [9], label: l-knee-p }
+      - { key: ServoState, id: [10], label: l-ankle-p}
+      - { key: ServoState, id: [11], label: l-ankle-r}
+    newline: false
+
+  leg 12V:
+    legends:
+      - { key: 12V, id: [0], label: r-hip-y  }
+      - { key: 12V, id: [1], label: r-hip-r  }
+      - { key: 12V, id: [2], label: r-hip-p  }
+      - { key: 12V, id: [3], label: r-knee-p }
+      - { key: 12V, id: [4], label: r-ankle-p}
+      - { key: 12V, id: [5], label: r-ankle-r}
+      - { key: 12V, id: [6], label: l-hip-y  }
+      - { key: 12V, id: [7], label: l-hip-r  }
+      - { key: 12V, id: [8], label: l-hip-p  }
+      - { key: 12V, id: [9], label: l-knee-p }
+      - { key: 12V, id: [10], label: l-ankle-p}
+      - { key: 12V, id: [11], label: l-ankle-r}
+    newline: false
+
+  leg 80V:
+    legends:
+      - { key: 80V, id: [0], label: r-hip-y  }
+      - { key: 80V, id: [1], label: r-hip-r  }
+      - { key: 80V, id: [2], label: r-hip-p  }
+      - { key: 80V, id: [3], label: r-knee-p }
+      - { key: 80V, id: [4], label: r-ankle-p}
+      - { key: 80V, id: [5], label: r-ankle-r}
+      - { key: 80V, id: [6], label: l-hip-y  }
+      - { key: 80V, id: [7], label: l-hip-r  }
+      - { key: 80V, id: [8], label: l-hip-p  }
+      - { key: 80V, id: [9], label: l-knee-p }
+      - { key: 80V, id: [10], label: l-ankle-p}
+      - { key: 80V, id: [11], label: l-ankle-r}
+    newline: false
+
+  leg motor_temp:
+    legends:
+      - { key: motor_temp, id: [0], label: r-hip-y  }
+      - { key: motor_temp, id: [1], label: r-hip-r  }
+      - { key: motor_temp, id: [2], label: r-hip-p  }
+      - { key: motor_temp, id: [3], label: r-knee-p }
+      - { key: motor_temp, id: [4], label: r-ankle-p}
+      - { key: motor_temp, id: [5], label: r-ankle-r}
+      - { key: motor_temp, id: [6], label: l-hip-y  }
+      - { key: motor_temp, id: [7], label: l-hip-r  }
+      - { key: motor_temp, id: [8], label: l-hip-p  }
+      - { key: motor_temp, id: [9], label: l-knee-p }
+      - { key: motor_temp, id: [10], label: l-ankle-p}
+      - { key: motor_temp, id: [11], label: l-ankle-r}
+    newline: true
+
+  # rleg abs/enc diff:
+  #   legends:
+  #     - { key: abs_enc_diff, id: [0], label: hip-y  }
+  #     - { key: abs_enc_diff, id: [1], label: hip-r  }
+  #     - { key: abs_enc_diff, id: [2], label: hip-p  }
+  #     - { key: abs_enc_diff, id: [3], label: knee-p }
+  #     - { key: abs_enc_diff, id: [4], label: ankle-p}
+  #     - { key: abs_enc_diff, id: [5], label: ankle-r}
+  #   newline: false
+
+  # lleg abs/enc diff:
+  #   legends:
+  #     - { key: abs_enc_diff, id: [6], label: hip-y  }
+  #     - { key: abs_enc_diff, id: [7], label: hip-r  }
+  #     - { key: abs_enc_diff, id: [8], label: hip-p  }
+  #     - { key: abs_enc_diff, id: [9], label: knee-p }
+  #     - { key: abs_enc_diff, id: [10], label: ankle-p}
+  #     - { key: abs_enc_diff, id: [11], label: ankle-r}
