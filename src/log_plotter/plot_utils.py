@@ -7,6 +7,8 @@ import re
 import fnmatch
 import numpy
 import functools
+import zipfile
+import tarfile
 
 def my_time(func):
     """
@@ -23,19 +25,20 @@ def my_time(func):
     return wrapper
 
 # seems that we should declare global function for multiprocess
-def readOneTopic(args):
+def readOneTopic(args, open_func = lambda fname: open(fname, 'r')):
     fname = args[0]
     start = 0
     length = 0
-    if len(args) > 1:
+    arglen = len(args)
+    if arglen > 1:
         start = args[1]
-    if len(args) > 2:
+    if arglen > 2:
         length = args[2]
     data = []
-    cntr = 0
     endidx = start + length
     try:
-        with open(fname, 'r') as f:
+        with open_func(fname) as f:
+            cntr = 0
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
                 try:
@@ -55,6 +58,18 @@ def readOneTopic(args):
         print('[readOneTopic] skip data and return None data')
         return None
     return numpy.array(data)
+
+def readOneTopicZip(args):
+    if len(args) > 3:
+        name_ = args[3]
+    obj_ = zipfile.ZipFile(name_)
+    return readOneTopic(args, open_func = lambda fname: obj_.open(fname, 'r'))
+
+def readOneTopicTar(args):
+    if len(args) > 3:
+        name_ = args[3]
+    obj_ = tarfile.TarFile(name_)
+    return readOneTopic(args, open_func = lambda fname: obj_.extractfile(fname))
 
 def findFile(pattern, path):
     """

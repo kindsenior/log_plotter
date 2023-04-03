@@ -4,9 +4,11 @@ import numpy
 import metayaml
 import multiprocessing
 from functools import reduce
-from log_plotter.plot_utils import readOneTopic, replaceRHString
+from log_plotter.plot_utils import readOneTopic, readOneTopicZip, readOneTopicTar, replaceRHString
 from log_plotter.graph_legend import expand_str_to_list
-
+import zipfile
+import tarfile
+import os.path
 
 class LogParser(object):
 
@@ -41,6 +43,28 @@ class LogParser(object):
         self.start_idx = start_idx
         self.data_length = data_length
 
+        self.zip_file = None
+        self.tar_file = None
+        try:
+            if zipfile.is_zipfile(fname):
+                ##self.zip_file = zipfile.ZipFile(fname)
+                self.zip_file = fname
+                root_, ext_ = os.path.splitext(fname)
+                self.fname = os.path.basename(root_)
+                print('Open zip file: %s %s'%(self.zip_file, self.fname))
+            elif tarfile.is_tarfile(fname):
+                ##self.tar_file = tarfile.TarFile(fname)
+                self.tar_file = fname
+                root_, ext_ = os.path.splitext(fname)
+                self.fname = os.path.basename(root_)
+                ## hotfix for with statement
+                tarfile.ExFileObject.__enter__ = lambda self_: self_
+                tarfile.ExFileObject.__exit__ = lambda self_, a, b, c: None
+                print('Open tar file: %s %s'%(self.tar_file, self.fname))
+        except Exception as e:
+            ## is_tarfile throw error
+            pass
+
     def readData(self):
         '''
         read log data from log files and store dataListDict
@@ -59,9 +83,17 @@ class LogParser(object):
 
         # store data in parallel
         fname_list = replaceRHString([self.fname + '.' + ext for ext in topic_list])
-        fname_list = map(lambda fn: [fn, self.start_idx, self.data_length], fname_list) ## add start_idx, data_length
+        read_func = readOneTopic
+        if not self.zip_file is None:
+            fname_list = map(lambda fn: [fn, self.start_idx, self.data_length, self.zip_file], fname_list) ## add start_idx, data_length
+            read_func = readOneTopicZip
+        elif not self.tar_file is None:
+            fname_list = map(lambda fn: [fn, self.start_idx, self.data_length, self.tar_file], fname_list) ## add start_idx, data_length
+            read_func = readOneTopicTar
+        else:
+            fname_list = map(lambda fn: [fn, self.start_idx, self.data_length], fname_list) ## add start_idx, data_length
         pl = multiprocessing.Pool()
-        data_list = pl.map(readOneTopic, fname_list)
+        data_list = pl.map(read_func, fname_list)
         for topic, data in zip(topic_list, data_list):
             self.dataListDict[topic] = data
         # set the fastest time as 0
