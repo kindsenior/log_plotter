@@ -147,6 +147,12 @@ class LogPlotter(object):
             col_num = len(self.view.ci.rows[i])
             for j in range(col_num):
                 cur_item = self.view.ci.rows[i][j]
+                # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
+                for ax in cur_item.axes.values():
+                    ax['item'].enableAutoSIPrefix(enable=False)
+                    ax['item'].autoSIPrefixScale = 1.0
+                    ax['item'].labelUnitPrefix = ''
+                    ax['item'].setLabel()
                 # set left label
                 title = cur_item.titleLabel.text
                 tmp_left_label = None
@@ -164,12 +170,6 @@ class LogPlotter(object):
                 # cur_item.setLabel("left", text="", units=tmp_left_label)
                 if tmp_left_label:
                     cur_item.setLabel("left", text=tmp_left_label)
-                # we need this to suppress si-prefix until https://github.com/pyqtgraph/pyqtgraph/pull/293 is merged
-                for ax in cur_item.axes.values():
-                    ax['item'].enableAutoSIPrefix(enable=False)
-                    ax['item'].autoSIPrefixScale = 1.0
-                    ax['item'].labelUnitPrefix = ''
-                    ax['item'].setLabel()
                 # set bottom label
                 cur_item.setLabel("bottom", text=self.legend_list[i][j][0].group_info['bottom_label'])
 
@@ -385,10 +385,10 @@ class LogPlotter(object):
         self.getData()
         self.setLayout()
         self.plotData()
+        self.setFont()
         self.setLabel()
         self.setItemSize()
         self.linkAxes()
-        self.setFont()
         self.customMenu()
         self.customMenu2()
         self.view.showMaximized()
