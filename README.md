@@ -84,7 +84,7 @@ main:
 Falseにすることで前にグラフと同じ行に表示することができる
 * `title: bool`  
 Falseにすることでグラフ上部のタイトルを非表示にする
-* `bottom_label: 'string' (default: "time [s]")`  
+* `bottom_label: 'string' (default: False)`  
 横軸ラベルを設定
 * `left_label: 'string' (default: False)`  
 縦軸ラベルを設定
