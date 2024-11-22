@@ -1,0 +1,44 @@
+main:
+  rleg_joint_angle:
+    legends:
+      - { key: sh_qOut, id: [0-5] }
+      # - { key: abc_q, id: [0-5] }
+      # - { key: st_q, id: [0-5] }
+      - { key: RobotHardware0_q, id: [0-5] }
+
+  lleg_joint_angle:
+    legends:
+      - { key: sh_qOut, id: [6-11] }
+      # - { key: abc_q, id: [6-11] }
+      # - { key: st_q, id: [6-11] }
+      - { key: RobotHardware0_q, id: [6-11] }
+
+  tracking:
+    legends:
+      # - {key: rh_st_diff, id: [0-5] }
+      - {key: abs_enc_diff, id: [0-5] }
+
+  current:
+    legends:
+      - { key: current, id: [0-5] }
+
+  temperature:
+    legends:
+      - { key: motor_temp, id: [0-5] }
+      - { key: motor_outer_temp, id: [0-5] }
+
+  watt:
+    legends:
+      - { key: watt, id: [0-5] }
+
+  ServoState:
+    legends:
+      - { key: ServoState, id: [0-5] }
+
+  12V:
+    legends:
+      - { key: 12V, id: [0,1,2,3,4,5] }
+
+  80V:
+    legends:
+      - { key: 80V, id: [0,1,2,3,4,5] }
