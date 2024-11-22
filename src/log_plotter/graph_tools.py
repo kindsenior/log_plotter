@@ -1,15 +1,15 @@
 import sys
 import numpy
 import functools
-from pyqtgraph import QtGui
+from pyqtgraph.Qt import QtWidgets
 from pyqtgraph import QtCore
 
-class GraphSize(QtGui.QWidget):
+class GraphSize(QtWidgets.QWidget):
    sig_graph_width = QtCore.pyqtSignal(int)
    sig_graph_height = QtCore.pyqtSignal(int)
    def __init__(self, plot_item, plot_item_parent):
-      QtGui.QWidget.__init__(self)
-      self.layout = QtGui.QGridLayout()
+      QtWidgets.QWidget.__init__(self)
+      self.layout = QtWidgets.QGridLayout()
       self.plot_item = plot_item
       self.plot_item_parent = plot_item_parent
       self.rows = {}
@@ -47,16 +47,16 @@ class GraphSize(QtGui.QWidget):
       current_row = self.layout.rowCount()
       if self.layout.count != 0:
          current_row +=1
-      l = QtGui.QLabel(name) # graph width label
-      sp = QtGui.QSpinBox()     # graph width spinbox
-      sp.setMaximum(max(QtGui.QApplication.desktop().size().width(),
-                        QtGui.QApplication.desktop().size().height()))
+      l = QtWidgets.QLabel(name) # graph width label
+      sp = QtWidgets.QSpinBox()     # graph width spinbox
+      sp.setMaximum(max(QtWidgets.QApplication.desktop().size().width(),
+                        QtWidgets.QApplication.desktop().size().height()))
       self.rows[name] = (l, sp)
       self.layout.addWidget(l,current_row, 0)
       self.layout.addWidget(sp,current_row, 1)
       if checkbox_name is not None:
-         l_check = QtGui.QLabel(checkbox_name)
-         check = QtGui.QCheckBox()
+         l_check = QtWidgets.QLabel(checkbox_name)
+         check = QtWidgets.QCheckBox()
          self.layout.addWidget(l_check, current_row, 2)
          self.layout.addWidget(check, current_row, 3)
          return l, sp, check

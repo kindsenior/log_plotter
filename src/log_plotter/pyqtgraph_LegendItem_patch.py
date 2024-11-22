@@ -78,7 +78,7 @@ def LegendItem_init(self, *args, **kwargs):
 # justify left for legend label
 from pyqtgraph.graphicsItems.LabelItem import LabelItem
 def LegendItem_addItem(self, item, name):
-    label = LabelItem(name, justify='left', color='000000')
+    label = LabelItem(name, justify='left', color='#000000')
     if isinstance(item, pyqtgraph.graphicsItems.LegendItem.ItemSample):
         sample = item
     else:

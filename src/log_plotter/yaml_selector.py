@@ -4,10 +4,10 @@ import sys
 import os
 import yaml
 import functools
-from pyqtgraph import QtGui
+from pyqtgraph.Qt import QtWidgets
 from pyqtgraph import QtCore
 
-class PathSelector (QtGui.QGroupBox):
+class PathSelector (QtWidgets.QGroupBox):
    '''
    :members: path (path/to/yaml)
    '''
@@ -21,13 +21,13 @@ class PathSelector (QtGui.QGroupBox):
       :param str default_path: default path to file
       '''
       self.path = str(default_path)
-      QtGui.QVBoxLayout.__init__(self, group_name)
+      QtWidgets.QVBoxLayout.__init__(self, group_name)
       # make layouts
-      vbox = QtGui.QVBoxLayout()
-      hbox = QtGui.QHBoxLayout()
+      vbox = QtWidgets.QVBoxLayout()
+      hbox = QtWidgets.QHBoxLayout()
       # label and button
-      self.label = QtGui.QLabel(self.path)
-      self.button = QtGui.QPushButton()
+      self.label = QtWidgets.QLabel(self.path)
+      self.button = QtWidgets.QPushButton()
       self.button.setText(button_name)
       self.button.setAutoDefault(True)
       # set parents
@@ -41,7 +41,7 @@ class PathSelector (QtGui.QGroupBox):
       '''
       callback function when 'select' button was pressed.
       '''
-      d = QtGui.QFileDialog()
+      d = QtWidgets.QFileDialog()
       # Compatible with Qt5 and Qt4
       if QtCore.QT_VERSION >= 0x050000:
          pathname, _filter = d.getOpenFileName(directory=os.path.dirname(self.path), filter=filter)
@@ -82,11 +82,11 @@ class MainDialog(object):
       self.read_path_history()
       # layout
       ## widgets
-      self.window = QtGui.QWidget()
-      vbox = QtGui.QVBoxLayout()
+      self.window = QtWidgets.QWidget()
+      vbox = QtWidgets.QVBoxLayout()
       self.plot_yaml_selector = PathSelector('plot.yaml', 'select', self.plot_yaml_path, filter="_plot.yaml (*_plot.yaml)")
       self.layout_yaml_selector = PathSelector('layout.yaml', 'select', self.layout_yaml_path, filter="_layout.yaml (*_layout.yaml)")
-      button = QtGui.QPushButton(self.window)
+      button = QtWidgets.QPushButton(self.window)
       button.setText('OK')
       button.setAutoDefault(True);
       ## set layout
@@ -98,7 +98,7 @@ class MainDialog(object):
       self.window.setWindowTitle("log_plotter")
       # connect
       for btn in [self.plot_yaml_selector.button, self.layout_yaml_selector.button]:
-         btn.setSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+         btn.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
    def __call__(self):
       self.window.show()
@@ -144,7 +144,7 @@ class MainDialog(object):
          yaml.dump(d, f)
 
 if __name__ == '__main__':
-   app = QtGui.QApplication([])
+   app = QtWidgets.QApplication([])
    get_yamls_path = MainDialog()
    plot_yaml_path, layout_yaml_path = get_yamls_path()
    print(plot_yaml_path, layout_yaml_path)

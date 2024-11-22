@@ -176,7 +176,7 @@ class LogPlotter(object):
     @my_time
     def setItemSize(self):
         # set graph size
-        qdw = pyqtgraph.QtGui.QDesktopWidget()
+        qdw = pyqtgraph.Qt.QtWidgets.QDesktopWidget()
         for i, _ in enumerate(self.legend_list):
             for j in range(len(self.legend_list[i])):
                 group = self.legend_list[i][j][0].group_info
@@ -368,7 +368,7 @@ class LogPlotter(object):
             # graph size tool
             size_menu = tool_menu.addMenu('graph size')
             size_widget = graph_tools.GraphSize(pi, self.view)
-            size_action = pyqtgraph.QtGui.QWidgetAction(size_menu)
+            size_action = pyqtgraph.Qt.QtWidgets.QWidgetAction(size_menu)
             size_action.setDefaultWidget(size_widget)
             size_menu.addAction(size_action)
 
@@ -406,7 +406,7 @@ def main():
     parser.set_defaults(feature=False)
     args = parser.parse_args()
     # main
-    app = pyqtgraph.Qt.QtGui.QApplication([])
+    app = pyqtgraph.Qt.QtWidgets.QApplication([])
     if args.plot is None or args.layout is None: # check args
         get_yamls_path = yaml_selector.MainDialog()
         args.plot, args.layout = get_yamls_path()
@@ -424,13 +424,13 @@ def main():
         embed()
     else:
         signal.signal(signal.SIGINT, signal.SIG_DFL)
-        pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+        pyqtgraph.Qt.QtWidgets.QApplication.instance().exec_()
 
 def plot_with_log_plotter(fname, plot_conf_name, layout_conf_name, title):
-    app = pyqtgraph.Qt.QtGui.QApplication([])
+    app = pyqtgraph.Qt.QtWidgets.QApplication([])
     lp = LogPlotter(fname, plot_conf_name, layout_conf_name, title)
     lp.main()
-    pyqtgraph.Qt.QtGui.QApplication.instance().exec_()
+    pyqtgraph.Qt.QtWidgets.QApplication.instance().exec_()
 
 if __name__ == '__main__':
     main()
