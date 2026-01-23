@@ -1,44 +1,182 @@
 main:
-  rleg_joint_angle:
+  linear q:
     legends:
-      - { key: sh_qOut, id: [0-5] }
-      # - { key: abc_q, id: [0-5] }
-      # - { key: st_q, id: [0-5] }
-      - { key: RobotHardware0_q, id: [0-5] }
+      - { key: el_q, id: [0],  label: el_bottom-y }
+      - { key: el_q, id: [1],  label: el_bottom-p }
+      - { key: el_q, id: [2],  label: el_top-p }
+      - { key: el_q, id: [3],  label: el_top-l }
+      - { key: RobotHardware0_q, id: [0],label: rh_bottom-y }
+      - { key: RobotHardware0_q, id: [1],label: rh_bottom-p }
+      - { key: RobotHardware0_q, id: [2],label: rh_top-p }
+      - { key: RobotHardware0_q, id: [3],label: rh_top-l }
+      - { key: enc_q, id: [0], label: enc_bottom-y }
+      - { key: enc_q, id: [1], label: enc_bottom-p }
+      - { key: enc_q, id: [2], label: enc_top-p }
+      - { key: enc_q, id: [3], label: enc_top-l }
+    newline: false
+  linear vel:
+    legends:
+      - { key: el_dq, id: [0],  label: el_bottom-y }
+      - { key: el_dq, id: [1],  label: el_bottom-p }
+      - { key: el_dq, id: [2],  label: el_top-p }
+      - { key: el_dq, id: [3],  label: el_top-l }
+      - { key: RobotHardware0_dq, id: [0],label: rh_bottom-y }
+      - { key: RobotHardware0_dq, id: [1],label: rh_bottom-p }
+      - { key: RobotHardware0_dq, id: [2],label: rh_top-p }
+      - { key: RobotHardware0_dq, id: [3],label: rh_top-l }
+    newline: false
+  linear diff q:
+    legends:
+      - { key: rh_el_diff, id: [0],label: bottom-y }
+      - { key: rh_el_diff, id: [1],label: bottom-p }
+      - { key: rh_el_diff, id: [2],label: top-p }
+      - { key: rh_el_diff, id: [3],label: top-l }
+    newline: false
+  linear tau:
+    legends:
+      - { key: torque, id: [0], label: bottom-y }
+      - { key: torque, id: [1], label: bottom-p }
+      - { key: torque, id: [2], label: top-p }
+      - { key: torque, id: [3], label: top-l }
 
-  lleg_joint_angle:
+# rarm
+  rarm q:
     legends:
-      - { key: sh_qOut, id: [6-11] }
-      # - { key: abc_q, id: [6-11] }
-      # - { key: st_q, id: [6-11] }
-      - { key: RobotHardware0_q, id: [6-11] }
+      - { key: el_q, id: [4],label: el_shoulder-p }
+      - { key: el_q, id: [5],label: el_shoulder-r }
+      - { key: el_q, id: [6],label: el_shoulder-y }
+      - { key: el_q, id: [7],label: el_elbow-p }
+      - { key: el_q, id: [8],label: el_wrist-y }
+      - { key: el_q, id: [9],label: el_wrist-r }
+      - { key: el_q, id: [10],label: el_wrist-p }
+      - { key: RobotHardware0_q, id: [4],label: rh_shoulder-p }
+      - { key: RobotHardware0_q, id: [5],label: rh_shoulder-r }
+      - { key: RobotHardware0_q, id: [6],label: rh_shoulder-y }
+      - { key: RobotHardware0_q, id: [7],label: rh_elbow-p }
+      - { key: RobotHardware0_q, id: [8],label: rh_wrist-y }
+      - { key: RobotHardware0_q, id: [9],label: rh_wrist-r }
+      - { key: RobotHardware0_q, id: [10],label: rh_wrist-p }
+      - { key: enc_q, id: [4], label: enc_shoulder-p }
+      - { key: enc_q, id: [5], label: enc_shoulder-r }
+      - { key: enc_q, id: [6], label: enc_shoulder-y }
+      - { key: enc_q, id: [7], label: enc_elbow-p }
+      - { key: enc_q, id: [8], label: enc_wrist-y }
+      - { key: enc_q, id: [9], label: enc_wrist-r }
+      - { key: enc_q, id: [10], label: enc_wrist-p }
+    newline: false
+  rarm vel:
+    legends:
+      - { key: el_dq, id: [4],  label: el_shoulder-p }
+      - { key: el_dq, id: [5],  label: el_shoulder-r }
+      - { key: el_dq, id: [6],  label: el_shoulder-y }
+      - { key: el_dq, id: [7],  label: el_elbow-p }
+      - { key: el_dq, id: [8],  label: el_wrist-y }
+      - { key: el_dq, id: [9],  label: el_wrist-r }
+      - { key: el_dq, id: [10], label: el_wrist-p }
+      - { key: RobotHardware0_dq, id: [4],label: rh_shoulder-p }
+      - { key: RobotHardware0_dq, id: [5],label: rh_shoulder-r }
+      - { key: RobotHardware0_dq, id: [6],label: rh_shoulder-y }
+      - { key: RobotHardware0_dq, id: [7],label: rh_elbow-p }
+      - { key: RobotHardware0_dq, id: [8],label: rh_wrist-y }
+      - { key: RobotHardware0_dq, id: [9],label: rh_wrist-r }
+      - { key: RobotHardware0_dq, id: [10],label: rh_wrist-p }
+    newline: false
+  rarm diff q:
+    legends:
+      - { key: rh_el_diff, id: [4],label: shoulder-p }
+      - { key: rh_el_diff, id: [5],label: shoulder-r }
+      - { key: rh_el_diff, id: [6],label: shoulder-y }
+      - { key: rh_el_diff, id: [7],label: elbow-p }
+      - { key: rh_el_diff, id: [8],label: wrist-y }
+      - { key: rh_el_diff, id: [9],label: wrist-r }
+      - { key: rh_el_diff, id: [10],label: wrist-p }
+    newline: false
+  rarm tau:
+    legends:
+      - { key: idc_tau, id: [0], label: idc_shoulder-p }
+      - { key: idc_tau, id: [1], label: idc_shoulder-r }
+      - { key: idc_tau, id: [2], label: idc_shoulder-y }
+      - { key: idc_tau, id: [3], label: idc_elbow-p }
+      - { key: idc_tau, id: [4], label: idc_wrist-y }
+      - { key: idc_tau, id: [5], label: idc_wrist-r }
+      - { key: idc_tau, id: [6], label: idc_wrist-p }
+      - { key: torque, id: [0], label: rh_shoulder-p }
+      - { key: torque, id: [1], label: rh_shoulder-r }
+      - { key: torque, id: [2], label: rh_shoulder-y }
+      - { key: torque, id: [3], label: rh_elbow-p }
+      - { key: torque, id: [4], label: rh_wrist-y }
+      - { key: torque, id: [5], label: rh_wrist-r }
+      - { key: torque, id: [6], label: rh_wrist-p }
 
-  tracking:
-    legends:
-      # - {key: rh_st_diff, id: [0-5] }
-      - {key: abs_enc_diff, id: [0-5] }
+  # larm q:
+  #   legends:
+  #     - { key: el_q, id: [25],  label: el_collar-y }
+  #     - { key: el_q, id: [26],  label: el_shoulder-p }
+  #     - { key: el_q, id: [27],  label: el_shoulder-r }
+  #     - { key: el_q, id: [28],  label: el_shoulder-y }
+  #     - { key: el_q, id: [29], label: el_elbow-p }
+  #     - { key: el_q, id: [30], label: el_wrist-y }
+  #     - { key: el_q, id: [31], label: el_wrist-r }
+  #     - { key: el_q, id: [32], label: el_wrist-p }
+  #     - { key: RobotHardware0_q, id: [25],label: rh_collar-y }
+  #     - { key: RobotHardware0_q, id: [26],label: rh_shoulder-p }
+  #     - { key: RobotHardware0_q, id: [27],label: rh_shoulder-r }
+  #     - { key: RobotHardware0_q, id: [28],label: rh_shoulder-y }
+  #     - { key: RobotHardware0_q, id: [29],label: rh_elbow-p }
+  #     - { key: RobotHardware0_q, id: [30],label: rh_wrist-y }
+  #     - { key: RobotHardware0_q, id: [31],label: rh_wrist-r }
+  #     - { key: RobotHardware0_q, id: [32],label: rh_wrist-p }
+  #     - { key: enc_q, id: [25], label: enc_collar-y }
+  #     - { key: enc_q, id: [26], label: enc_shoulder-p }
+  #     - { key: enc_q, id: [27], label: enc_shoulder-r }
+  #     - { key: enc_q, id: [28], label: enc_shoulder-y }
+  #     - { key: enc_q, id: [29], label: enc_elbow-p }
+  #     - { key: enc_q, id: [30], label: enc_wrist-y }
+  #     - { key: enc_q, id: [31], label: enc_wrist-r }
+  #     - { key: enc_q, id: [32], label: enc_wrist-p }
+  #   bottom_label:
 
-  current:
+  arm ServoState:
     legends:
-      - { key: current, id: [0-5] }
+      - { key: ServoState, id: [0], label: bottom-y }
+      - { key: ServoState, id: [1], label: bottom-p }
+      - { key: ServoState, id: [2], label: top-p }
+      - { key: ServoState, id: [3], label: top-l }
+      - { key: ServoState, id: [4], label: shoulder-p }
+      - { key: ServoState, id: [5], label: shoulder-r }
+      - { key: ServoState, id: [6], label: shoulder-y }
+      - { key: ServoState, id: [7], label: elbow-p }
+      - { key: ServoState, id: [8], label: wrist-y }
+      - { key: ServoState, id: [9], label: wrist-r }
+      - { key: ServoState, id: [10], label: wrist-p }
+    bottom_label:
+    newline: false
 
-  temperature:
+  arm 12V:
     legends:
-      - { key: motor_temp, id: [0-5] }
-      - { key: motor_outer_temp, id: [0-5] }
+      - { key: 12V, id: [0], label: bottom-y }
+      - { key: 12V, id: [1], label: bottom-p }
+      - { key: 12V, id: [2], label: top-p }
+      - { key: 12V, id: [3], label: top-l }
+      - { key: 12V, id: [4], label: shoulder-p }
+      - { key: 12V, id: [5], label: shoulder-r }
+      - { key: 12V, id: [6], label: shoulder-y }
+      - { key: 12V, id: [7], label: elbow-p }
+      - { key: 12V, id: [8], label: wrist-y }
+      - { key: 12V, id: [9], label: wrist-r }
+      - { key: 12V, id: [10], label: wrist-p }
+    newline: false
 
-  watt:
+  arm 80V:
     legends:
-      - { key: watt, id: [0-5] }
-
-  ServoState:
-    legends:
-      - { key: ServoState, id: [0-5] }
-
-  12V:
-    legends:
-      - { key: 12V, id: [0,1,2,3,4,5] }
-
-  80V:
-    legends:
-      - { key: 80V, id: [0,1,2,3,4,5] }
+      - { key: 80V, id: [0], label: bottom-y }
+      - { key: 80V, id: [1], label: bottom-p }
+      - { key: 80V, id: [2], label: top-p }
+      - { key: 80V, id: [3], label: top-l }
+      - { key: 80V, id: [4], label: shoulder-p }
+      - { key: 80V, id: [5], label: shoulder-r }
+      - { key: 80V, id: [6], label: shoulder-y }
+      - { key: 80V, id: [7], label: elbow-p }
+      - { key: 80V, id: [8], label: wrist-y }
+      - { key: 80V, id: [9], label: wrist-r }
+      - { key: 80V, id: [10], label: wrist-p }
