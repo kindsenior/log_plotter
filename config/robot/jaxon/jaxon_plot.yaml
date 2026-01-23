@@ -124,6 +124,10 @@ torque:
   data:
     - { log: RobotHardware0_tau, column: [0-33] }
 
+idc_tau:
+  data:
+    - { log: idc_tauOut, column: [0-33] }
+
 st_tau:
   data:
     - { log: st_tau, column: [0-33] }
