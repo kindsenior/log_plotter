@@ -34,10 +34,14 @@ main:
     newline: false
   linear tau:
     legends:
-      - { key: torque, id: [0], label: bottom-y }
-      - { key: torque, id: [1], label: bottom-p }
-      - { key: torque, id: [2], label: top-p }
-      - { key: torque, id: [3], label: top-l }
+      - { key: idc_tau, id: [0], label: idc_bottom-y }
+      - { key: idc_tau, id: [1], label: idc_bottom-p }
+      - { key: idc_tau, id: [2], label: idc_top-p }
+      - { key: idc_tau, id: [3], label: idc_top-l }
+      - { key: torque, id: [0], label: rh_bottom-y }
+      - { key: torque, id: [1], label: rh_bottom-p }
+      - { key: torque, id: [2], label: rh_top-p }
+      - { key: torque, id: [3], label: rh_top-l }
 
 # rarm
   rarm q:
