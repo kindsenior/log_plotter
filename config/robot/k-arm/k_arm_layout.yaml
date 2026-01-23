@@ -97,20 +97,20 @@ main:
     newline: false
   rarm tau:
     legends:
-      - { key: idc_tau, id: [0], label: idc_shoulder-p }
-      - { key: idc_tau, id: [1], label: idc_shoulder-r }
-      - { key: idc_tau, id: [2], label: idc_shoulder-y }
-      - { key: idc_tau, id: [3], label: idc_elbow-p }
-      - { key: idc_tau, id: [4], label: idc_wrist-y }
-      - { key: idc_tau, id: [5], label: idc_wrist-r }
-      - { key: idc_tau, id: [6], label: idc_wrist-p }
-      - { key: torque, id: [0], label: rh_shoulder-p }
-      - { key: torque, id: [1], label: rh_shoulder-r }
-      - { key: torque, id: [2], label: rh_shoulder-y }
-      - { key: torque, id: [3], label: rh_elbow-p }
-      - { key: torque, id: [4], label: rh_wrist-y }
-      - { key: torque, id: [5], label: rh_wrist-r }
-      - { key: torque, id: [6], label: rh_wrist-p }
+      - { key: idc_tau, id: [4], label: idc_shoulder-p }
+      - { key: idc_tau, id: [5], label: idc_shoulder-r }
+      - { key: idc_tau, id: [6], label: idc_shoulder-y }
+      - { key: idc_tau, id: [7], label: idc_elbow-p }
+      - { key: idc_tau, id: [8], label: idc_wrist-y }
+      - { key: idc_tau, id: [9], label: idc_wrist-r }
+      - { key: idc_tau, id: [10], label: idc_wrist-p }
+      - { key: torque, id: [4], label: rh_shoulder-p }
+      - { key: torque, id: [5], label: rh_shoulder-r }
+      - { key: torque, id: [6], label: rh_shoulder-y }
+      - { key: torque, id: [7], label: rh_elbow-p }
+      - { key: torque, id: [8], label: rh_wrist-y }
+      - { key: torque, id: [9], label: rh_wrist-r }
+      - { key: torque, id: [10], label: rh_wrist-p }
 
   # larm q:
   #   legends:
